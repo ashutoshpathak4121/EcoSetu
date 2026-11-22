@@ -203,7 +203,37 @@ cd frontend && npm run build
 
 ---
 
-## 8. Author & Creator (Techathon 2026)
-**Ashutosh Pathak**
-*Engineering scalable civic technology for clean, circular, and transparent Indian cities.*
+## 8. 👨‍💻 Project Architect & Lead Developer Profile
+
+### **Ashutosh Pathak**
+**Lead Software Architect, Full-Stack Developer & AI Systems Engineer**  
+*Creator of EcoSetu – Bridge to Cleanliness for Techathon 2026*
+
+[![GitHub Profile](https://img.shields.io/badge/GitHub-ashutoshpathak4121-181717?style=for-the-badge&logo=github)](https://github.com/ashutoshpathak4121)
+[![Email](https://img.shields.io/badge/Contact-Developer-0078D4?style=for-the-badge&logo=microsoftoutlook&logoColor=white)](mailto:ashutoshpathak4121@gmail.com)
+[![Techathon 2026](https://img.shields.io/badge/Competition-Techathon%202026-forest?style=for-the-badge)](https://github.com/ashutoshpathak4121/EcoSetu)
+
+---
+
+### 📋 Developer Bio Data & Project Role
+
+| Attribute | Details |
+| :--- | :--- |
+| **Full Name** | **Ashutosh Pathak** |
+| **Role & Designation** | Lead Software Architect, Full-Stack Developer, AI & Database Architect |
+| **Initiative / Project** | **EcoSetu (स्वच्छसेतु) – Waste Management Ecosystem** |
+| **Framework & Concept**| WasteChakra Circular Economy Framework (Segregation at Source) |
+| **Competition** | **Techathon 2026** |
+| **GitHub Profile** | [@ashutoshpathak4121](https://github.com/ashutoshpathak4121) |
+| **Repository** | [github.com/ashutoshpathak4121/EcoSetu](https://github.com/ashutoshpathak4121/EcoSetu) |
+
+### 🛠️ Technical Competencies & Full-Stack Contributions
+Ashutosh single-handedly designed, built, and tested the end-to-end multi-tier architecture for EcoSetu:
+- **Frontend Architecture**: Engineered a responsive 6-role multi-portal client in React 18, TypeScript, Tailwind CSS, Leaflet GIS mapping, Recharts analytics, and Framer Motion transitions.
+- **Backend & Relational Modeling**: Designed the PostgreSQL relational database schema with Prisma ORM, foreign-key constraints, role-based access control (RBAC), and REST API endpoints in Express TypeScript with full OpenAPI/Swagger documentation.
+- **AI / Computer Vision Microservice**: Developed an independent Python FastAPI microservice utilizing OpenCV for photographic waste stream verification, cross-stream contamination evaluation, and confidence scoring.
+- **Civic Innovation & Mechanism Design**: Conceptualized the physical single-bin divided bag (wet/dry) + add-ons (sanitary/hazardous), an immutable double-entry green credit reward ledger, and a direct B2B society-to-recycler procurement marketplace.
+- **DevOps & Testing Automation**: Configured multi-container Docker Compose environments and wrote comprehensive automated test suites (Jest for API endpoints, Pytest for AI vision logic, TypeScript strict typing).
+
+> *"Engineering scalable civic technology for clean, circular, and transparent Indian cities."*
 

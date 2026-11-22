@@ -51,11 +51,44 @@ export const AboutPage: React.FC = () => {
         </div>
       </div>
 
-      <div className="border-t border-gray-200 pt-8 text-center space-y-4">
-        <h3 className="text-xl font-bold text-gray-900">Ashutosh Pathak • Techathon 2026</h3>
-        <p className="text-xs text-gray-500 max-w-lg mx-auto">
-          Built with an enterprise software architecture: React 18, Node.js Express TypeScript, Prisma ORM, PostgreSQL, Python FastAPI Computer Vision microservice, and Docker containerization.
-        </p>
+      {/* Creator Profile & Bio Data */}
+      <div className="bg-gradient-to-br from-forest-900 to-slate-900 text-white p-8 rounded-3xl border border-forest-800 shadow-xl space-y-6">
+        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 text-center sm:text-left">
+          <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-600 text-slate-950 font-black text-2xl flex items-center justify-center shadow-lg border-2 border-emerald-300 flex-shrink-0">
+            AP
+          </div>
+          <div className="space-y-1.5 flex-1">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold uppercase tracking-wider">
+              Lead Software Architect & Developer
+            </div>
+            <h3 className="text-2xl font-extrabold text-white tracking-tight">Ashutosh Pathak</h3>
+            <p className="text-sm text-gray-300 max-w-2xl leading-relaxed">
+              Sole creator, software architect, and full-stack engineer of <strong>EcoSetu</strong> for <strong>Techathon 2026</strong>. Conceptualized and engineered the complete physical-to-digital civic technology architecture spanning React 18, Node.js Express, PostgreSQL Prisma, and Python FastAPI Computer Vision.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-forest-800/80 text-xs">
+          <div className="bg-forest-800/50 p-3.5 rounded-xl border border-forest-700/60">
+            <span className="text-[10px] uppercase font-bold text-emerald-400 block mb-1">Architecture</span>
+            <p className="text-gray-200">End-to-end full-stack design: 6-portal frontend, REST API, & OpenCV AI verification</p>
+          </div>
+          <div className="bg-forest-800/50 p-3.5 rounded-xl border border-forest-700/60">
+            <span className="text-[10px] uppercase font-bold text-emerald-400 block mb-1">Ecosystem Concept</span>
+            <p className="text-gray-200">WasteChakra 4-stream physical bin segregation + immutable green credit ledger</p>
+          </div>
+          <div className="bg-forest-800/50 p-3.5 rounded-xl border border-forest-700/60">
+            <span className="text-[10px] uppercase font-bold text-emerald-400 block mb-1">Connect with Developer</span>
+            <a 
+              href="https://github.com/ashutoshpathak4121/EcoSetu" 
+              target="_blank" 
+              rel="noreferrer"
+              className="text-emerald-400 hover:text-emerald-300 font-bold underline block mt-0.5"
+            >
+              github.com/ashutoshpathak4121
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   );
