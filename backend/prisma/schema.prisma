@@ -1,0 +1,472 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  RESIDENT
+  COLLECTOR
+  SOCIETY_ADMIN
+  RECYCLER
+  MCD_OFFICER
+  SUPER_ADMIN
+}
+
+enum WasteStreamType {
+  WET
+  DRY
+  SANITARY
+  SPECIAL_CARE
+}
+
+enum CollectionStatus {
+  PENDING
+  ASSIGNED
+  COLLECTOR_ON_THE_WAY
+  COLLECTED
+  VERIFICATION_PENDING
+  VERIFIED
+  PROCESSED
+  REJECTED
+  DISPUTED
+}
+
+enum VerificationStatus {
+  APPROVED
+  REQUIRES_REVIEW
+  FLAGGED
+  REJECTED
+}
+
+enum PurityGrade {
+  A_PLUS
+  A
+  B
+  STANDARD
+}
+
+enum ListingStatus {
+  DRAFT
+  ACTIVE
+  OFFERED
+  SOLD
+  COMPLETED
+  CANCELLED
+}
+
+enum OrderStatus {
+  PENDING
+  ACCEPTED
+  WEIGHBRIDGE_VERIFIED
+  IN_TRANSIT
+  DELIVERED
+  COMPLETED
+  CANCELLED
+}
+
+enum CreditTransactionType {
+  EARN_SEGREGATION
+  BONUS_PURITY
+  REDEEM_REWARD
+  PENALTY_CONTAMINATION
+  COMMUNITY_SHARE
+}
+
+model User {
+  id              String            @id @default(uuid())
+  email           String            @unique
+  passwordHash    String
+  name            String
+  phoneNumber     String?           @unique
+  role            Role              @default(RESIDENT)
+  avatarUrl       String?
+  isActive        Boolean           @default(true)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  households      Household[]
+  collector       Collector?
+  recyclerProfile RecyclerProfile?
+  auditLogs       AuditLog[]
+  notifications   Notification[]
+
+  @@index([role])
+}
+
+model Locality {
+  id          String       @id @default(uuid())
+  code        String       @unique // e.g. "LOC-DL-WZ1-04"
+  name        String
+  ward        String
+  zone        String
+  city        String       @default("New Delhi")
+  state       String       @default("Delhi")
+  pincode     String
+  createdAt   DateTime     @default(now())
+
+  societies   Society[]
+  households  Household[]
+  collectors  Collector[]
+  vehicles    Vehicle[]
+  collections Collection[]
+
+  @@index([ward, zone])
+}
+
+model Society {
+  id              String         @id @default(uuid())
+  code            String         @unique // e.g. "SOC-GULM-01"
+  name            String
+  localityId      String
+  locality        Locality       @relation(fields: [localityId], references: [id])
+  address         String
+  totalFlats      Int            @default(0)
+  registrationNo  String?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  households      Household[]
+  collections     Collection[]
+  wasteListings   WasteListing[]
+
+  @@index([localityId])
+}
+
+model Household {
+  id              String            @id @default(uuid())
+  householdId     String            @unique // e.g. "HH-DL-WZ1-0042"
+  userId          String
+  user            User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  societyId       String
+  society         Society           @relation(fields: [societyId], references: [id])
+  localityId      String
+  locality        Locality          @relation(fields: [localityId], references: [id])
+  flatNumber      String
+  wingBlock       String?
+  qrCodeHash      String            @unique
+  complianceScore Float             @default(100.0)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  creditAccount   CreditAccount?
+  collections     Collection[]
+  redemptions     RewardRedemption[]
+
+  @@index([societyId])
+  @@index([localityId])
+}
+
+model Collector {
+  id                  String           @id @default(uuid())
+  employeeId          String           @unique // e.g. "COL-EMP-108"
+  userId              String           @unique
+  user                User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  assignedLocalityId  String
+  assignedLocality    Locality         @relation(fields: [assignedLocalityId], references: [id])
+  phone               String
+  shift               String           @default("MORNING") // MORNING, AFTERNOON
+  activeStatus        Boolean          @default(true)
+  createdAt           DateTime         @default(now())
+
+  vehicles            Vehicle[]
+  collections         Collection[]
+  tasks               CollectionTask[]
+
+  @@index([assignedLocalityId])
+}
+
+model Vehicle {
+  id                String       @id @default(uuid())
+  vehicleNumber     String       @unique // e.g. "DL-01-GA-4892"
+  vehicleType       String       @default("ELECTRIC_TIPPER") // HYDRAULIC_COMPACTOR, ELECTRIC_TIPPER, MINI_TRUCK
+  collectorId       String?
+  collector         Collector?   @relation(fields: [collectorId], references: [id])
+  localityId        String
+  locality          Locality     @relation(fields: [localityId], references: [id])
+  capacityKg        Float        @default(1500.0)
+  status            String       @default("ACTIVE") // ACTIVE, ON_ROUTE, IDLE, MAINTENANCE
+  currentLatitude   Float?
+  currentLongitude  Float?
+  heading           Float?
+  speedKmH          Float?       @default(0.0)
+  lastTelemetryAt   DateTime?
+  createdAt         DateTime     @default(now())
+
+  @@index([localityId])
+  @@index([status])
+}
+
+model CollectionTask {
+  id              String       @id @default(uuid())
+  collectorId     String
+  collector       Collector    @relation(fields: [collectorId], references: [id])
+  localityId      String
+  date            DateTime     @default(now())
+  status          String       @default("IN_PROGRESS") // PENDING, IN_PROGRESS, COMPLETED
+  targetCount     Int          @default(0)
+  completedCount  Int          @default(0)
+  createdAt       DateTime     @default(now())
+
+  @@index([collectorId, date])
+}
+
+model Collection {
+  id                   String               @id @default(uuid())
+  collectionCode       String               @unique // e.g. "COL-20261122-0042"
+  householdId          String
+  household            Household            @relation(fields: [householdId], references: [id])
+  collectorId          String?
+  collector            Collector?           @relation(fields: [collectorId], references: [id])
+  societyId            String
+  society              Society              @relation(fields: [societyId], references: [id])
+  localityId           String
+  locality             Locality             @relation(fields: [localityId], references: [id])
+  status               CollectionStatus     @default(PENDING)
+  totalWeightKg        Float                @default(0.0)
+  wetWeightKg          Float                @default(0.0)
+  dryWeightKg          Float                @default(0.0)
+  sanitaryWeightKg     Float                @default(0.0)
+  specialCareWeightKg  Float                @default(0.0)
+  latitude             Float?
+  longitude            Float?
+  accuracyMeters       Float?
+  addressSnapshot      String?
+  notes                String?
+  rejectionReason      String?
+  collectedAt          DateTime?
+  createdAt            DateTime             @default(now())
+  updatedAt            DateTime             @updatedAt
+
+  aiVerification       AIVerificationRecord?
+  mediaUploads         MediaUpload[]
+
+  @@index([householdId, createdAt])
+  @@index([collectorId, status])
+  @@index([societyId])
+  @@index([localityId, createdAt])
+  @@index([status])
+}
+
+model MediaUpload {
+  id              String       @id @default(uuid())
+  collectionId    String
+  collection      Collection   @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  fileUrl         String
+  fileName        String
+  mimeType        String
+  fileSizeBytes   Int
+  uploadPurpose   String       @default("COLLECTION_PROOF") // COLLECTION_PROOF, RESIDENT_QUERY, WEIGHBRIDGE_SLIP
+  latitude        Float?
+  longitude       Float?
+  createdAt       DateTime     @default(now())
+
+  @@index([collectionId])
+}
+
+model AIVerificationRecord {
+  id                  String             @id @default(uuid())
+  collectionId        String             @unique
+  collection          Collection         @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  predictedCategory   WasteStreamType
+  confidence          Float
+  contaminationIndex  Float              @default(0.0)
+  verificationStatus  VerificationStatus @default(REQUIRES_REVIEW)
+  modelVersion        String             @default("swachhsetu-waste-v2.1")
+  detectedItems       String[]           @default([])
+  visualFeatures      Json?
+  reviewedByUserId    String?
+  reviewerNote        String?
+  verifiedAt          DateTime?
+  createdAt           DateTime           @default(now())
+
+  @@index([verificationStatus, confidence])
+}
+
+model CreditAccount {
+  id              String              @id @default(uuid())
+  householdId     String              @unique
+  household       Household           @relation(fields: [householdId], references: [id], onDelete: Cascade)
+  balance         Int                 @default(0)
+  totalEarned     Int                 @default(0)
+  totalRedeemed   Int                 @default(0)
+  tier            String              @default("GREEN_CITIZEN") // GREEN_CITIZEN, ECO_CHAMPION, PLANET_HERO
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+
+  transactions    CreditTransaction[]
+}
+
+model CreditTransaction {
+  id              String                @id @default(uuid())
+  accountId       String
+  account         CreditAccount         @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  amount          Int
+  transactionType CreditTransactionType
+  idempotencyKey  String                @unique
+  referenceId     String? // e.g. collectionId or redemptionId
+  description     String
+  balanceAfter    Int
+  createdAt       DateTime              @default(now())
+
+  @@index([accountId, createdAt])
+}
+
+model Reward {
+  id            String             @id @default(uuid())
+  title         String
+  description   String
+  category      String             // COMPOST, LINERS, TAX_REBATE, VOUCHERS
+  creditCost    Int
+  partnerName   String             // e.g. "MCD Green Wing", "IFFCO Urban Garden", "Delhi Metro Rail Corp"
+  stockQuantity Int                @default(100)
+  imageUrl      String?
+  terms         String?
+  active        Boolean            @default(true)
+  createdAt     DateTime           @default(now())
+
+  redemptions   RewardRedemption[]
+}
+
+model RewardRedemption {
+  id              String       @id @default(uuid())
+  householdId     String
+  household       Household    @relation(fields: [householdId], references: [id])
+  rewardId        String
+  reward          Reward       @relation(fields: [rewardId], references: [id])
+  creditsSpent    Int
+  redemptionCode  String       @unique // e.g. "SWACHH-RBD-9821"
+  status          String       @default("PENDING") // PENDING, FULFILLED, CANCELLED
+  expiresAt       DateTime
+  redeemedAt      DateTime?
+  createdAt       DateTime     @default(now())
+
+  @@index([householdId])
+}
+
+model WasteListing {
+  id               String            @id @default(uuid())
+  listingCode      String            @unique // e.g. "LIST-2026-DRY-019"
+  societyId        String
+  society          Society           @relation(fields: [societyId], references: [id])
+  category         WasteStreamType   @default(DRY)
+  subType          String            // "Baled PET Bottles", "High-Grade Cardboard", "Compostable Bio-Cake"
+  quantityKg       Float
+  purityGrade      PurityGrade       @default(A)
+  minimumBidPerKg  Float
+  pickupAddress    String
+  localityName     String
+  status           ListingStatus     @default(ACTIVE)
+  notes            String?
+  images           String[]          @default([])
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+
+  purchaseRequests PurchaseRequest[]
+  orders           Order[]
+
+  @@index([category, status])
+  @@index([societyId])
+}
+
+model RecyclerProfile {
+  id                 String            @id @default(uuid())
+  userId             String            @unique
+  user               User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  companyName        String
+  gstNumber          String            @unique
+  cpcbLicenseNumber  String            @unique // Central Pollution Control Board License
+  categoriesHandled  String[]          @default(["DRY", "E_WASTE"])
+  verificationStatus String            @default("VERIFIED") // PENDING, VERIFIED, REJECTED
+  officeAddress      String
+  verifiedAt         DateTime?
+  createdAt          DateTime          @default(now())
+
+  purchaseRequests   PurchaseRequest[]
+  orders             Order[]
+}
+
+model PurchaseRequest {
+  id                  String          @id @default(uuid())
+  listingId           String
+  listing             WasteListing    @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  recyclerId          String
+  recycler            RecyclerProfile @relation(fields: [recyclerId], references: [id], onDelete: Cascade)
+  offeredPricePerKg   Float
+  requestedQuantityKg Float
+  notes               String?
+  status              String          @default("PENDING") // PENDING, ACCEPTED, REJECTED, EXPIRED
+  createdAt           DateTime        @default(now())
+  updatedAt           DateTime        @updatedAt
+
+  order               Order?
+
+  @@index([listingId])
+  @@index([recyclerId])
+}
+
+model Order {
+  id                  String          @id @default(uuid())
+  orderNumber         String          @unique // e.g. "ORD-2026-9812"
+  listingId           String
+  listing             WasteListing    @relation(fields: [listingId], references: [id])
+  purchaseRequestId   String          @unique
+  purchaseRequest     PurchaseRequest @relation(fields: [purchaseRequestId], references: [id])
+  buyerId             String
+  buyer               RecyclerProfile @relation(fields: [buyerId], references: [id])
+  sellerSocietyId     String
+  agreedPricePerKg    Float
+  totalAmount         Float
+  weighbridgeSlipUrl  String?
+  manifestCode        String?         // Hazardous/Dry Waste Transportation Manifest No.
+  status              OrderStatus     @default(PENDING)
+  paymentStatus       String          @default("ESCROW_HOLD") // ESCROW_HOLD, RELEASED, REFUNDED
+  completedAt         DateTime?
+  createdAt           DateTime        @default(now())
+
+  @@index([buyerId])
+  @@index([sellerSocietyId])
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  message   String
+  type      String   @default("INFO") // INFO, SUCCESS, WARNING, ALERT
+  isRead    Boolean  @default(false)
+  linkUrl   String?
+  createdAt DateTime @default(now())
+
+  @@index([userId, isRead])
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  action    String
+  entity    String
+  entityId  String?
+  ipAddress String?
+  userAgent String?
+  details   Json?
+  createdAt DateTime @default(now())
+
+  @@index([action, createdAt])
+}
+
+model WasteCategory {
+  id                  String   @id @default(uuid())
+  code                String   @unique // WET, DRY, SANITARY, SPECIAL_CARE
+  name                String
+  description         String
+  recommendedHandling String
+  colorCode           String   // #2d6a4f, #2563eb, #dc2626, #ca8a04
+  createdAt           DateTime @default(now())
+}
+

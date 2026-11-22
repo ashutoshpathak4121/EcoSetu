@@ -1,0 +1,9 @@
+import { Router } from 'express';
+import { aiController } from '../controllers/ai.controller';
+
+const router = Router();
+
+router.post('/verify', aiController.verifyWaste);
+
+export default router;
+
