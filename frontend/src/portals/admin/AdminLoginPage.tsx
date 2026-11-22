@@ -31,8 +31,8 @@ export const AdminLoginPage: React.FC = () => {
     <div className="min-h-screen bg-gray-950 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 font-sans">
       <div className="max-w-md w-full space-y-6 bg-gray-900 border border-gray-800 p-8 rounded-3xl shadow-2xl text-gray-100">
         <div className="text-center space-y-2">
-          <div className="w-14 h-14 bg-emerald-500 text-black rounded-2xl flex items-center justify-center mx-auto shadow-lg">
-            <Shield className="w-8 h-8" />
+          <div className="flex justify-center mb-1">
+            <img src="/logo-transparent.png" alt="EcoSetu Logo" className="h-14 w-auto object-contain" />
           </div>
           <h2 className="text-2xl font-black tracking-tight text-white">Super Admin Access Portal</h2>
           <p className="text-xs text-gray-400">Restricted to authorized system administrators and infrastructure engineers</p>

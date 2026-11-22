@@ -31,8 +31,8 @@ export const RecyclerLoginPage: React.FC = () => {
     <div className="min-h-screen bg-zinc-950 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 font-sans">
       <div className="max-w-md w-full space-y-6 bg-zinc-900 border border-zinc-800 p-8 rounded-3xl shadow-2xl text-zinc-100">
         <div className="text-center space-y-2">
-          <div className="w-14 h-14 bg-amber-500 text-zinc-950 rounded-2xl flex items-center justify-center mx-auto shadow-lg">
-            <Factory className="w-8 h-8" />
+          <div className="flex justify-center mb-1">
+            <img src="/logo-transparent.png" alt="EcoSetu Logo" className="h-14 w-auto object-contain" />
           </div>
           <h2 className="text-2xl font-black tracking-tight text-white">Authorized Recycler Portal</h2>
           <p className="text-xs text-zinc-400">B2B Material Procurement & Chain-of-Custody Sign-In</p>

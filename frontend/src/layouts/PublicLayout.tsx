@@ -19,11 +19,14 @@ export const PublicLayout: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div className="space-y-3">
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center">
-                  <Recycle className="w-5 h-5" />
+              <div className="flex items-center space-x-2.5">
+                <div className="w-9 h-9 rounded-xl bg-white/10 p-1 flex items-center justify-center backdrop-blur-sm border border-white/20">
+                  <img src="/logo-icon.png" alt="EcoSetu Emblem" className="w-full h-full object-contain" />
                 </div>
-                <span className="font-extrabold text-lg text-white">EcoSetu</span>
+                <div>
+                  <span className="font-extrabold text-lg text-white block leading-tight">EcoSetu</span>
+                  <span className="text-[10px] text-emerald-300 font-semibold uppercase tracking-wider block">WasteChakra Eco-Grid</span>
+                </div>
               </div>
               <p className="text-xs text-gray-400 leading-relaxed">
                 Bridge to Cleanliness — Transforming urban Indian waste management through 4-stream source segregation, computer vision verification, and circular economy rewards.

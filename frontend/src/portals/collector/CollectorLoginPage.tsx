@@ -31,8 +31,8 @@ export const CollectorLoginPage: React.FC = () => {
     <div className="min-h-screen bg-slate-950 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 font-sans">
       <div className="max-w-md w-full space-y-6 bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl text-slate-100">
         <div className="text-center space-y-2">
-          <div className="w-14 h-14 bg-amber-400 text-slate-950 rounded-2xl flex items-center justify-center mx-auto shadow-lg">
-            <Truck className="w-8 h-8" />
+          <div className="flex justify-center mb-1">
+            <img src="/logo-transparent.png" alt="EcoSetu Logo" className="h-14 w-auto object-contain" />
           </div>
           <h2 className="text-2xl font-black tracking-tight text-white">Collector Field Portal</h2>
           <p className="text-xs text-slate-400">Sanitation Driver & Field Collection Operatives Sign-In</p>

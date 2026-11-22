@@ -5,6 +5,9 @@ export const AboutPage: React.FC = () => {
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
       <div className="text-center space-y-3">
+        <div className="flex justify-center mb-2">
+          <img src="/logo-transparent.png" alt="EcoSetu Logo" className="h-20 w-auto object-contain" />
+        </div>
         <span className="text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
           About EcoSetu
         </span>

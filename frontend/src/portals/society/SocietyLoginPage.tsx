@@ -31,8 +31,8 @@ export const SocietyLoginPage: React.FC = () => {
     <div className="min-h-screen bg-slate-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 font-sans">
       <div className="max-w-md w-full space-y-6 bg-white p-8 rounded-3xl border border-gray-200 shadow-xl">
         <div className="text-center space-y-2">
-          <div className="w-14 h-14 bg-indigo-700 text-white rounded-2xl flex items-center justify-center mx-auto shadow-md">
-            <Building2 className="w-8 h-8 text-indigo-200" />
+          <div className="flex justify-center mb-1">
+            <img src="/logo-transparent.png" alt="EcoSetu Logo" className="h-14 w-auto object-contain" />
           </div>
           <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">Society RWA Portal</h2>
           <p className="text-xs text-gray-500">Residential Welfare Association & Estate Management Console</p>

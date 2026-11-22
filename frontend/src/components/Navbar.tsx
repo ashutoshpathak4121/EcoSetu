@@ -42,8 +42,8 @@ export const Navbar: React.FC = () => {
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2.5 group">
-            <div className="w-10 h-10 rounded-xl bg-forest-800 text-white flex items-center justify-center shadow-md group-hover:bg-forest-700 transition-colors">
-              <Recycle className="w-6 h-6 text-emerald-300" />
+            <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200/80 flex items-center justify-center p-1 shadow-sm group-hover:bg-white group-hover:border-emerald-300 transition-colors">
+              <img src="/logo-icon.png" alt="EcoSetu Emblem" className="w-full h-full object-contain" />
             </div>
             <div>
               <span className="font-extrabold text-xl tracking-tight text-forest-900 block leading-tight">

@@ -81,8 +81,8 @@ export const ResidentLayout: React.FC = () => {
       {/* Resident Header */}
       <header className="bg-white/95 backdrop-blur-md border-b border-gray-200 sticky top-8 z-40 px-6 py-3 flex items-center justify-between shadow-xs">
         <Link to="/resident/dashboard" className="flex items-center space-x-2.5">
-          <div className="w-9 h-9 rounded-xl bg-forest-800 text-white flex items-center justify-center shadow-md">
-            <Recycle className="w-5 h-5 text-emerald-300" />
+          <div className="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-200/80 flex items-center justify-center p-1 shadow-xs">
+            <img src="/logo-icon.png" alt="EcoSetu" className="w-full h-full object-contain" />
           </div>
           <div>
             <div className="font-extrabold text-sm tracking-tight text-forest-900 flex items-center gap-2">

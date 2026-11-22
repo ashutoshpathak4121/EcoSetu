@@ -65,8 +65,8 @@ export const LoginPage: React.FC = () => {
     <div className="min-h-[85vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-xl w-full space-y-8 bg-white p-8 rounded-3xl border border-gray-200 shadow-xl">
         <div className="text-center space-y-2">
-          <div className="w-12 h-12 bg-forest-800 text-white rounded-2xl flex items-center justify-center mx-auto shadow-md">
-            <Recycle className="w-7 h-7 text-emerald-300" />
+          <div className="flex justify-center mb-1">
+            <img src="/logo-transparent.png" alt="EcoSetu Logo" className="h-16 w-auto object-contain" />
           </div>
           <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">EcoSetu Universal Sign In</h2>
           <p className="text-xs text-gray-500">Sign in to your role account or choose your dedicated portal entrance below</p>
