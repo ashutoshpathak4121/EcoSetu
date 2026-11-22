@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, Award, Heart, CheckCircle2, Recycle } from 'lucide-react';
+import { ShieldCheck, Award, Heart, CheckCircle2, Recycle, Linkedin } from 'lucide-react';
 
 export const AboutPage: React.FC = () => {
   return (
@@ -80,12 +80,13 @@ export const AboutPage: React.FC = () => {
           <div className="bg-forest-800/50 p-3.5 rounded-xl border border-forest-700/60">
             <span className="text-[10px] uppercase font-bold text-emerald-400 block mb-1">Connect with Developer</span>
             <a 
-              href="https://github.com/ashutoshpathak4121/EcoSetu" 
+              href="https://www.linkedin.com/in/ashutosh-pathak" 
               target="_blank" 
               rel="noreferrer"
-              className="text-emerald-400 hover:text-emerald-300 font-bold underline block mt-0.5"
+              className="text-emerald-400 hover:text-emerald-300 font-bold underline mt-1 inline-flex items-center gap-1.5"
             >
-              github.com/ashutoshpathak4121
+              <Linkedin className="w-3.5 h-3.5 text-blue-400" />
+              <span>Ashutosh Pathak on LinkedIn</span>
             </a>
           </div>
         </div>
