@@ -35,7 +35,7 @@ export const ContactPage: React.FC = () => {
             <div className="space-y-3 text-xs text-gray-600">
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5" />
-                <span>MCD Sanitation Control Center, Mayur Vihar Ward 203, East Delhi - 110091</span>
+                <span>MCD Sanitation Control Center, Mayur Vihar Ward 42, East Delhi - 110091</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-emerald-600 flex-shrink-0" />
@@ -64,7 +64,7 @@ export const ContactPage: React.FC = () => {
               </div>
               <h3 className="text-xl font-bold text-gray-900">Inquiry Logged Successfully</h3>
               <p className="text-xs text-gray-500 max-w-sm mx-auto">
-                Ticket #SSETU-2026-9041 has been generated and dispatched to the Ward 203 Sanitation Supervisor.
+                Ticket #SSETU-2026-9041 has been generated and dispatched to the Ward 42 Sanitation Supervisor.
               </p>
               <button
                 onClick={() => setSubmitted(false)}
@@ -84,7 +84,7 @@ export const ContactPage: React.FC = () => {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="e.g. Ramesh Kumar"
-                    className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+                    className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-lg text-xs text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-emerald-500 focus:outline-none"
                   />
                 </div>
                 <div>
@@ -95,55 +95,55 @@ export const ContactPage: React.FC = () => {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="e.g. resident@domain.com"
-                    className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+                    className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-lg text-xs text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-emerald-500 focus:outline-none"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-gray-700 mb-1">Society / Locality</label>
+                  <label className="block text-xs font-semibold text-gray-700 mb-1">Society Name / Apartment</label>
                   <input
                     type="text"
                     value={formData.societyName}
                     onChange={(e) => setFormData({ ...formData, societyName: e.target.value })}
-                    placeholder="e.g. Gulmohar Enclave RWA"
-                    className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+                    placeholder="e.g. Green Meadows Residency"
+                    className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-lg text-xs text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-emerald-500 focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-gray-700 mb-1">Inquiry Purpose</label>
+                  <label className="block text-xs font-semibold text-gray-700 mb-1">Inquiry Category</label>
                   <select
                     value={formData.category}
                     onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+                    className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-lg text-xs text-gray-900 font-medium focus:ring-2 focus:ring-emerald-500 focus:outline-none"
                   >
-                    <option value="GRIEVANCE">Missed Doorstep Collection</option>
-                    <option value="ONBOARDING">RWA / Society Onboarding Request</option>
-                    <option value="RECYCLER">Recycler Accreditation / Buyer Inquiry</option>
-                    <option value="AI_INQUIRY">AI Verification Discrepancy Dispute</option>
+                    <option value="GRIEVANCE">Missed / Irregular Collection Grievance</option>
+                    <option value="RWA_ONBOARDING">New Society RWA Registration</option>
+                    <option value="RECYCLER_ACCREDITATION">Authorized Recycler Partner Onboarding</option>
+                    <option value="TECHNICAL_SUPPORT">Doorstep QR / AI Verification Support</option>
                   </select>
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">Message / Details</label>
+                <label className="block text-xs font-semibold text-gray-700 mb-1">Message Details</label>
                 <textarea
                   rows={4}
                   required
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  placeholder="Describe your query or feedback..."
-                  className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none"
-                ></textarea>
+                  placeholder="Describe your inquiry, grievance, or society requirements in detail..."
+                  className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-lg text-xs text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+                />
               </div>
 
               <button
                 type="submit"
-                className="px-6 py-3 bg-forest-800 hover:bg-forest-700 text-white font-bold text-xs rounded-xl shadow-sm flex items-center gap-2"
+                className="w-full py-3 bg-forest-800 hover:bg-forest-700 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-2"
               >
                 <Send className="w-4 h-4" />
-                Submit Citizen Dispatch
+                Submit Citizen Ticket
               </button>
             </form>
           )}
@@ -152,4 +152,3 @@ export const ContactPage: React.FC = () => {
     </div>
   );
 };
-

@@ -8,7 +8,7 @@ export const RecyclerOrdersPage: React.FC = () => {
       id: 'ord-01',
       orderNumber: 'ORD-2026-11-0089',
       material: 'Baled PET Bottles (Clean & Flaked)',
-      society: 'Gulmohar Enclave RWA',
+      society: 'Green Meadows Residency RWA',
       quantityKg: 350,
       agreedRate: 34.0,
       totalAmount: 11900,
@@ -37,15 +37,15 @@ export const RecyclerOrdersPage: React.FC = () => {
   return (
     <div className="space-y-6">
       <div className="space-y-1">
-        <h1 className="text-2xl font-extrabold text-gray-900 tracking-tight">Procurement Orders & Manifests</h1>
-        <p className="text-xs text-gray-500">
+        <h1 className="text-2xl font-extrabold text-white tracking-tight">Procurement Orders & Manifests</h1>
+        <p className="text-xs text-zinc-400">
           Official weighbridge verified receipts and CPCB digital waste transport manifests
         </p>
       </div>
 
       <div className="space-y-4">
         {orders.map((ord) => (
-          <div key={ord.id} className="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm space-y-4">
+          <div key={ord.id} className="bg-white text-gray-900 rounded-2xl border border-gray-200 p-6 shadow-sm space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="space-y-1">
                 <div className="flex items-center space-x-2">
@@ -58,45 +58,24 @@ export const RecyclerOrdersPage: React.FC = () => {
 
               <div className="text-right">
                 <span className="text-xl font-extrabold text-gray-900 block">₹{ord.totalAmount.toLocaleString()}</span>
-                <span className="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                  {ord.paymentStatus}
+                <span className="text-xs text-emerald-700 font-semibold block">{ord.quantityKg} kg @ ₹{ord.agreedRate}/kg</span>
+                <span className="text-[10px] font-mono text-gray-400">Escrow: {ord.paymentStatus}</span>
+              </div>
+            </div>
+
+            <div className="p-3 bg-zinc-50 border border-zinc-200 rounded-xl flex flex-wrap items-center justify-between gap-3 text-xs">
+              <div className="flex items-center space-x-2">
+                <FileText className="w-4 h-4 text-amber-600" />
+                <span className="text-gray-600">Digital Manifest Code:</span>
+                <span className="font-mono font-bold text-gray-900">{ord.manifestCode}</span>
+              </div>
+
+              <div className="flex items-center space-x-3">
+                <span className="text-gray-400 text-[11px]">{ord.date}</span>
+                <span className="px-2 py-0.5 rounded font-bold text-[10px] bg-emerald-50 text-emerald-800 border border-emerald-200">
+                  Weighbridge Certified
                 </span>
               </div>
-            </div>
-
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-3 bg-gray-50 rounded-xl border border-gray-100 text-xs">
-              <div>
-                <span className="text-gray-400 block text-[10px]">Quantity</span>
-                <span className="font-bold text-gray-900">{ord.quantityKg} kg</span>
-              </div>
-              <div>
-                <span className="text-gray-400 block text-[10px]">Agreed Price</span>
-                <span className="font-bold text-gray-900">₹{ord.agreedRate} / kg</span>
-              </div>
-              <div>
-                <span className="text-gray-400 block text-[10px]">Order Date</span>
-                <span className="font-bold text-gray-900">{ord.date}</span>
-              </div>
-              <div>
-                <span className="text-gray-400 block text-[10px]">CPCB Manifest No</span>
-                <span className="font-mono font-bold text-blue-700">{ord.manifestCode}</span>
-              </div>
-            </div>
-
-            <div className="pt-2 flex items-center justify-between text-xs text-gray-500">
-              <span className="flex items-center gap-1.5 text-emerald-700 font-semibold">
-                <CheckCircle2 className="w-4 h-4" />
-                Weighbridge Weight Confirmed (Electronic Zero Drift)
-              </span>
-              <a
-                href={ord.weighbridgeSlip}
-                target="_blank"
-                rel="noreferrer"
-                className="text-xs font-bold text-forest-800 hover:underline flex items-center gap-1"
-              >
-                View Weighbridge Slip
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
             </div>
           </div>
         ))}
@@ -104,4 +83,3 @@ export const RecyclerOrdersPage: React.FC = () => {
     </div>
   );
 };
-

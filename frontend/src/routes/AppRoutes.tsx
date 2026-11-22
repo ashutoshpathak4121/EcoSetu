@@ -137,16 +137,44 @@ export const AppRoutes: React.FC = () => {
         <Route path="orders" element={<RecyclerOrdersPage />} />
       </Route>
 
-      {/* 9. Backward compatibility aliases for /dashboard/:role */}
+      {/* 9. Granular Backward Compatibility Redirect Aliases */}
+      {/* Resident Aliases */}
       <Route path="/dashboard" element={<Navigate to="/resident/dashboard" replace />} />
-      <Route path="/dashboard/resident/*" element={<Navigate to="/resident/dashboard" replace />} />
-      <Route path="/dashboard/collector/*" element={<Navigate to="/collector/dashboard" replace />} />
-      <Route path="/dashboard/society/*" element={<Navigate to="/society/dashboard" replace />} />
-      <Route path="/dashboard/recycler/*" element={<Navigate to="/recycler/dashboard" replace />} />
-      <Route path="/dashboard/municipal/*" element={<Navigate to="/municipal/dashboard" replace />} />
-      <Route path="/dashboard/admin/*" element={<Navigate to="/admin/dashboard" replace />} />
+      <Route path="/dashboard/resident" element={<Navigate to="/resident/dashboard" replace />} />
+      <Route path="/dashboard/resident/household" element={<Navigate to="/resident/household" replace />} />
+      <Route path="/dashboard/resident/ai-verify" element={<Navigate to="/resident/ai-verify" replace />} />
+      <Route path="/dashboard/resident/request" element={<Navigate to="/resident/request" replace />} />
+      <Route path="/dashboard/resident/history" element={<Navigate to="/resident/history" replace />} />
+      <Route path="/dashboard/resident/credits" element={<Navigate to="/resident/credits" replace />} />
+      <Route path="/dashboard/resident/rewards" element={<Navigate to="/resident/rewards" replace />} />
 
-      {/* Catch-all */}
+      {/* Collector Aliases */}
+      <Route path="/dashboard/collector" element={<Navigate to="/collector/dashboard" replace />} />
+      <Route path="/dashboard/collector/tasks" element={<Navigate to="/collector/tasks" replace />} />
+      <Route path="/dashboard/collector/map" element={<Navigate to="/collector/map" replace />} />
+      <Route path="/dashboard/collector/upload" element={<Navigate to="/collector/upload" replace />} />
+
+      {/* Society Aliases */}
+      <Route path="/dashboard/society" element={<Navigate to="/society/dashboard" replace />} />
+      <Route path="/dashboard/society/households" element={<Navigate to="/society/households" replace />} />
+      <Route path="/dashboard/society/marketplace" element={<Navigate to="/society/marketplace" replace />} />
+
+      {/* Municipal Aliases */}
+      <Route path="/dashboard/municipal" element={<Navigate to="/municipal/dashboard" replace />} />
+      <Route path="/dashboard/municipal/fleet" element={<Navigate to="/municipal/fleet" replace />} />
+      <Route path="/dashboard/municipal/flagged" element={<Navigate to="/municipal/flagged" replace />} />
+
+      {/* Recycler Aliases */}
+      <Route path="/dashboard/recycler" element={<Navigate to="/recycler/dashboard" replace />} />
+      <Route path="/dashboard/recycler/marketplace" element={<Navigate to="/recycler/marketplace" replace />} />
+      <Route path="/dashboard/recycler/orders" element={<Navigate to="/recycler/orders" replace />} />
+
+      {/* Admin Aliases */}
+      <Route path="/dashboard/admin" element={<Navigate to="/admin/dashboard" replace />} />
+      <Route path="/dashboard/admin/users" element={<Navigate to="/admin/users" replace />} />
+      <Route path="/dashboard/admin/logs" element={<Navigate to="/admin/logs" replace />} />
+
+      {/* Fallback */}
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

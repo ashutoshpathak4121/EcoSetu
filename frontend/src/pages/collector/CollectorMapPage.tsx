@@ -17,7 +17,7 @@ export const CollectorMapPage: React.FC = () => {
       id: 'soc-01',
       lat: 28.611,
       lng: 77.298,
-      title: 'Gulmohar Enclave RWA',
+      title: 'Green Meadows Residency',
       subtitle: 'Collection Stop 1',
       type: 'society',
       status: 'IN_PROGRESS',
@@ -46,24 +46,23 @@ export const CollectorMapPage: React.FC = () => {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-extrabold text-gray-900 tracking-tight">Ward 203 Collection GIS Map</h1>
-          <p className="text-xs text-gray-500">Live GPS tracking of vehicle DL-01-GA-4892 and scheduled society pickup stops</p>
+          <h1 className="text-2xl font-extrabold text-white tracking-tight">Ward 42 Collection GIS Map</h1>
+          <p className="text-xs text-slate-400">Live GPS tracking of vehicle DL-01-GA-4892 and scheduled society pickup stops</p>
         </div>
 
         <div className="flex items-center space-x-2 text-xs">
-          <span className="flex items-center gap-1 font-semibold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-lg border border-blue-200">
+          <span className="flex items-center gap-1 font-semibold text-amber-900 bg-amber-400/90 px-2.5 py-1 rounded-lg">
             <Truck className="w-3.5 h-3.5" /> DL-01-GA-4892
           </span>
-          <span className="flex items-center gap-1 font-semibold text-purple-700 bg-purple-50 px-2.5 py-1 rounded-lg border border-purple-200">
-            <MapPin className="w-3.5 h-3.5" /> 3 Societies
+          <span className="flex items-center gap-1 font-semibold text-slate-300 bg-slate-800 px-2.5 py-1 rounded-lg border border-slate-700">
+            <MapPin className="w-3.5 h-3.5 text-amber-400" /> 3 Societies
           </span>
         </div>
       </div>
 
-      <div className="bg-white rounded-2xl border border-gray-200 p-4 shadow-sm">
+      <div className="bg-white text-gray-900 rounded-2xl border border-gray-200 p-4 shadow-sm">
         <LeafletMap center={[28.6083, 77.2942]} zoom={14} markers={waypoints} height="520px" />
       </div>
     </div>
   );
 };
-

@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { marketplaceApi } from '../../services/marketplace.api';
-import { StatusBadge } from '../../components/StatusBadge';
-import { Scale, CheckCircle2, AlertCircle, ShoppingCart, Tag, Filter, Search } from 'lucide-react';
+import { WasteStream } from '../../../../shared/types';
+import { ShoppingBag, Scale, Award, Search, CheckCircle2, Clock, AlertCircle } from 'lucide-react';
 
 export const RecyclerMarketplacePage: React.FC = () => {
   const [listings, setListings] = useState<any[]>([]);
+  const [selectedListing, setSelectedListing] = useState<any>(null);
+  const [offeredPrice, setOfferedPrice] = useState('34.0');
+  const [notes, setNotes] = useState('Payment via escrow. Electric vehicle dispatch scheduled.');
   const [search, setSearch] = useState('');
-  const [selectedListing, setSelectedListing] = useState<any | null>(null);
-  const [offeredPrice, setOfferedPrice] = useState<string>('34.0');
-  const [notes, setNotes] = useState('Immediate electric carrier dispatch.');
+  const [streamFilter, setStreamFilter] = useState('ALL');
   const [loading, setLoading] = useState(false);
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -25,13 +26,6 @@ export const RecyclerMarketplacePage: React.FC = () => {
     fetchListings();
   }, []);
 
-  const handleOpenBid = (listing: any) => {
-    setSelectedListing(listing);
-    setOfferedPrice((listing.minimumBidPerKg + 1.5).toFixed(1));
-    setSuccessMsg(null);
-    setError(null);
-  };
-
   const handleSubmitBid = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedListing) return;
@@ -46,38 +40,55 @@ export const RecyclerMarketplacePage: React.FC = () => {
         notes,
       });
 
-      setSuccessMsg(`Bid of ₹${offeredPrice}/kg submitted successfully to ${selectedListing.societyName || 'Gulmohar Enclave RWA'}.`);
+      setSuccessMsg(`Bid of ₹${offeredPrice}/kg submitted successfully for Lot ${selectedListing.listingCode || 'selected lot'}!`);
       setSelectedListing(null);
+      setTimeout(() => setSuccessMsg(null), 5000);
     } catch (err: any) {
-      setError(err.response?.data?.message || 'Bid submission failed.');
+      setError(err.response?.data?.message || 'Failed to submit bid.');
     } finally {
       setLoading(false);
     }
   };
 
-  const filtered = listings.filter(
-    (l) =>
-      l.subType.toLowerCase().includes(search.toLowerCase()) ||
-      (l.localityName || '').toLowerCase().includes(search.toLowerCase())
-  );
+  const filtered = listings.filter((l) => {
+    const matchesSearch =
+      (l.subType || '').toLowerCase().includes(search.toLowerCase()) ||
+      (l.listingCode || '').toLowerCase().includes(search.toLowerCase()) ||
+      (l.society?.name || '').toLowerCase().includes(search.toLowerCase());
+    const matchesStream = streamFilter === 'ALL' || l.category === streamFilter;
+    return matchesSearch && matchesStream;
+  });
 
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-extrabold text-gray-900 tracking-tight">Available Recyclable Material Lots</h1>
-          <p className="text-xs text-gray-500">Verified feedstock from registered societies • Zero mixed contamination</p>
+          <h1 className="text-2xl font-extrabold text-white tracking-tight">Verified Waste Scrap Marketplace</h1>
+          <p className="text-xs text-zinc-400">Bid on segregated, baled recyclables directly aggregated by East Delhi housing societies</p>
         </div>
 
-        <div className="relative w-full sm:w-64">
-          <Search className="w-4 h-4 absolute left-3 top-3 text-gray-400" />
-          <input
-            type="text"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Filter by material (PET, Cardboard)..."
-            className="w-full pl-9 pr-3.5 py-2 bg-white border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none"
-          />
+        <div className="flex flex-wrap items-center gap-2">
+          <select
+            value={streamFilter}
+            onChange={(e) => setStreamFilter(e.target.value)}
+            className="px-3 py-2 bg-white text-gray-900 border border-gray-300 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-amber-500"
+          >
+            <option value="ALL">All Streams</option>
+            <option value={WasteStream.DRY}>🔵 Dry Recyclables</option>
+            <option value={WasteStream.WET}>🟢 Compost & Bio-Cake</option>
+            <option value={WasteStream.SPECIAL_CARE}>🟡 Domestic E-Waste</option>
+          </select>
+
+          <div className="relative w-full sm:w-64">
+            <Search className="w-4 h-4 absolute left-3 top-3 text-gray-400" />
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search lot or material..."
+              className="w-full pl-9 pr-3.5 py-2 bg-white text-gray-900 border border-gray-300 rounded-xl text-xs placeholder-gray-400 focus:ring-2 focus:ring-amber-500 focus:outline-none"
+            />
+          </div>
         </div>
       </div>
 
@@ -90,8 +101,8 @@ export const RecyclerMarketplacePage: React.FC = () => {
 
       {/* Bid Modal */}
       {selectedListing && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
+          <div className="bg-white text-gray-900 rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl">
             <div className="flex items-center justify-between border-b border-gray-100 pb-3">
               <h3 className="font-bold text-gray-900 text-base">Submit Purchase Bid</h3>
               <button onClick={() => setSelectedListing(null)} className="text-gray-400 text-sm font-bold">✕</button>
@@ -118,7 +129,7 @@ export const RecyclerMarketplacePage: React.FC = () => {
                   required
                   value={offeredPrice}
                   onChange={(e) => setOfferedPrice(e.target.value)}
-                  className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl font-bold text-sm focus:ring-2 focus:ring-amber-500"
+                  className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-xl font-bold text-sm text-gray-900 focus:ring-2 focus:ring-amber-500"
                 />
               </div>
 
@@ -129,7 +140,7 @@ export const RecyclerMarketplacePage: React.FC = () => {
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   placeholder="e.g. Electric mini-truck arrival tomorrow 10 AM"
-                  className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl"
+                  className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-amber-500"
                 />
               </div>
 
@@ -137,16 +148,16 @@ export const RecyclerMarketplacePage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setSelectedListing(null)}
-                  className="px-4 py-2 border border-gray-200 rounded-lg text-gray-600 font-semibold"
+                  className="px-4 py-2 border border-gray-300 rounded-lg text-gray-600 font-semibold"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={loading}
-                  className="px-5 py-2 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-lg shadow-sm"
+                  className="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold rounded-lg shadow-md disabled:opacity-50"
                 >
-                  {loading ? 'Submitting...' : 'Submit Formal Bid'}
+                  {loading ? 'Submitting Bid...' : 'Confirm & Place Bid'}
                 </button>
               </div>
             </form>
@@ -155,41 +166,41 @@ export const RecyclerMarketplacePage: React.FC = () => {
       )}
 
       {/* Grid of Listings */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filtered.map((item) => (
-          <div key={item.id} className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-card-hover transition-all flex flex-col justify-between">
-            <div>
-              <div className="h-44 w-full overflow-hidden bg-gray-100 relative">
-                <img
-                  src={item.images?.[0] || 'https://images.unsplash.com/photo-1528323273322-d81458248d40?w=500'}
-                  alt={item.subType}
-                  className="w-full h-full object-cover"
-                />
-                <span className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-forest-900/90 text-white text-xs font-bold">
-                  {item.purityGrade}
-                </span>
-                <span className="absolute bottom-3 left-3 px-2 py-0.5 rounded bg-white/90 text-gray-800 text-[10px] font-bold">
-                  {item.quantityKg} Kg Available
+          <div key={item.id} className="bg-white text-gray-900 rounded-2xl border border-gray-200 p-5 shadow-sm space-y-4 flex flex-col justify-between">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-xs font-bold text-gray-900">{item.listingCode || 'LOT-2026-001'}</span>
+                <span className="px-2 py-0.5 rounded font-bold text-[10px] bg-amber-50 text-amber-800 border border-amber-200">
+                  {item.purityGrade || 'Grade A'}
                 </span>
               </div>
-
-              <div className="p-5 space-y-2 text-xs">
-                <div className="font-mono text-[10px] text-gray-400 font-bold">{item.listingCode}</div>
-                <h3 className="font-bold text-gray-900 text-base">{item.subType}</h3>
-                <p className="text-gray-500">{item.pickupAddress}</p>
-                <div className="font-extrabold text-sm text-amber-700 pt-1">
-                  Base: ₹{item.minimumBidPerKg} / kg
-                </div>
-              </div>
+              <h3 className="font-bold text-gray-900 text-sm leading-tight">{item.subType}</h3>
+              <p className="text-xs text-gray-500">Seller: <strong>{item.society?.name || 'Green Meadows Residency'}</strong></p>
+              <p className="text-xs text-gray-600">{item.notes}</p>
             </div>
 
-            <div className="p-5 pt-0">
+            <div className="space-y-3 pt-3 border-t border-gray-100">
+              <div className="flex items-center justify-between text-xs">
+                <div>
+                  <span className="text-gray-400 text-[10px] block">Total Lot Weight</span>
+                  <span className="font-extrabold text-gray-900 text-sm">{item.quantityKg} Kg</span>
+                </div>
+                <div className="text-right">
+                  <span className="text-gray-400 text-[10px] block">Reserve Bid</span>
+                  <span className="font-extrabold text-emerald-700 text-sm">₹{item.minimumBidPerKg} / Kg</span>
+                </div>
+              </div>
+
               <button
-                onClick={() => handleOpenBid(item)}
-                className="w-full py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs rounded-xl shadow-sm transition-all flex items-center justify-center gap-2"
+                onClick={() => {
+                  setSelectedListing(item);
+                  setOfferedPrice((item.minimumBidPerKg + 2).toString());
+                }}
+                className="w-full py-2.5 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold text-xs rounded-xl shadow-sm transition-all"
               >
-                <ShoppingCart className="w-4 h-4" />
-                Place Purchase Request
+                Place Purchase Bid
               </button>
             </div>
           </div>
@@ -198,4 +209,3 @@ export const RecyclerMarketplacePage: React.FC = () => {
     </div>
   );
 };
-

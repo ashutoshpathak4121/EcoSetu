@@ -49,10 +49,10 @@ export const ResidentDashboard: React.FC = () => {
             Tier: {household?.creditAccount?.tier?.replace('_', ' ') || 'ECO CHAMPION'}
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-            Namaste, {user?.name || 'Aarav Sharma'}!
+            Namaste, {user?.name || 'Pooja Verma'}!
           </h1>
           <p className="text-xs sm:text-sm text-emerald-200 max-w-xl">
-            Assigned to <strong>{household?.society?.name || 'Gulmohar Enclave RWA'}</strong> • Ward 203 (East Delhi MCD). Keep segregating with your divided bag to earn daily Green Credits!
+            Assigned to <strong>{household?.society?.name || 'Green Meadows Residency'}</strong> • Ward 42 (East Delhi MCD). Keep segregating with your divided bag to earn daily Green Credits!
           </p>
         </div>
 
@@ -62,7 +62,7 @@ export const ResidentDashboard: React.FC = () => {
             {household?.householdId || 'HH-DL-WZ1-0042'}
           </div>
           <Link
-            to="/dashboard/resident/household"
+            to="/resident/household"
             className="inline-flex items-center gap-1 text-xs text-emerald-300 hover:text-white font-bold"
           >
             <QrCode className="w-3.5 h-3.5" />
@@ -98,7 +98,7 @@ export const ResidentDashboard: React.FC = () => {
         <StatCard
           title="Next Scheduled Pickup"
           value="8:30 AM"
-          subtitle="Collector: Rajesh Kumar"
+          subtitle="Collector: Suresh Kumar (DL-01-GA-4892)"
           icon={Truck}
           colorScheme="purple"
         />
@@ -107,7 +107,7 @@ export const ResidentDashboard: React.FC = () => {
       {/* Action Quick Launchers */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Link
-          to="/dashboard/resident/ai-verify"
+          to="/resident/ai-verify"
           className="p-5 rounded-xl bg-white border border-gray-200 shadow-sm hover:shadow-card-hover transition-all flex items-center justify-between group"
         >
           <div className="flex items-center space-x-3">
@@ -123,7 +123,7 @@ export const ResidentDashboard: React.FC = () => {
         </Link>
 
         <Link
-          to="/dashboard/resident/request"
+          to="/resident/request"
           className="p-5 rounded-xl bg-white border border-gray-200 shadow-sm hover:shadow-card-hover transition-all flex items-center justify-between group"
         >
           <div className="flex items-center space-x-3">
@@ -139,7 +139,7 @@ export const ResidentDashboard: React.FC = () => {
         </Link>
 
         <Link
-          to="/dashboard/resident/rewards"
+          to="/resident/rewards"
           className="p-5 rounded-xl bg-white border border-gray-200 shadow-sm hover:shadow-card-hover transition-all flex items-center justify-between group"
         >
           <div className="flex items-center space-x-3">
@@ -158,39 +158,56 @@ export const ResidentDashboard: React.FC = () => {
       {/* Recent Collections Feed */}
       <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm space-y-4">
         <div className="flex items-center justify-between">
-          <h3 className="font-bold text-gray-900 text-base">Recent Doorstep Collections</h3>
-          <Link
-            to="/dashboard/resident/history"
-            className="text-xs font-semibold text-emerald-700 hover:underline"
-          >
+          <div>
+            <h3 className="font-bold text-gray-900 text-base">Recent Doorstep Collections</h3>
+            <span className="text-xs text-gray-500">Verified stream logs and awarded Green Credits</span>
+          </div>
+          <Link to="/resident/history" className="text-xs font-bold text-emerald-700 hover:underline">
             View All History &rarr;
           </Link>
         </div>
 
         <div className="divide-y divide-gray-100">
-          {collections.slice(0, 3).map((col) => (
-            <div key={col.id} className="py-3 flex flex-wrap items-center justify-between gap-3 text-xs">
-              <div className="space-y-0.5">
-                <div className="font-mono font-bold text-gray-900">{col.collectionCode}</div>
-                <div className="text-gray-500">{col.addressSnapshot || 'Flat B-402, Gulmohar Enclave'}</div>
-                <div className="text-[11px] text-gray-400">
-                  Total Weight: <strong>{col.totalWeightKg || 3.4} kg</strong> (Wet: {col.wetWeightKg || 2.1}kg, Dry: {col.dryWeightKg || 1.1}kg)
+          {collections.length === 0 ? (
+            <div className="text-center py-8 text-xs text-gray-500">
+              No collection logs found yet. Schedule your first pickup above!
+            </div>
+          ) : (
+            collections.slice(0, 4).map((col) => (
+              <div key={col.id} className="py-3.5 flex flex-wrap items-center justify-between gap-4 text-xs">
+                <div className="space-y-1">
+                  <div className="flex items-center space-x-2">
+                    <span className="font-mono font-bold text-gray-900">{col.collectionCode}</span>
+                    <StatusBadge status={col.status} size="sm" />
+                  </div>
+                  <div className="text-gray-500 text-[11px]">
+                    {new Date(col.createdAt).toLocaleDateString('en-IN', {
+                      day: 'numeric',
+                      month: 'short',
+                      year: 'numeric',
+                      hour: '2-digit',
+                      minute: '2-digit',
+                    })}
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-4">
+                  <div className="text-right">
+                    <span className="font-bold text-emerald-700 block">+{col.creditsAwarded || 20} Credits</span>
+                    <span className="text-[10px] text-gray-400">Purity: 98.2%</span>
+                  </div>
+                  <Link
+                    to="/resident/credits"
+                    className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100 text-gray-600 border border-gray-200 transition-colors"
+                  >
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
                 </div>
               </div>
-
-              <div className="flex items-center space-x-3">
-                {col.aiVerification && (
-                  <span className="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                    AI Purity: {Math.round(col.aiVerification.confidence * 100)}%
-                  </span>
-                )}
-                <StatusBadge status={col.status} />
-              </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </div>
     </div>
   );
 };
-

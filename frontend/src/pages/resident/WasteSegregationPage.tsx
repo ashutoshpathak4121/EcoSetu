@@ -69,11 +69,12 @@ export const WasteSegregationPage: React.FC = () => {
     }
     setDeclaredCategory(cat);
     setResult(null);
+    setError(null);
   };
 
-  const handleVerify = async () => {
+  const handleScan = async () => {
     if (!imageBase64) {
-      setError('Please upload or select an image of your segregated waste first.');
+      setError('Please select or capture a photograph first.');
       return;
     }
 
@@ -82,17 +83,10 @@ export const WasteSegregationPage: React.FC = () => {
 
     try {
       const res = await aiApi.verifyWaste(imageBase64, declaredCategory);
-      setResult({
-        predictedCategory: res.classification.predictedCategory,
-        confidence: res.classification.confidence,
-        contaminationIndex: res.classification.contaminationIndex,
-        detectedItems: res.classification.detectedItems,
-        verificationStatus: res.verificationStatus,
-        modelVersion: res.modelVersion,
-        manualReviewReasons: res.manualReviewReasons,
-      });
-    } catch (e: any) {
-      setError(e.response?.data?.message || 'Verification analysis failed. Please try again.');
+      setResult(res);
+    } catch (err: any) {
+      console.error(err);
+      setError(err.response?.data?.message || 'Verification microservice connection timed out.');
     } finally {
       setLoading(false);
     }
@@ -101,19 +95,16 @@ export const WasteSegregationPage: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       <div className="space-y-1">
-        <h1 className="text-2xl font-extrabold text-gray-900 tracking-tight">AI Waste Segregation Scanner</h1>
+        <h1 className="text-2xl font-extrabold text-gray-900 tracking-tight">AI Segregation Camera Scanner</h1>
         <p className="text-xs text-gray-500">
-          Powered by FastAPI Computer Vision Microservice • Validates purity before collector doorstep handover
+          Inspect and verify physical 4-stream segregation with Python PyTorch vision microservice
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
-        {/* Upload & Controls */}
-        <div className="md:col-span-6 bg-white rounded-2xl border border-gray-200 p-6 shadow-sm space-y-4">
-          <h3 className="font-bold text-gray-900 text-sm">Capture / Upload Segregation Photograph</h3>
-
-          {/* Image preview area */}
-          <div className="border-2 border-dashed border-gray-300 rounded-xl p-4 text-center hover:border-emerald-500 transition-colors bg-gray-50/50">
+        {/* Upload panel */}
+        <div className="md:col-span-6 bg-white rounded-2xl border border-gray-200 p-6 space-y-4 shadow-sm">
+          <div className="border-2 border-dashed border-gray-300 rounded-xl p-4 text-center hover:border-emerald-500 transition-colors">
             {imageBase64 ? (
               <div className="space-y-3">
                 <img
@@ -165,12 +156,12 @@ export const WasteSegregationPage: React.FC = () => {
             <select
               value={declaredCategory}
               onChange={(e) => setDeclaredCategory(e.target.value)}
-              className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-xs font-semibold text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
             >
               <option value="wet">🟢 Wet Waste (Green Compartment)</option>
-              <option value="dry">🔵 Dry Waste (Blue Compartment)</option>
-              <option value="sanitary">🔴 Sanitary Waste (Red Dot Pouch)</option>
-              <option value="special-care">🟡 Special-Care / Hazardous (Yellow Box)</option>
+              <option value="dry">🔵 Dry Recyclables (Blue Compartment)</option>
+              <option value="sanitary">🔴 Sanitary Waste (Red-Dot Pouch)</option>
+              <option value="special-care">🟡 Special-Care Hazardous (Yellow Container)</option>
             </select>
           </div>
 
@@ -182,36 +173,36 @@ export const WasteSegregationPage: React.FC = () => {
           )}
 
           <button
-            onClick={handleVerify}
+            onClick={handleScan}
             disabled={loading || !imageBase64}
             className="w-full py-3 bg-forest-800 hover:bg-forest-700 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-2 disabled:opacity-50"
           >
             {loading ? (
               <span className="flex items-center gap-2">
                 <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
-                Processing Neural Classification...
+                AI Inspecting Divided Bag & Purity...
               </span>
             ) : (
               <>
                 <Sparkles className="w-4 h-4 text-emerald-300" />
-                Analyze & Verify Segregation
+                Analyze with SwachhSetu AI v2.1
               </>
             )}
           </button>
         </div>
 
-        {/* Verification Analysis Output */}
+        {/* Results output */}
         <div className="md:col-span-6 space-y-4">
           {result ? (
             <AIVerificationCard result={result} />
           ) : (
-            <div className="bg-white rounded-2xl border border-gray-200 p-8 text-center space-y-3 shadow-sm text-xs text-gray-500">
-              <div className="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center mx-auto text-gray-400">
+            <div className="bg-white rounded-2xl border border-gray-200 p-8 text-center text-xs text-gray-500 space-y-3">
+              <div className="w-12 h-12 bg-gray-50 text-gray-400 rounded-2xl flex items-center justify-center mx-auto border border-gray-100">
                 <Sparkles className="w-6 h-6" />
               </div>
-              <h4 className="font-bold text-gray-800 text-sm">Awaiting Image Input</h4>
-              <p className="max-w-xs mx-auto leading-relaxed">
-                Upload a photograph of your sorted waste or select one of the test presets to trigger real-time AI classification and contamination detection.
+              <h4 className="font-bold text-gray-800 text-sm">Computer Vision Audit Ready</h4>
+              <p className="max-w-xs mx-auto">
+                Upload or select an image on the left. The verification service will inspect dividing line segregation, detect cross-contamination, and assign Green Credit eligibility.
               </p>
             </div>
           )}
@@ -220,4 +211,3 @@ export const WasteSegregationPage: React.FC = () => {
     </div>
   );
 };
-

@@ -1,32 +1,33 @@
 import React, { useState } from 'react';
-import { Users, QrCode, ShieldCheck, Search, Plus } from 'lucide-react';
+import { StatusBadge } from '../../components/StatusBadge';
+import { Users, QrCode, Search, Award, CheckCircle2, AlertTriangle, ShieldCheck } from 'lucide-react';
 
 export const SocietyHouseholdsPage: React.FC = () => {
   const [search, setSearch] = useState('');
 
   const residentDirectory = [
     {
-      flat: 'B-402',
-      block: 'Block B',
-      resident: 'Aarav Sharma',
+      flat: 'A-101',
+      block: 'Block A',
+      resident: 'Pooja Verma',
       householdId: 'HH-DL-WZ1-0042',
       compliance: 98.4,
       status: 'VERIFIED',
       credits: 145,
     },
     {
-      flat: 'A-101',
+      flat: 'A-204',
       block: 'Block A',
-      resident: 'Deepak Verma',
-      householdId: 'HH-DL-WZ1-0019',
+      resident: 'Rohan Sharma',
+      householdId: 'HH-DL-WZ1-0051',
       compliance: 94.2,
       status: 'VERIFIED',
       credits: 110,
     },
     {
-      flat: 'C-204',
+      flat: 'C-501',
       block: 'Block C',
-      resident: 'Meenakshi Iyer',
+      resident: 'Sunita Mehra',
       householdId: 'HH-DL-WZ1-0078',
       compliance: 99.1,
       status: 'VERIFIED',
@@ -64,7 +65,7 @@ export const SocietyHouseholdsPage: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-extrabold text-gray-900 tracking-tight">Society Resident Directory</h1>
-          <p className="text-xs text-gray-500">Registered flats in Gulmohar Enclave RWA • Monitored for 4-stream compliance</p>
+          <p className="text-xs text-gray-500">Registered flats in Green Meadows Residency RWA • Monitored for 4-stream compliance</p>
         </div>
 
         <div className="relative w-full sm:w-64">
@@ -73,48 +74,40 @@ export const SocietyHouseholdsPage: React.FC = () => {
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search flat or resident..."
-            className="w-full pl-9 pr-3.5 py-2 bg-white border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-purple-500 focus:outline-none"
+            placeholder="Search flat, name, ID..."
+            className="w-full pl-9 pr-3.5 py-2 bg-white border border-gray-300 rounded-xl text-xs text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
           />
         </div>
       </div>
 
       <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+        <div className="p-4 bg-gray-50 border-b border-gray-100 flex items-center justify-between text-xs font-bold text-gray-700">
+          <span>Apartment Unit & Resident</span>
+          <span>Compliance & Credits</span>
+        </div>
+
         <div className="divide-y divide-gray-100">
           {filtered.map((item) => (
-            <div key={item.householdId} className="p-4 flex flex-wrap items-center justify-between gap-4 hover:bg-gray-50/50 transition-colors text-xs">
-              <div className="flex items-center space-x-3">
-                <div className="w-9 h-9 rounded-xl bg-purple-50 text-purple-700 font-extrabold flex items-center justify-center">
-                  {item.flat}
+            <div key={item.flat} className="p-4 flex flex-wrap items-center justify-between gap-4 hover:bg-gray-50/50 transition-colors text-xs">
+              <div className="space-y-1">
+                <div className="flex items-center space-x-2">
+                  <span className="font-mono font-extrabold text-indigo-900 text-sm">{item.flat}</span>
+                  <span className="text-[10px] bg-gray-100 text-gray-600 px-2 py-0.5 rounded font-semibold">{item.block}</span>
+                  <StatusBadge status={item.status} size="sm" />
                 </div>
-                <div>
-                  <div className="font-bold text-gray-900">{item.resident}</div>
-                  <div className="text-[11px] text-gray-400 font-mono">
-                    {item.householdId} • {item.block}
-                  </div>
-                </div>
+                <div className="font-semibold text-gray-800">{item.resident}</div>
+                <div className="text-[11px] font-mono text-gray-500">{item.householdId}</div>
               </div>
 
               <div className="flex items-center space-x-6">
-                <div>
-                  <span className="text-gray-400 block text-[10px] uppercase font-bold">Purity Score</span>
-                  <span className="font-black text-emerald-700 text-xs">{item.compliance}%</span>
+                <div className="text-right">
+                  <span className="text-xs font-bold text-gray-900 block">{item.compliance}% Segregation</span>
+                  <span className="text-[10px] text-emerald-700 font-semibold">{item.credits} Green Credits</span>
                 </div>
 
-                <div>
-                  <span className="text-gray-400 block text-[10px] uppercase font-bold">Credits</span>
-                  <span className="font-bold text-gray-900 text-xs">{item.credits}</span>
+                <div className="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-700 flex items-center justify-center border border-indigo-200" title="QR Code Verified">
+                  <QrCode className="w-4 h-4" />
                 </div>
-
-                <span
-                  className={`px-2.5 py-0.5 rounded-full font-bold text-[10px] border ${
-                    item.status === 'VERIFIED'
-                      ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
-                      : 'bg-amber-50 text-amber-700 border-amber-200'
-                  }`}
-                >
-                  {item.status.replace(/_/g, ' ')}
-                </span>
               </div>
             </div>
           ))}
@@ -123,4 +116,3 @@ export const SocietyHouseholdsPage: React.FC = () => {
     </div>
   );
 };
-

@@ -27,7 +27,7 @@ export const CollectorTasksPage: React.FC = () => {
   const handleSimulateScan = async (task: any) => {
     try {
       await collectorApi.updateStatus(task.id, 'COLLECTOR_ON_THE_WAY');
-      navigate(`/dashboard/collector/upload?colId=${task.id}`);
+      navigate(`/collector/upload?colId=${task.id}`);
     } catch (e) {
       console.error(e);
     }
@@ -42,24 +42,24 @@ export const CollectorTasksPage: React.FC = () => {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-extrabold text-gray-900 tracking-tight">Today's Collection Tasks</h1>
-          <p className="text-xs text-gray-500">Doorstep pickup runs assigned to vehicle DL-01-GA-4892</p>
+          <h1 className="text-2xl font-extrabold text-white tracking-tight">Today's Collection Tasks</h1>
+          <p className="text-xs text-slate-400">Doorstep pickup runs assigned to vehicle DL-01-GA-4892 (Ward 42)</p>
         </div>
 
         <div className="relative w-full sm:w-64">
-          <Search className="w-4 h-4 absolute left-3 top-3 text-gray-400" />
+          <Search className="w-4 h-4 absolute left-3 top-3 text-gray-500" />
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search flat or code..."
-            className="w-full pl-9 pr-3.5 py-2 bg-white border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+            className="w-full pl-9 pr-3.5 py-2 bg-white border border-gray-300 rounded-xl text-xs text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-amber-400 focus:outline-none"
           />
         </div>
       </div>
 
-      <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
-        <div className="p-4 bg-gray-50 border-b border-gray-100 flex items-center justify-between text-xs font-bold text-gray-600">
+      <div className="bg-white text-gray-900 rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+        <div className="p-4 bg-gray-50 border-b border-gray-100 flex items-center justify-between text-xs font-bold text-gray-700">
           <span>Household & Address</span>
           <span>Status & Action</span>
         </div>
@@ -75,7 +75,7 @@ export const CollectorTasksPage: React.FC = () => {
                     <span className="font-mono font-bold text-gray-900 text-xs">{task.collectionCode}</span>
                     <StatusBadge status={task.status} size="sm" />
                   </div>
-                  <div className="text-xs font-semibold text-gray-800">{task.addressSnapshot || 'Flat B-402, Gulmohar Enclave'}</div>
+                  <div className="text-xs font-semibold text-gray-800">{task.addressSnapshot || 'Flat B-402, Green Meadows Residency'}</div>
                   <div className="text-[11px] text-gray-500">{task.notes || 'Doorstep scheduled run'}</div>
                 </div>
 
@@ -89,10 +89,10 @@ export const CollectorTasksPage: React.FC = () => {
                   </button>
 
                   <Link
-                    to={`/dashboard/collector/upload?colId=${task.id}`}
-                    className="px-3.5 py-2 bg-forest-800 hover:bg-forest-700 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-colors shadow-sm"
+                    to={`/collector/upload?colId=${task.id}`}
+                    className="px-3.5 py-2 bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold rounded-xl text-xs flex items-center gap-1.5 transition-colors shadow-sm"
                   >
-                    <Camera className="w-3.5 h-3.5" />
+                    <Camera className="w-3.5 h-3.5 text-slate-950" />
                     Log Weights
                   </Link>
                 </div>
@@ -104,4 +104,3 @@ export const CollectorTasksPage: React.FC = () => {
     </div>
   );
 };
-

@@ -94,14 +94,14 @@ export const UploadProofPage: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       <div className="space-y-1">
-        <h1 className="text-2xl font-extrabold text-gray-900 tracking-tight">Log Doorstep Evidence & Weights</h1>
-        <p className="text-xs text-gray-500">
+        <h1 className="text-2xl font-extrabold text-white tracking-tight">Log Doorstep Evidence & Weights</h1>
+        <p className="text-xs text-slate-400">
           Geo-tagged collection verification • Auto-triggers AI audit and Green Credit release
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
-        <div className="md:col-span-7 bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
+        <div className="md:col-span-7 bg-white text-gray-900 rounded-2xl border border-gray-200 p-6 shadow-sm">
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
               <div className="p-3 bg-rose-50 border border-rose-200 text-rose-700 rounded-xl text-xs flex items-center gap-2">
@@ -118,7 +118,7 @@ export const UploadProofPage: React.FC = () => {
                 value={collectionId}
                 onChange={(e) => setCollectionId(e.target.value)}
                 placeholder="e.g. col-02 or COL-20261122-0042"
-                className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs font-mono font-bold focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+                className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-xs font-mono font-bold text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-amber-400 focus:outline-none"
               />
             </div>
 
@@ -138,7 +138,7 @@ export const UploadProofPage: React.FC = () => {
                     min="0"
                     value={wetKg}
                     onChange={(e) => setWetKg(e.target.value)}
-                    className="w-full px-3 py-2 bg-emerald-50/40 border border-emerald-200 rounded-xl text-xs font-bold"
+                    className="w-full px-3 py-2 bg-emerald-50 border border-emerald-300 rounded-xl text-xs font-bold text-gray-900 focus:ring-2 focus:ring-emerald-500 focus:outline-none"
                   />
                 </div>
                 <div>
@@ -149,7 +149,7 @@ export const UploadProofPage: React.FC = () => {
                     min="0"
                     value={dryKg}
                     onChange={(e) => setDryKg(e.target.value)}
-                    className="w-full px-3 py-2 bg-blue-50/40 border border-blue-200 rounded-xl text-xs font-bold"
+                    className="w-full px-3 py-2 bg-blue-50 border border-blue-300 rounded-xl text-xs font-bold text-gray-900 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                   />
                 </div>
                 <div>
@@ -160,7 +160,7 @@ export const UploadProofPage: React.FC = () => {
                     min="0"
                     value={sanitaryKg}
                     onChange={(e) => setSanitaryKg(e.target.value)}
-                    className="w-full px-3 py-2 bg-rose-50/40 border border-rose-200 rounded-xl text-xs font-bold"
+                    className="w-full px-3 py-2 bg-rose-50 border border-rose-300 rounded-xl text-xs font-bold text-gray-900 focus:ring-2 focus:ring-rose-500 focus:outline-none"
                   />
                 </div>
                 <div>
@@ -171,7 +171,7 @@ export const UploadProofPage: React.FC = () => {
                     min="0"
                     value={specialKg}
                     onChange={(e) => setSpecialKg(e.target.value)}
-                    className="w-full px-3 py-2 bg-amber-50/40 border border-amber-200 rounded-xl text-xs font-bold"
+                    className="w-full px-3 py-2 bg-amber-50 border border-amber-300 rounded-xl text-xs font-bold text-gray-900 focus:ring-2 focus:ring-amber-500 focus:outline-none"
                   />
                 </div>
               </div>
@@ -192,7 +192,7 @@ export const UploadProofPage: React.FC = () => {
                   Refresh GPS
                 </button>
               </div>
-              <div className="text-[11px] text-gray-500 font-mono">{gpsStatus}</div>
+              <div className="text-[11px] text-gray-600 font-mono">{gpsStatus}</div>
             </div>
 
             {/* Photo upload */}
@@ -224,23 +224,24 @@ export const UploadProofPage: React.FC = () => {
                 type="text"
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
-                className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs"
+                placeholder="e.g. Divided bag intact, clean segregation"
+                className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-xs text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-amber-400 focus:outline-none"
               />
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 bg-forest-800 hover:bg-forest-700 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+              className="w-full py-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-2 disabled:opacity-50"
             >
               {loading ? (
                 <span className="flex items-center gap-2">
-                  <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                  <span className="w-4 h-4 border-2 border-slate-950 border-t-transparent rounded-full animate-spin"></span>
                   Submitting & Verifying with AI Microservice...
                 </span>
               ) : (
                 <>
-                  <CheckCircle2 className="w-4 h-4 text-emerald-300" />
+                  <CheckCircle2 className="w-4 h-4 text-slate-950" />
                   Submit Evidence & Award Credits
                 </>
               )}
@@ -253,20 +254,20 @@ export const UploadProofPage: React.FC = () => {
           {result ? (
             <div className="space-y-4">
               <div className="p-4 bg-emerald-50 border-2 border-emerald-500 rounded-2xl text-emerald-950 space-y-1">
-                <div className="font-extrabold text-sm flex items-center gap-1.5">
+                <div className="font-extrabold text-sm flex items-center gap-1.5 text-emerald-900">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                   Collection Verified & Credits Issued!
                 </div>
-                <p className="text-xs text-gray-600">
+                <p className="text-xs text-gray-700">
                   +20 Green Credits credited to household account. Status updated to <strong>VERIFIED</strong>.
                 </p>
               </div>
               <AIVerificationCard result={result} />
             </div>
           ) : (
-            <div className="bg-white rounded-2xl border border-gray-200 p-6 text-center text-xs text-gray-500 space-y-2">
-              <Camera className="w-8 h-8 mx-auto text-gray-400" />
-              <h4 className="font-bold text-gray-800">Verification Pending</h4>
+            <div className="bg-white text-gray-900 rounded-2xl border border-gray-200 p-6 text-center text-xs text-gray-600 space-y-2">
+              <Camera className="w-8 h-8 mx-auto text-amber-500" />
+              <h4 className="font-bold text-gray-900">Verification Pending</h4>
               <p>
                 When you click "Submit Evidence", our FastAPI AI microservice will automatically analyze the photograph, compute contamination scores, and transition this task to <strong>VERIFIED</strong>.
               </p>
@@ -277,4 +278,3 @@ export const UploadProofPage: React.FC = () => {
     </div>
   );
 };
-

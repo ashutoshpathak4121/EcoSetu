@@ -42,8 +42,8 @@ export const AdminUsersPage: React.FC = () => {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-extrabold text-gray-900 tracking-tight">User Account Governance</h1>
-          <p className="text-xs text-gray-500">Manage stakeholder accounts and enforce Role-Based Access Control (RBAC)</p>
+          <h1 className="text-2xl font-extrabold text-white tracking-tight">User Account Governance</h1>
+          <p className="text-xs text-gray-400">Manage stakeholder accounts and enforce Role-Based Access Control (RBAC)</p>
         </div>
 
         <div className="relative w-full sm:w-64">
@@ -53,7 +53,7 @@ export const AdminUsersPage: React.FC = () => {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search users..."
-            className="w-full pl-9 pr-3.5 py-2 bg-white border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+            className="w-full pl-9 pr-3.5 py-2 bg-white text-gray-900 border border-gray-300 rounded-xl text-xs placeholder-gray-400 focus:ring-2 focus:ring-emerald-500 focus:outline-none"
           />
         </div>
       </div>
@@ -65,7 +65,7 @@ export const AdminUsersPage: React.FC = () => {
         </div>
       )}
 
-      <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+      <div className="bg-white text-gray-900 rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
         <div className="divide-y divide-gray-100">
           {filtered.map((u) => (
             <div key={u.id} className="p-4 flex flex-wrap items-center justify-between gap-4 text-xs hover:bg-gray-50/50 transition-colors">
@@ -75,16 +75,16 @@ export const AdminUsersPage: React.FC = () => {
                 </div>
                 <div>
                   <div className="font-bold text-gray-900">{u.name}</div>
-                  <div className="text-gray-400 text-[11px]">{u.email} • {u.phoneNumber || 'Phone on file'}</div>
+                  <div className="text-gray-500 text-[11px]">{u.email} • {u.phoneNumber || 'Phone on file'}</div>
                 </div>
               </div>
 
               <div className="flex items-center space-x-3">
-                <span className="text-gray-400 font-semibold text-[11px]">Assigned Role:</span>
+                <span className="text-gray-500 font-semibold text-[11px]">Assigned Role:</span>
                 <select
                   value={u.role}
                   onChange={(e) => handleRoleChange(u.id, e.target.value)}
-                  className="px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-lg text-xs font-bold text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="px-3 py-1.5 bg-gray-50 text-gray-900 border border-gray-300 rounded-lg text-xs font-bold focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 >
                   <option value={UserRole.RESIDENT}>RESIDENT</option>
                   <option value={UserRole.COLLECTOR}>COLLECTOR</option>
@@ -101,4 +101,3 @@ export const AdminUsersPage: React.FC = () => {
     </div>
   );
 };
-

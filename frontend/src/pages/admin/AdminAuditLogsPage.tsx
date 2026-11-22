@@ -20,11 +20,11 @@ export const AdminAuditLogsPage: React.FC = () => {
   return (
     <div className="space-y-6">
       <div className="space-y-1">
-        <h1 className="text-2xl font-extrabold text-gray-900 tracking-tight">Security & Audit Logs</h1>
-        <p className="text-xs text-gray-500">Immutable record of critical events, state changes, and API transactions</p>
+        <h1 className="text-2xl font-extrabold text-white tracking-tight">Security & Audit Logs</h1>
+        <p className="text-xs text-gray-400">Immutable record of critical events, state changes, and API transactions</p>
       </div>
 
-      <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+      <div className="bg-white text-gray-900 rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
         <div className="divide-y divide-gray-100">
           {logs.map((log) => (
             <div key={log.id} className="p-4 flex flex-wrap items-center justify-between gap-4 text-xs hover:bg-gray-50/50 transition-colors">
@@ -34,14 +34,14 @@ export const AdminAuditLogsPage: React.FC = () => {
                 </div>
                 <div>
                   <div className="font-mono font-bold text-gray-900 text-xs">{log.action}</div>
-                  <div className="text-[11px] text-gray-400">
+                  <div className="text-[11px] text-gray-500">
                     Entity: <strong>{log.entity}</strong> • Ref: {log.entityId || 'SYS-EVENT'} • IP: {log.ipAddress || '127.0.0.1'}
                   </div>
                 </div>
               </div>
 
               <div className="text-right">
-                <span className="font-mono text-[11px] text-gray-500 block">
+                <span className="font-mono text-[11px] text-gray-600 block">
                   {new Date(log.createdAt).toLocaleString('en-IN')}
                 </span>
                 {log.details && (
@@ -57,4 +57,3 @@ export const AdminAuditLogsPage: React.FC = () => {
     </div>
   );
 };
-

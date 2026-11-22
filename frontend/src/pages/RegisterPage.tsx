@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Recycle, ArrowRight, AlertCircle, Building, Home, User, Mail, Lock, Phone } from 'lucide-react';
+import { Recycle, Lock, Mail, User, Phone, Home, Building2, ArrowRight, AlertCircle, Sparkles } from 'lucide-react';
 import { UserRole } from '../../../shared/types';
 
 export const RegisterPage: React.FC = () => {
@@ -11,9 +11,11 @@ export const RegisterPage: React.FC = () => {
     email: '',
     password: '',
     phoneNumber: '',
-    societyId: 'soc-gulmohar-01',
-    flatNumber: '',
-    wingBlock: '',
+    flatNumber: 'A-101',
+    block: 'Block A',
+    societyId: 'soc-green-meadows-01',
+    businessName: '',
+    cpcbLicenseNumber: '',
   });
 
   const [error, setError] = useState<string | null>(null);
@@ -33,10 +35,10 @@ export const RegisterPage: React.FC = () => {
         role,
       });
 
-      if (role === UserRole.COLLECTOR) navigate('/dashboard/collector');
-      else if (role === UserRole.SOCIETY_ADMIN) navigate('/dashboard/society');
-      else if (role === UserRole.RECYCLER) navigate('/dashboard/recycler');
-      else navigate('/dashboard/resident');
+      if (role === UserRole.COLLECTOR) navigate('/collector/dashboard');
+      else if (role === UserRole.SOCIETY_ADMIN) navigate('/society/dashboard');
+      else if (role === UserRole.RECYCLER) navigate('/recycler/dashboard');
+      else navigate('/resident/dashboard');
     } catch (err: any) {
       setError(err.response?.data?.message || err.message || 'Registration failed.');
     } finally {
@@ -51,12 +53,12 @@ export const RegisterPage: React.FC = () => {
           <div className="w-12 h-12 bg-forest-800 text-white rounded-2xl flex items-center justify-center mx-auto shadow-md">
             <Recycle className="w-7 h-7 text-emerald-300" />
           </div>
-          <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">Onboard to SwachhSetu</h2>
-          <p className="text-xs text-gray-500">Join the municipal circular waste management network</p>
+          <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">Join the SwachhSetu Eco-Grid</h2>
+          <p className="text-xs text-gray-500">Connect to your local 4-stream municipal segregation network</p>
         </div>
 
-        {/* Role Selector Tabs */}
-        <div className="grid grid-cols-4 gap-1.5 p-1 bg-gray-100 rounded-xl text-xs font-bold text-center">
+        {/* Role selection pill tabs */}
+        <div className="grid grid-cols-4 p-1.5 bg-gray-100 rounded-xl text-xs font-bold text-center">
           <button
             type="button"
             onClick={() => setRole(UserRole.RESIDENT)}
@@ -112,7 +114,7 @@ export const RegisterPage: React.FC = () => {
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 placeholder="e.g. Priya Sharma"
-                className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+                className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-xs text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-emerald-500 focus:outline-none"
               />
             </div>
             <div>
@@ -122,7 +124,7 @@ export const RegisterPage: React.FC = () => {
                 value={formData.phoneNumber}
                 onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
                 placeholder="+91 98765 43210"
-                className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+                className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-xs text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-emerald-500 focus:outline-none"
               />
             </div>
           </div>
@@ -136,7 +138,7 @@ export const RegisterPage: React.FC = () => {
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 placeholder="priya.sharma@domain.com"
-                className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+                className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-xs text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-emerald-500 focus:outline-none"
               />
             </div>
             <div>
@@ -148,7 +150,7 @@ export const RegisterPage: React.FC = () => {
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 placeholder="At least 6 characters"
-                className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+                className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-xs text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-emerald-500 focus:outline-none"
               />
             </div>
           </div>
@@ -160,35 +162,63 @@ export const RegisterPage: React.FC = () => {
                 <select
                   value={formData.societyId}
                   onChange={(e) => setFormData({ ...formData, societyId: e.target.value })}
-                  className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+                  className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-xs text-gray-900 font-medium focus:ring-2 focus:ring-emerald-500 focus:outline-none"
                 >
-                  <option value="soc-gulmohar-01">Gulmohar Enclave RWA (Mayur Vihar Ph-1, Ward 203)</option>
-                  <option value="soc-aravali-02">Aravali Heights Housing (Vasant Kunj, Ward 142)</option>
+                  <option value="soc-green-meadows-01">Green Meadows Residency (Mayur Vihar Ph-1)</option>
+                  <option value="soc-aravali-01">Aravali Heights Cooperative Housing (Ward 42)</option>
+                  <option value="soc-samachar-01">Samachar Apartments (Pocket 1, East Delhi)</option>
                 </select>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-gray-700 mb-1">Flat / Unit Number</label>
+                  <label className="block text-xs font-semibold text-gray-700 mb-1">Flat / House No.</label>
                   <input
                     type="text"
                     required
                     value={formData.flatNumber}
                     onChange={(e) => setFormData({ ...formData, flatNumber: e.target.value })}
-                    placeholder="e.g. C-104"
-                    className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+                    placeholder="e.g. B-402"
+                    className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-xs text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-emerald-500 focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-gray-700 mb-1">Wing / Block</label>
+                  <label className="block text-xs font-semibold text-gray-700 mb-1">Tower / Block</label>
                   <input
                     type="text"
-                    value={formData.wingBlock}
-                    onChange={(e) => setFormData({ ...formData, wingBlock: e.target.value })}
-                    placeholder="e.g. Block C"
-                    className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+                    value={formData.block}
+                    onChange={(e) => setFormData({ ...formData, block: e.target.value })}
+                    placeholder="e.g. Tower B"
+                    className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-xs text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-emerald-500 focus:outline-none"
                   />
                 </div>
+              </div>
+            </div>
+          )}
+
+          {role === UserRole.RECYCLER && (
+            <div className="pt-2 border-t border-gray-100 space-y-3">
+              <div>
+                <label className="block text-xs font-semibold text-gray-700 mb-1">Enterprise Facility Name</label>
+                <input
+                  type="text"
+                  required
+                  value={formData.businessName}
+                  onChange={(e) => setFormData({ ...formData, businessName: e.target.value })}
+                  placeholder="e.g. GreenPolymer Processing Solutions Pvt Ltd"
+                  className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-xs text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-semibold text-gray-700 mb-1">CPCB / SPCB Waste Authorization No.</label>
+                <input
+                  type="text"
+                  required
+                  value={formData.cpcbLicenseNumber}
+                  onChange={(e) => setFormData({ ...formData, cpcbLicenseNumber: e.target.value })}
+                  placeholder="e.g. CPCB/WMT/2024/9082"
+                  className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-xl text-xs font-mono text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+                />
               </div>
             </div>
           )}
@@ -196,13 +226,13 @@ export const RegisterPage: React.FC = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 bg-forest-800 hover:bg-forest-700 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-2 disabled:opacity-50 mt-4"
+            className="w-full py-3 bg-forest-800 hover:bg-forest-700 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-2 disabled:opacity-50"
           >
             {loading ? (
               <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
             ) : (
               <>
-                Complete Registration
+                Register Account & Enter Portal
                 <ArrowRight className="w-4 h-4" />
               </>
             )}
@@ -212,11 +242,10 @@ export const RegisterPage: React.FC = () => {
         <div className="text-center text-xs text-gray-500">
           Already registered?{' '}
           <Link to="/login" className="font-bold text-emerald-700 hover:underline">
-            Sign In here
+            Sign In to SwachhSetu
           </Link>
         </div>
       </div>
     </div>
   );
 };
-

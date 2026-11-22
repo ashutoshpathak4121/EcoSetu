@@ -6,6 +6,37 @@
   body {
     @apply bg-[#f8faf9] text-[#1a1d20] font-sans;
   }
+
+  /* Universal high-contrast input fix: ensure text typed inside inputs is always visible and never inherits an invisible color */
+  input, select, textarea {
+    color: #0f172a !important; /* Default dark slate text for light inputs */
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: #64748b !important; /* slate-500 */
+    opacity: 1;
+  }
+
+  /* When input is explicitly placed in dark background contexts or carries dark styling */
+  input.bg-gray-800, input.bg-gray-900,
+  input.bg-slate-800, input.bg-slate-900,
+  input.bg-zinc-800, input.bg-zinc-900,
+  textarea.bg-gray-800, textarea.bg-gray-900,
+  textarea.bg-slate-800, textarea.bg-slate-900,
+  textarea.bg-zinc-800, textarea.bg-zinc-900,
+  select.bg-gray-800, select.bg-gray-900,
+  select.bg-slate-800, select.bg-slate-900,
+  select.bg-zinc-800, select.bg-zinc-900,
+  .dark-input {
+    color: #f8fafc !important; /* Crisp white text for dark inputs */
+  }
+
+  input.bg-gray-800::placeholder, input.bg-gray-900::placeholder,
+  input.bg-slate-800::placeholder, input.bg-slate-900::placeholder,
+  input.bg-zinc-800::placeholder, input.bg-zinc-900::placeholder {
+    color: #94a3b8 !important; /* slate-400 */
+    opacity: 1;
+  }
 }
 
 /* Custom scrollbars */
@@ -31,4 +62,3 @@
   border-radius: 0.75rem;
   z-index: 10;
 }
-
