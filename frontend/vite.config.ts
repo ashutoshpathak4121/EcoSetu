@@ -5,10 +5,11 @@ import path from 'path';
 export default defineConfig({
   plugins: [react()],
   resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
-      '@shared': path.resolve(__dirname, '../shared'),
-    },
+    alias: [
+      { find: /.*shared\/types/, replacement: path.resolve(__dirname, './src/shared/types') },
+      { find: '@shared', replacement: path.resolve(__dirname, './src/shared') },
+      { find: '@', replacement: path.resolve(__dirname, './src') },
+    ],
   },
   server: {
     port: 5173,
