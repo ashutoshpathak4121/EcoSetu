@@ -28,7 +28,7 @@ export const SuperAdminDashboard: React.FC = () => {
       <div className="bg-gradient-to-r from-gray-900 to-forest-950 border border-emerald-500/20 rounded-2xl p-6 sm:p-8 text-white shadow-lg space-y-2">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-semibold border border-emerald-400/30">
           <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-          Super Administrator Console • Techathon 2026 Core
+          Super Administrator Console • EcoSetu Core Platform
         </div>
         <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">EcoSetu System Governance</h1>
         <p className="text-xs sm:text-sm text-gray-300">

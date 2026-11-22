@@ -2,7 +2,7 @@
   "name": "ecosetu-monorepo",
   "version": "1.0.0",
   "private": true,
-  "description": "EcoSetu - Waste Management Ecosystem | WasteChakra by Ashutosh Pathak (Techathon 2026)",
+  "description": "EcoSetu - Waste Management Ecosystem | WasteChakra by Ashutosh Pathak",
   "workspaces": [
     "frontend",
     "backend",
@@ -21,7 +21,7 @@
   "devDependencies": {
     "concurrently": "^9.1.2"
   },
-  "author": "Ashutosh Pathak (Techathon 2026)",
+  "author": "Ashutosh Pathak",
   "license": "MIT"
 }
 

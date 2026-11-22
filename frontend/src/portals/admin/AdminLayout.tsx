@@ -76,7 +76,7 @@ export const AdminLayout: React.FC = () => {
                 Root Access
               </span>
             </div>
-            <span className="text-[11px] text-gray-400">Techathon 2026 Core Infrastructure</span>
+            <span className="text-[11px] text-gray-400">Enterprise Core Infrastructure</span>
           </div>
         </div>
 

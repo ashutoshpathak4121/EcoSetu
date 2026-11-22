@@ -15,7 +15,7 @@ export const AboutPage: React.FC = () => {
           Bridge to Cleanliness – WasteChakra Concept
         </h1>
         <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
-          Developed by <strong>Ashutosh Pathak</strong> for <strong>Techathon 2026</strong>, EcoSetu tackles the root bottleneck of urban Indian sanitation: improper segregation at source.
+          Developed by <strong>Ashutosh Pathak</strong>, EcoSetu tackles the root bottleneck of urban Indian sanitation: improper segregation at source.
         </p>
       </div>
 
@@ -63,7 +63,7 @@ export const AboutPage: React.FC = () => {
             </div>
             <h3 className="text-2xl font-extrabold text-white tracking-tight">Ashutosh Pathak</h3>
             <p className="text-sm text-gray-300 max-w-2xl leading-relaxed">
-              Sole creator, software architect, and full-stack engineer of <strong>EcoSetu</strong> for <strong>Techathon 2026</strong>. Conceptualized and engineered the complete physical-to-digital civic technology architecture spanning React 18, Node.js Express, PostgreSQL Prisma, and Python FastAPI Computer Vision.
+              Sole creator, software architect, and full-stack engineer of <strong>EcoSetu</strong>. Conceptualized and engineered the complete physical-to-digital civic technology architecture spanning React 18, Node.js Express, PostgreSQL Prisma, and Python FastAPI Computer Vision.
             </p>
           </div>
         </div>

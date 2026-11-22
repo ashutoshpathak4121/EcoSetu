@@ -1,6 +1,6 @@
 # 🌿 EcoSetu (स्वच्छसेतु) – Bridge to Cleanliness
 ### *Under the WasteChakra Circular Economy Framework*
-**Architected & Developed by Ashutosh Pathak for Techathon 2026**
+**Architected & Developed by Ashutosh Pathak**
 
 [![Tech Stack](https://img.shields.io/badge/Stack-React%2018%20%7C%20Node.js%20%7C%20PostgreSQL%20%7C%20FastAPI-2d6a4f?style=for-the-badge)](https://github.com/ashutoshpathak4121/EcoSetu)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
@@ -207,11 +207,11 @@ cd frontend && npm run build
 
 ### **Ashutosh Pathak**
 **Lead Software Architect, Full-Stack Developer & AI Systems Engineer**  
-*Creator of EcoSetu – Bridge to Cleanliness for Techathon 2026*
+*Creator of EcoSetu – Bridge to Cleanliness*
 
 [![GitHub Profile](https://img.shields.io/badge/GitHub-ashutoshpathak4121-181717?style=for-the-badge&logo=github)](https://github.com/ashutoshpathak4121)
 [![Email](https://img.shields.io/badge/Contact-Developer-0078D4?style=for-the-badge&logo=microsoftoutlook&logoColor=white)](mailto:ashutoshpathak4121@gmail.com)
-[![Techathon 2026](https://img.shields.io/badge/Competition-Techathon%202026-forest?style=for-the-badge)](https://github.com/ashutoshpathak4121/EcoSetu)
+[![Platform](https://img.shields.io/badge/Platform-Production%20Ready-emerald?style=for-the-badge)](https://github.com/ashutoshpathak4121/EcoSetu)
 
 ---
 
@@ -223,7 +223,7 @@ cd frontend && npm run build
 | **Role & Designation** | Lead Software Architect, Full-Stack Developer, AI & Database Architect |
 | **Initiative / Project** | **EcoSetu (स्वच्छसेतु) – Waste Management Ecosystem** |
 | **Framework & Concept**| WasteChakra Circular Economy Framework (Segregation at Source) |
-| **Competition** | **Techathon 2026** |
+| **Focus Area** | Urban Sanitation & Circular Waste Segregation |
 | **GitHub Profile** | [@ashutoshpathak4121](https://github.com/ashutoshpathak4121) |
 | **Repository** | [github.com/ashutoshpathak4121/EcoSetu](https://github.com/ashutoshpathak4121/EcoSetu) |
 

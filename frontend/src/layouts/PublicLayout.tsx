@@ -55,9 +55,9 @@ export const PublicLayout: React.FC = () => {
             </div>
 
             <div>
-              <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-3">Techathon 2026</h4>
+              <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-3">Project Initiative</h4>
               <p className="text-xs text-gray-400 leading-relaxed mb-2">
-                Architected and developed by <strong>Ashutosh Pathak</strong> for Techathon 2026.
+                Architected and developed by <strong>Ashutosh Pathak</strong>.
               </p>
               <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-forest-800 text-emerald-300 text-xs border border-forest-700">
                 <Shield className="w-3.5 h-3.5" />

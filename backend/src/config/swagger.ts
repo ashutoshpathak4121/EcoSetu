@@ -7,10 +7,10 @@ const swaggerDocument = {
     title: 'EcoSetu REST API',
     version: '1.0.0',
     description:
-      'Backend API service for EcoSetu – Bridge to Cleanliness | WasteChakra Concept by Team MazeRunners (Techathon 2026)',
+      'Backend API service for EcoSetu – Bridge to Cleanliness | WasteChakra Concept by Ashutosh Pathak',
     contact: {
-      name: 'Team MazeRunners',
-      email: 'techathon2026@ecosetu.in',
+      name: 'Ashutosh Pathak',
+      email: 'support@ecosetu.in',
     },
   },
   servers: [

@@ -36,7 +36,7 @@ export const DemoRoleSwitcher: React.FC = () => {
           </span>
           <span className="font-semibold text-emerald-300 tracking-wide flex items-center gap-1">
             <Sparkles className="w-3.5 h-3.5" />
-            Techathon 2026 Evaluation Bar
+            EcoSetu Portal Navigation Bar
           </span>
           <span className="text-gray-400 hidden sm:inline">| Quick Role Switcher:</span>
         </div>

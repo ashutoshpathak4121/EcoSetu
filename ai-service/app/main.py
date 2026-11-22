@@ -5,7 +5,7 @@ from app.core.config import settings
 
 app = FastAPI(
     title="EcoSetu AI Waste Verification Service",
-    description="Independent Computer Vision & Waste Stream Classification Microservice for Techathon 2026",
+    description="Independent Computer Vision & Waste Stream Classification Microservice",
     version="2.1.0",
     docs_url="/docs",
     redoc_url="/redoc"

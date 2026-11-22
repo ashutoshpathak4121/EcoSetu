@@ -151,7 +151,7 @@ export const MunicipalLayout: React.FC = () => {
       </main>
 
       <footer className="bg-slate-900 border-t border-slate-800 py-3 px-6 text-center text-xs text-slate-500 font-mono">
-        MCD East Delhi Municipal Portal • Official Government Interface • Techathon 2026
+        MCD East Delhi Municipal Portal • Official Government Interface
       </footer>
     </div>
   );
