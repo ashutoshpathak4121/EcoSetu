@@ -78,7 +78,7 @@ export const CollectorLayout: React.FC = () => {
       <DemoRoleSwitcher />
 
       {/* Rugged Mobile-Optimized Field Header */}
-      <header className="bg-slate-900 border-b border-slate-800 sticky top-8 z-40 px-4 sm:px-6 py-2.5 flex items-center justify-between shadow-md">
+      <header className="bg-slate-900 border-b border-slate-800 sticky top-0 z-40 px-4 sm:px-6 py-2.5 flex items-center justify-between shadow-md">
         <div className="flex items-center space-x-3">
           <div className="w-9 h-9 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center font-black shadow-md">
             <Truck className="w-5 h-5" />
@@ -131,7 +131,7 @@ export const CollectorLayout: React.FC = () => {
       </header>
 
       {/* Navigation Bar */}
-      <nav className="bg-slate-900/90 backdrop-blur-md border-b border-slate-800 px-4 sm:px-6 py-2 sticky top-[4.75rem] z-30 overflow-x-auto">
+      <nav className="bg-slate-900/90 backdrop-blur-md border-b border-slate-800 px-4 sm:px-6 py-2 sticky top-[53px] z-30 overflow-x-auto">
         <div className="max-w-7xl mx-auto flex items-center space-x-2">
           {navItems.map((item) => {
             const Icon = item.icon;

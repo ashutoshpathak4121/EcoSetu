@@ -67,7 +67,7 @@ export const AdminLayout: React.FC = () => {
       <DemoRoleSwitcher />
 
       {/* Top Authoritative Header */}
-      <header className="bg-gray-900 border-b border-gray-800 sticky top-8 z-40 px-6 py-3 flex items-center justify-between">
+      <header className="bg-gray-900 border-b border-gray-800 sticky top-0 z-40 px-4 sm:px-6 py-3 flex items-center justify-between">
         <div className="flex items-center space-x-3">
           <div className="w-9 h-9 rounded-xl bg-emerald-500 text-black flex items-center justify-center font-black shadow-md">
             <Shield className="w-5 h-5" />
@@ -114,9 +114,32 @@ export const AdminLayout: React.FC = () => {
         </div>
       </header>
 
+      {/* Mobile Horizontal Sub-Navigation (< md) */}
+      <nav className="md:hidden bg-gray-900/95 backdrop-blur-md border-b border-gray-800 px-3 py-2 sticky top-[57px] z-30 overflow-x-auto flex items-center space-x-2 scrollbar-none">
+        {navItems.map((item) => {
+          const Icon = item.icon;
+          return (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              className={({ isActive }) =>
+                `flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
+                  isActive
+                    ? 'bg-emerald-500 text-black shadow-sm font-black'
+                    : 'text-gray-400 hover:bg-gray-800 hover:text-white bg-gray-800/80 border border-gray-700'
+                }`
+              }
+            >
+              <Icon className="w-3.5 h-3.5" />
+              <span>{item.label}</span>
+            </NavLink>
+          );
+        })}
+      </nav>
+
       {/* Main Content Area */}
-      <div className="flex-1 flex max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 gap-6">
-        <aside className="w-60 bg-gray-900/90 border border-gray-800 rounded-2xl p-4 flex flex-col flex-shrink-0 h-fit space-y-2">
+      <div className="flex-1 flex flex-col md:flex-row max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 gap-6">
+        <aside className="hidden md:flex w-60 bg-gray-900/90 border border-gray-800 rounded-2xl p-4 flex-col flex-shrink-0 h-fit space-y-2">
           <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest px-3 py-1">
             Governance Console
           </div>
@@ -148,7 +171,7 @@ export const AdminLayout: React.FC = () => {
           </div>
         </aside>
 
-        <main className="flex-1 overflow-x-hidden">
+        <main className="flex-1 min-w-0 w-full overflow-x-hidden">
           <Outlet />
         </main>
       </div>

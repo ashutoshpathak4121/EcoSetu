@@ -75,7 +75,7 @@ export const SocietyLayout: React.FC = () => {
       <DemoRoleSwitcher />
 
       {/* RWA Portal Header */}
-      <header className="bg-white border-b border-indigo-100 sticky top-8 z-40 px-6 py-3 flex items-center justify-between shadow-sm">
+      <header className="bg-white border-b border-indigo-100 sticky top-0 z-40 px-4 sm:px-6 py-3 flex items-center justify-between shadow-sm">
         <div className="flex items-center space-x-3">
           <div className="w-9 h-9 rounded-xl bg-indigo-700 text-white flex items-center justify-center font-bold shadow-md">
             <Building2 className="w-5 h-5 text-indigo-200" />
@@ -123,7 +123,7 @@ export const SocietyLayout: React.FC = () => {
       </header>
 
       {/* RWA Nav Bar */}
-      <nav className="bg-white/95 backdrop-blur-md border-b border-gray-200 px-6 py-2 sticky top-[4.75rem] z-30">
+      <nav className="bg-white/95 backdrop-blur-md border-b border-gray-200 px-4 sm:px-6 py-2 sticky top-[61px] z-30 overflow-x-auto">
         <div className="max-w-7xl mx-auto flex items-center space-x-2">
           {navItems.map((item) => {
             const Icon = item.icon;

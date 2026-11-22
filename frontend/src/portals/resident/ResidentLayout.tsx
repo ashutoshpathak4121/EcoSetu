@@ -82,7 +82,7 @@ export const ResidentLayout: React.FC = () => {
       <DemoRoleSwitcher />
 
       {/* Resident Header */}
-      <header className="bg-white/95 backdrop-blur-md border-b border-gray-200 sticky top-8 z-40 px-6 py-3 flex items-center justify-between shadow-xs">
+      <header className="bg-white/95 backdrop-blur-md border-b border-gray-200 sticky top-0 z-40 px-4 sm:px-6 py-3 flex items-center justify-between shadow-xs">
         <Link to="/resident/dashboard" className="flex items-center space-x-2.5">
           <div className="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-200/80 flex items-center justify-center p-1 shadow-xs">
             <img src="/logo-icon.png" alt="EcoSetu" className="w-full h-full object-contain" />
@@ -116,9 +116,32 @@ export const ResidentLayout: React.FC = () => {
         </div>
       </header>
 
+      {/* Mobile Horizontal Sub-Navigation (< md) */}
+      <nav className="md:hidden bg-white/95 backdrop-blur-md border-b border-gray-200 px-3 py-2 sticky top-[57px] z-30 overflow-x-auto flex items-center space-x-2 scrollbar-none">
+        {navItems.map((item) => {
+          const Icon = item.icon;
+          return (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              className={({ isActive }) =>
+                `flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
+                  isActive
+                    ? 'bg-forest-800 text-white shadow-sm'
+                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900 bg-gray-50 border border-gray-200'
+                }`
+              }
+            >
+              <Icon className="w-3.5 h-3.5" />
+              <span>{item.label}</span>
+            </NavLink>
+          );
+        })}
+      </nav>
+
       {/* Main Container */}
-      <div className="flex-1 flex max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 gap-6">
-        <aside className="w-60 bg-white border border-gray-200 rounded-2xl p-4 flex flex-col flex-shrink-0 h-fit space-y-2 shadow-xs">
+      <div className="flex-1 flex flex-col md:flex-row max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 gap-6">
+        <aside className="hidden md:flex w-60 bg-white border border-gray-200 rounded-2xl p-4 flex-col flex-shrink-0 h-fit space-y-2 shadow-xs">
           <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest px-3 py-1">
             Household Navigation
           </div>
@@ -145,7 +168,7 @@ export const ResidentLayout: React.FC = () => {
           </nav>
         </aside>
 
-        <main className="flex-1 overflow-x-hidden">
+        <main className="flex-1 min-w-0 w-full overflow-x-hidden">
           <Outlet />
         </main>
       </div>

@@ -28,28 +28,30 @@ export const DemoRoleSwitcher: React.FC = () => {
   };
 
   return (
-    <div className="bg-forest-900 text-white text-xs py-2 px-4 border-b border-forest-800 sticky top-0 z-50 shadow-sm">
-      <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
-        <div className="flex items-center space-x-2">
-          <span className="flex h-2 w-2 relative">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-          </span>
-          <span className="font-semibold text-emerald-300 tracking-wide flex items-center gap-1">
-            <Sparkles className="w-3.5 h-3.5" />
-            EcoSetu Live Portals
-          </span>
-          <span className="text-gray-400 hidden sm:inline">| Quick Switcher:</span>
+    <div className="bg-forest-900 text-white text-xs py-2 px-3 sm:px-4 border-b border-forest-800 relative z-50 shadow-sm">
+      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2">
+        <div className="flex items-center justify-between space-x-2">
+          <div className="flex items-center space-x-2">
+            <span className="flex h-2 w-2 relative">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span className="font-semibold text-emerald-300 tracking-wide flex items-center gap-1">
+              <Sparkles className="w-3.5 h-3.5" />
+              EcoSetu Live Portals
+            </span>
+          </div>
+          <span className="text-[10px] text-gray-400 sm:hidden">Swipe roles &rarr;</span>
         </div>
 
-        <div className="flex flex-wrap items-center gap-1.5">
+        <div className="flex items-center gap-1.5 overflow-x-auto max-w-full pb-0.5 sm:pb-0 scrollbar-none">
           {roles.map(({ role, label, path, icon: Icon }) => {
             const isActive = user?.role === role;
             return (
               <button
                 key={role}
                 onClick={() => handleSwitch(role, path)}
-                className={`px-2.5 py-1 rounded-lg font-medium border transition-all duration-150 flex items-center gap-1.5 text-[11px] ${
+                className={`px-2.5 py-1 rounded-lg font-medium border transition-all duration-150 flex items-center gap-1.5 text-[11px] whitespace-nowrap flex-shrink-0 ${
                   isActive
                     ? 'bg-emerald-500 text-white border-emerald-400 font-bold shadow-sm'
                     : 'bg-forest-800/90 text-gray-200 border-forest-700 hover:bg-forest-700 hover:text-white'

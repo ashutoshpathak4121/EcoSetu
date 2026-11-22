@@ -28,9 +28,11 @@ export const DashboardLayout: React.FC = () => {
       <DemoRoleSwitcher />
       <Navbar />
 
-      <div className="flex-1 flex max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 gap-6">
-        <Sidebar />
-        <main className="flex-1 overflow-x-hidden">
+      <div className="flex-1 flex flex-col md:flex-row max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 gap-6">
+        <div className="hidden md:block flex-shrink-0">
+          <Sidebar />
+        </div>
+        <main className="flex-1 min-w-0 w-full overflow-x-hidden">
           <Outlet />
         </main>
       </div>

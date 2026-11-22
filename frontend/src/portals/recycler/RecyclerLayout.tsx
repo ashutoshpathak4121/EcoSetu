@@ -75,7 +75,7 @@ export const RecyclerLayout: React.FC = () => {
       <DemoRoleSwitcher />
 
       {/* Recycler B2B Header */}
-      <header className="bg-zinc-900 border-b border-zinc-800 sticky top-8 z-40 px-6 py-3 flex items-center justify-between shadow-md">
+      <header className="bg-zinc-900 border-b border-zinc-800 sticky top-0 z-40 px-4 sm:px-6 py-3 flex items-center justify-between shadow-md">
         <div className="flex items-center space-x-3">
           <div className="w-9 h-9 rounded-xl bg-amber-500 text-zinc-950 flex items-center justify-center font-black shadow-md">
             <Factory className="w-5 h-5" />
@@ -124,7 +124,7 @@ export const RecyclerLayout: React.FC = () => {
       </header>
 
       {/* Nav Menu */}
-      <nav className="bg-zinc-900/90 backdrop-blur-md border-b border-zinc-800 px-6 py-2 sticky top-[4.75rem] z-30">
+      <nav className="bg-zinc-900/90 backdrop-blur-md border-b border-zinc-800 px-4 sm:px-6 py-2 sticky top-[61px] z-30 overflow-x-auto">
         <div className="max-w-7xl mx-auto flex items-center space-x-2">
           {navItems.map((item) => {
             const Icon = item.icon;
