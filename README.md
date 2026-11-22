@@ -209,7 +209,7 @@ cd frontend && npm run build
 **Lead Software Architect, Full-Stack Developer & AI Systems Engineer**  
 *Creator of EcoSetu – Bridge to Cleanliness*
 
-[![LinkedIn Profile](https://img.shields.io/badge/LinkedIn-Ashutosh%20Pathak-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/ashutosh-pathak)
+[![LinkedIn Profile](https://img.shields.io/badge/LinkedIn-ashutoshpathak51-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/ashutoshpathak51/)
 [![Email](https://img.shields.io/badge/Contact-Developer-0078D4?style=for-the-badge&logo=microsoftoutlook&logoColor=white)](mailto:ashutoshpathak4121@gmail.com)
 [![Platform](https://img.shields.io/badge/Platform-Production%20Ready-emerald?style=for-the-badge)](https://github.com/ashutoshpathak4121/EcoSetu)
 
@@ -224,7 +224,7 @@ cd frontend && npm run build
 | **Initiative / Project** | **EcoSetu (स्वच्छसेतु) – Waste Management Ecosystem** |
 | **Framework & Concept**| WasteChakra Circular Economy Framework (Segregation at Source) |
 | **Focus Area** | Urban Sanitation & Circular Waste Segregation |
-| **LinkedIn Profile** | [linkedin.com/in/ashutosh-pathak](https://www.linkedin.com/in/ashutosh-pathak) |
+| **LinkedIn Profile** | [linkedin.com/in/ashutoshpathak51](https://www.linkedin.com/in/ashutoshpathak51/) |
 | **Repository** | [github.com/ashutoshpathak4121/EcoSetu](https://github.com/ashutoshpathak4121/EcoSetu) |
 
 ### 🛠️ Technical Competencies & Full-Stack Contributions
