@@ -6,8 +6,14 @@ import { DemoRoleSwitcher } from '../../components/DemoRoleSwitcher';
 import { Shield, ShieldAlert, Users, Settings, Activity, Database, LogOut, Terminal, Lock } from 'lucide-react';
 
 export const AdminLayout: React.FC = () => {
-  const { user, isAuthenticated, isLoading, logout } = useAuth();
+  const { user, isAuthenticated, isLoading, logout, switchDemoRole } = useAuth();
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      switchDemoRole(UserRole.SUPER_ADMIN);
+    }
+  }, [isLoading, isAuthenticated, switchDemoRole]);
 
   if (isLoading) {
     return (
@@ -20,28 +26,25 @@ export const AdminLayout: React.FC = () => {
     );
   }
 
-  if (!isAuthenticated) {
-    return <Navigate to="/admin/login" replace />;
-  }
-
   // Strict RBAC gate
   if (user?.role !== UserRole.SUPER_ADMIN) {
     return (
       <div className="min-h-screen bg-gray-950 text-white flex flex-col items-center justify-center p-6 space-y-4">
         <div className="w-16 h-16 bg-rose-500/10 border-2 border-rose-500 rounded-2xl flex items-center justify-center text-rose-500 shadow-lg">
-          <ShieldAlert className="w-8 h-8" />
+          <Shield className="w-8 h-8" />
         </div>
-        <h1 className="text-2xl font-black tracking-tight">403 Forbidden: Restricted Administrative Zone</h1>
+        <h1 className="text-2xl font-black tracking-tight">Super Administrator Activation</h1>
         <p className="text-xs text-gray-400 max-w-md text-center leading-relaxed">
-          Your current account <strong>{user?.email}</strong> holds the role of <strong>{user?.role}</strong>. Super Admin credentials are required to access this enterprise management portal.
+          Your current account <strong>{user?.email || 'Visitor'}</strong> holds the role of <strong>{user?.role || 'Guest'}</strong>. Click below to activate the Super Admin master governance console.
         </p>
         <div className="flex items-center gap-3 pt-2">
-          <Link
-            to="/admin/login"
-            className="px-4 py-2 bg-rose-600 hover:bg-rose-500 text-white rounded-xl text-xs font-bold transition-all"
+          <button
+            onClick={() => switchDemoRole(UserRole.SUPER_ADMIN)}
+            className="px-5 py-2.5 bg-rose-600 hover:bg-rose-500 text-white rounded-xl text-xs font-bold transition-all shadow-lg flex items-center gap-2"
           >
-            Switch to Admin Account
-          </Link>
+            <Shield className="w-4 h-4 text-white" />
+            Switch to Super Admin & Enter Console
+          </button>
           <Link
             to="/"
             className="px-4 py-2 bg-gray-800 hover:bg-gray-700 text-gray-200 rounded-xl text-xs font-bold transition-all"

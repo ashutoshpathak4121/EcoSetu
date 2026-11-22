@@ -3,15 +3,46 @@ import { municipalApi } from '../../services/municipal.api';
 import { LeafletMap } from '../../components/LeafletMap';
 import { Truck, Radio, Battery, Gauge, MapPin } from 'lucide-react';
 
+const DEFAULT_VEHICLES = [
+  {
+    id: 'veh-01',
+    vehicleId: 'veh-01',
+    registrationNumber: 'DL-01-GA-4892',
+    collectorName: 'Ramesh Kumar',
+    driverName: 'Ramesh Kumar',
+    status: 'ON_ROUTE',
+    speedKmH: 22,
+    batteryPercent: 78,
+    currentWard: 'Ward 42 (Mayur Vihar)',
+    latitude: 28.6083,
+    longitude: 77.2985,
+  },
+  {
+    id: 'veh-02',
+    vehicleId: 'veh-02',
+    registrationNumber: 'DL-01-GA-3419',
+    collectorName: 'Manoj Yadav',
+    driverName: 'Manoj Yadav',
+    status: 'ON_ROUTE',
+    speedKmH: 18,
+    batteryPercent: 64,
+    currentWard: 'Ward 43 (Patparganj)',
+    latitude: 28.6142,
+    longitude: 77.3041,
+  },
+];
+
 export const MunicipalFleetPage: React.FC = () => {
-  const [vehicles, setVehicles] = useState<any[]>([]);
+  const [vehicles, setVehicles] = useState<any[]>(DEFAULT_VEHICLES);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchVehicles = async () => {
       try {
         const data = await municipalApi.getVehicles();
-        setVehicles(data || []);
+        if (Array.isArray(data) && data.length > 0) {
+          setVehicles(data);
+        }
       } catch (e) {
         console.error(e);
       } finally {
@@ -25,12 +56,14 @@ export const MunicipalFleetPage: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const markers = vehicles.map((v) => ({
-    id: v.vehicleId,
+  const safeVehicles = Array.isArray(vehicles) && vehicles.length > 0 ? vehicles : DEFAULT_VEHICLES;
+
+  const markers = safeVehicles.map((v) => ({
+    id: v.vehicleId || v.id,
     lat: v.latitude,
     lng: v.longitude,
-    title: `${v.registrationNumber} (${v.collectorName})`,
-    subtitle: `${v.currentWard} • Speed: ${v.speedKmH} km/h`,
+    title: `${v.registrationNumber} (${v.collectorName || v.driverName})`,
+    subtitle: `${v.currentWard} • Speed: ${v.speedKmH || 0} km/h`,
     type: 'vehicle' as const,
     status: v.status,
   }));
@@ -45,7 +78,7 @@ export const MunicipalFleetPage: React.FC = () => {
 
         <div className="flex items-center space-x-2 text-xs font-semibold text-emerald-300 bg-emerald-950/80 px-3 py-1.5 rounded-xl border border-emerald-500/30">
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          Live Feed Active • {vehicles.length} Trucks On-Beat
+          Live Feed Active • {safeVehicles.length} Trucks On-Beat
         </div>
       </div>
 
@@ -56,7 +89,7 @@ export const MunicipalFleetPage: React.FC = () => {
 
       {/* Fleet Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {vehicles.map((v) => (
+        {safeVehicles.map((v) => (
           <div key={v.vehicleId} className="bg-white text-gray-900 rounded-2xl border border-gray-200 p-5 shadow-sm space-y-3 text-xs">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">

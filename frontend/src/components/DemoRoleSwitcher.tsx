@@ -2,19 +2,19 @@ import React from 'react';
 import { useAuth } from '../context/AuthContext';
 import { UserRole } from '../../../shared/types';
 import { useNavigate } from 'react-router-dom';
-import { UserCheck, Shield, Sparkles } from 'lucide-react';
+import { UserCheck, Shield, Sparkles, Home, Truck, Building2, Factory, Landmark } from 'lucide-react';
 
 export const DemoRoleSwitcher: React.FC = () => {
   const { user, switchDemoRole } = useAuth();
   const navigate = useNavigate();
 
   const roles = [
-    { role: UserRole.RESIDENT, label: 'Resident', path: '/resident/dashboard', color: 'bg-emerald-50 text-emerald-700 border-emerald-200' },
-    { role: UserRole.COLLECTOR, label: 'Collector', path: '/collector/dashboard', color: 'bg-blue-50 text-blue-700 border-blue-200' },
-    { role: UserRole.SOCIETY_ADMIN, label: 'Society RWA', path: '/society/dashboard', color: 'bg-purple-50 text-purple-700 border-purple-200' },
-    { role: UserRole.RECYCLER, label: 'Recycler', path: '/recycler/dashboard', color: 'bg-amber-50 text-amber-700 border-amber-200' },
-    { role: UserRole.MCD_OFFICER, label: 'MCD Command', path: '/municipal/dashboard', color: 'bg-rose-50 text-rose-700 border-rose-200' },
-    { role: UserRole.SUPER_ADMIN, label: 'Super Admin', path: '/admin/dashboard', color: 'bg-gray-100 text-gray-800 border-gray-300' },
+    { role: UserRole.RESIDENT, label: 'Resident', path: '/resident/dashboard', icon: Home },
+    { role: UserRole.COLLECTOR, label: 'Collector', path: '/collector/dashboard', icon: Truck },
+    { role: UserRole.SOCIETY_ADMIN, label: 'Society RWA', path: '/society/dashboard', icon: Building2 },
+    { role: UserRole.RECYCLER, label: 'Recycler', path: '/recycler/dashboard', icon: Factory },
+    { role: UserRole.MCD_OFFICER, label: 'MCD Command', path: '/municipal/dashboard', icon: Landmark },
+    { role: UserRole.SUPER_ADMIN, label: 'Super Admin', path: '/admin/dashboard', icon: Shield },
   ];
 
   const handleSwitch = async (role: UserRole, targetPath: string) => {
@@ -37,26 +37,31 @@ export const DemoRoleSwitcher: React.FC = () => {
           </span>
           <span className="font-semibold text-emerald-300 tracking-wide flex items-center gap-1">
             <Sparkles className="w-3.5 h-3.5" />
-            EcoSetu Portal Navigation Bar
+            EcoSetu Live Portals
           </span>
-          <span className="text-gray-400 hidden sm:inline">| Quick Role Switcher:</span>
+          <span className="text-gray-400 hidden sm:inline">| Quick Switcher:</span>
         </div>
 
         <div className="flex flex-wrap items-center gap-1.5">
-          {roles.map(({ role, label, path }) => {
+          {roles.map(({ role, label, path, icon: Icon }) => {
             const isActive = user?.role === role;
             return (
               <button
                 key={role}
                 onClick={() => handleSwitch(role, path)}
-                className={`px-2.5 py-1 rounded font-medium border transition-all duration-150 flex items-center gap-1 ${
+                className={`px-2.5 py-1 rounded-lg font-medium border transition-all duration-150 flex items-center gap-1.5 text-[11px] ${
                   isActive
                     ? 'bg-emerald-500 text-white border-emerald-400 font-bold shadow-sm'
-                    : 'bg-forest-800 text-gray-200 border-forest-700 hover:bg-forest-700 hover:text-white'
+                    : 'bg-forest-800/90 text-gray-200 border-forest-700 hover:bg-forest-700 hover:text-white'
                 }`}
+                title={`Switch to ${label} portal`}
               >
-                {isActive && <UserCheck className="w-3 h-3 text-white" />}
-                {label}
+                {isActive ? (
+                  <UserCheck className="w-3.5 h-3.5 text-white" />
+                ) : (
+                  <Icon className="w-3.5 h-3.5 text-emerald-400/80" />
+                )}
+                <span>{label}</span>
               </button>
             );
           })}

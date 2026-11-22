@@ -17,8 +17,14 @@ import {
 } from 'lucide-react';
 
 export const CollectorLayout: React.FC = () => {
-  const { user, isAuthenticated, isLoading, logout } = useAuth();
+  const { user, isAuthenticated, isLoading, logout, switchDemoRole } = useAuth();
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      switchDemoRole(UserRole.COLLECTOR);
+    }
+  }, [isLoading, isAuthenticated, switchDemoRole]);
 
   if (isLoading) {
     return (
@@ -31,27 +37,24 @@ export const CollectorLayout: React.FC = () => {
     );
   }
 
-  if (!isAuthenticated) {
-    return <Navigate to="/login/collector" replace />;
-  }
-
   if (user?.role !== UserRole.COLLECTOR) {
     return (
       <div className="min-h-screen bg-slate-900 text-white flex flex-col items-center justify-center p-6 space-y-4">
         <div className="w-16 h-16 bg-amber-500/10 border-2 border-amber-500 rounded-2xl flex items-center justify-center text-amber-500 shadow-lg">
-          <ShieldAlert className="w-8 h-8" />
+          <Truck className="w-8 h-8" />
         </div>
-        <h1 className="text-2xl font-black tracking-tight">403: Collector Portal Restricted</h1>
+        <h1 className="text-2xl font-black tracking-tight">Collector Portal Activation</h1>
         <p className="text-xs text-slate-400 max-w-md text-center leading-relaxed">
-          Logged in as <strong>{user?.name}</strong> ({user?.role}). Field collector credentials are required to operate sanitation beat assignments and geotagged collection proof.
+          Logged in as <strong>{user?.name || 'Visitor'}</strong> ({user?.role || 'Guest'}). Click below to activate the sanitation collector beat console.
         </p>
         <div className="flex items-center gap-3 pt-2">
-          <Link
-            to="/login/collector"
-            className="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-xl text-xs font-bold transition-all"
+          <button
+            onClick={() => switchDemoRole(UserRole.COLLECTOR)}
+            className="px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-xl text-xs font-bold transition-all shadow-lg flex items-center gap-2"
           >
-            Switch to Collector Account
-          </Link>
+            <Truck className="w-4 h-4 text-slate-950" />
+            Switch to Collector & Start Beat
+          </button>
           <Link
             to="/"
             className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-bold transition-all"

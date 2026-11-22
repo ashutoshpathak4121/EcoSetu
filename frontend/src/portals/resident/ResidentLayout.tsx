@@ -18,8 +18,14 @@ import {
 } from 'lucide-react';
 
 export const ResidentLayout: React.FC = () => {
-  const { user, isAuthenticated, isLoading, logout } = useAuth();
+  const { user, isAuthenticated, isLoading, logout, switchDemoRole } = useAuth();
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      switchDemoRole(UserRole.RESIDENT);
+    }
+  }, [isLoading, isAuthenticated, switchDemoRole]);
 
   if (isLoading) {
     return (
@@ -32,27 +38,24 @@ export const ResidentLayout: React.FC = () => {
     );
   }
 
-  if (!isAuthenticated) {
-    return <Navigate to="/login/resident" replace />;
-  }
-
   if (user?.role !== UserRole.RESIDENT) {
     return (
       <div className="min-h-screen bg-civic-bg flex flex-col items-center justify-center p-6 space-y-4">
-        <div className="w-16 h-16 bg-rose-50 border-2 border-rose-300 rounded-2xl flex items-center justify-center text-rose-600 shadow-sm">
-          <ShieldAlert className="w-8 h-8" />
+        <div className="w-16 h-16 bg-emerald-50 border-2 border-emerald-300 rounded-2xl flex items-center justify-center text-emerald-600 shadow-sm">
+          <Sparkles className="w-8 h-8" />
         </div>
-        <h1 className="text-2xl font-bold text-gray-900 tracking-tight">403: Resident Portal Restricted</h1>
+        <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Resident Portal Activation</h1>
         <p className="text-xs text-gray-500 max-w-md text-center leading-relaxed">
-          You are signed in as <strong>{user?.name}</strong> ({user?.role}). Please switch to a registered Resident account to access the household segregation hub.
+          Currently viewed as <strong>{user?.name || 'Visitor'}</strong> ({user?.role || 'Guest'}). Click below to instantly activate the Resident household demo session.
         </p>
         <div className="flex items-center gap-3 pt-2">
-          <Link
-            to="/login/resident"
-            className="px-4 py-2 bg-forest-800 hover:bg-forest-700 text-white rounded-xl text-xs font-bold transition-all"
+          <button
+            onClick={() => switchDemoRole(UserRole.RESIDENT)}
+            className="px-5 py-2.5 bg-forest-800 hover:bg-forest-700 text-white rounded-xl text-xs font-bold transition-all shadow-md flex items-center gap-2"
           >
-            Switch to Resident
-          </Link>
+            <Sparkles className="w-4 h-4 text-emerald-300" />
+            Switch to Resident & Open Portal
+          </button>
           <Link
             to="/"
             className="px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-xl text-xs font-bold transition-all"

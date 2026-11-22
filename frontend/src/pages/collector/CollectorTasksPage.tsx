@@ -33,9 +33,10 @@ export const CollectorTasksPage: React.FC = () => {
     }
   };
 
-  const filtered = tasks.filter((t) =>
+  const safeTasks = Array.isArray(tasks) ? tasks : [];
+  const filtered = safeTasks.filter((t) =>
     (t.addressSnapshot || '').toLowerCase().includes(search.toLowerCase()) ||
-    t.collectionCode.toLowerCase().includes(search.toLowerCase())
+    (t.collectionCode || t.householdIdCode || t.id || '').toLowerCase().includes(search.toLowerCase())
   );
 
   return (

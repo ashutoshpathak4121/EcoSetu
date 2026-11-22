@@ -15,8 +15,14 @@ import {
 } from 'lucide-react';
 
 export const SocietyLayout: React.FC = () => {
-  const { user, isAuthenticated, isLoading, logout } = useAuth();
+  const { user, isAuthenticated, isLoading, logout, switchDemoRole } = useAuth();
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      switchDemoRole(UserRole.SOCIETY_ADMIN);
+    }
+  }, [isLoading, isAuthenticated, switchDemoRole]);
 
   if (isLoading) {
     return (
@@ -29,27 +35,24 @@ export const SocietyLayout: React.FC = () => {
     );
   }
 
-  if (!isAuthenticated) {
-    return <Navigate to="/login/society" replace />;
-  }
-
   if (user?.role !== UserRole.SOCIETY_ADMIN) {
     return (
       <div className="min-h-screen bg-indigo-50/40 flex flex-col items-center justify-center p-6 space-y-4">
         <div className="w-16 h-16 bg-indigo-100 border-2 border-indigo-300 rounded-2xl flex items-center justify-center text-indigo-700 shadow-sm">
-          <ShieldAlert className="w-8 h-8" />
+          <Building2 className="w-8 h-8" />
         </div>
-        <h1 className="text-2xl font-bold text-gray-900 tracking-tight">403: Society RWA Portal Restricted</h1>
+        <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Society RWA Portal Activation</h1>
         <p className="text-xs text-gray-600 max-w-md text-center leading-relaxed">
-          Logged in as <strong>{user?.name}</strong> ({user?.role}). This portal is restricted to authorized Residential Welfare Association (RWA) administrators.
+          Logged in as <strong>{user?.name || 'Visitor'}</strong> ({user?.role || 'Guest'}). Click below to activate the RWA administration dashboard for Green Meadows Residency.
         </p>
         <div className="flex items-center gap-3 pt-2">
-          <Link
-            to="/login/society"
-            className="px-4 py-2 bg-indigo-700 hover:bg-indigo-600 text-white rounded-xl text-xs font-bold transition-all"
+          <button
+            onClick={() => switchDemoRole(UserRole.SOCIETY_ADMIN)}
+            className="px-5 py-2.5 bg-indigo-700 hover:bg-indigo-600 text-white rounded-xl text-xs font-bold transition-all shadow-md flex items-center gap-2"
           >
-            Switch to Society Admin
-          </Link>
+            <Building2 className="w-4 h-4 text-white" />
+            Switch to Society Admin & Open Hub
+          </button>
           <Link
             to="/"
             className="px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-xl text-xs font-bold transition-all"

@@ -283,6 +283,8 @@ export function getMockResponse(method: string, url: string, data?: any): any {
         data: [
           {
             id: 'task-1',
+            collectionCode: 'COL-2026-0891',
+            addressSnapshot: 'Flat B-402, Green Meadows Residency',
             flatNumber: 'B-402',
             wingBlock: 'Block B',
             householdIdCode: 'HH-DL-WZ1-0042',
@@ -293,6 +295,8 @@ export function getMockResponse(method: string, url: string, data?: any): any {
           },
           {
             id: 'task-2',
+            collectionCode: 'COL-2026-0892',
+            addressSnapshot: 'Flat B-403, Green Meadows Residency',
             flatNumber: 'B-403',
             wingBlock: 'Block B',
             householdIdCode: 'HH-DL-WZ1-0043',
@@ -303,6 +307,8 @@ export function getMockResponse(method: string, url: string, data?: any): any {
           },
           {
             id: 'task-3',
+            collectionCode: 'COL-2026-0893',
+            addressSnapshot: 'Flat A-101, Green Meadows Residency',
             flatNumber: 'A-101',
             wingBlock: 'Block A',
             householdIdCode: 'HH-DL-WZ1-0012',
@@ -364,11 +370,72 @@ export function getMockResponse(method: string, url: string, data?: any): any {
           totalHouseholds: 18450,
           totalSocieties: 48,
           activeVehicles: 14,
-          dailyCollectionMetricTons: 42.8,
-          segregationComplianceRate: 91.4,
+          todayTonnageMetricTons: 12.45,
+          dailyCollectionMetricTons: 12.45,
+          complianceRatePercentage: 94.2,
+          segregationComplianceRate: 94.2,
           purityScoreAverage: 93.8,
+          pendingAIReviews: 3,
           flaggedReviewCount: 3,
+          streamDistribution: {
+            wetKg: 6840,
+            dryKg: 4620,
+            sanitaryKg: 710,
+            specialCareKg: 280,
+          },
         },
+      },
+    };
+  }
+
+  // Municipal: Locality Analytics
+  if (cleanUrl.includes('/municipal/analytics')) {
+    return {
+      status: 200,
+      data: {
+        success: true,
+        data: [
+          { ward: 'Ward 42 (Mayur Vihar)', zone: 'East Zone', households: 4200, complianceScore: 96.8, dailyTonnageKg: 3420, status: 'EXCELLENT' },
+          { ward: 'Ward 43 (Patparganj)', zone: 'East Zone', households: 3850, complianceScore: 93.4, dailyTonnageKg: 2950, status: 'EXCELLENT' },
+          { ward: 'Ward 44 (Preet Vihar)', zone: 'East Zone', households: 3400, complianceScore: 89.2, dailyTonnageKg: 2800, status: 'GOOD' },
+          { ward: 'Ward 45 (Laxmi Nagar)', zone: 'East Zone', households: 5100, complianceScore: 84.5, dailyTonnageKg: 3950, status: 'NEEDS_ATTENTION' },
+        ],
+      },
+    };
+  }
+
+  // Municipal: Flagged Reviews Queue
+  if (cleanUrl.includes('/municipal/flagged-reviews') || cleanUrl.includes('/municipal/flagged')) {
+    return {
+      status: 200,
+      data: {
+        success: true,
+        data: [
+          {
+            id: 'flg-01',
+            collectionId: 'COL-2026-0901',
+            householdIdCode: 'HH-DL-WZ1-0089',
+            flatNumber: 'C-204',
+            societyName: 'Mayur Vihar Pocket 1',
+            declaredCategory: 'WET',
+            aiConfidence: 0.62,
+            flagReason: 'Dry plastic packaging detected inside wet organic compartment',
+            timestamp: new Date().toISOString(),
+            status: 'FLAGGED',
+          },
+          {
+            id: 'flg-02',
+            collectionId: 'COL-2026-0904',
+            householdIdCode: 'HH-DL-WZ1-0112',
+            flatNumber: 'A-502',
+            societyName: 'Silver Oaks Apartments',
+            declaredCategory: 'DRY',
+            aiConfidence: 0.58,
+            flagReason: 'Kitchen organic slurry detected in dry cardboard bale',
+            timestamp: new Date(Date.now() - 3600000).toISOString(),
+            status: 'FLAGGED',
+          },
+        ],
       },
     };
   }
@@ -382,24 +449,30 @@ export function getMockResponse(method: string, url: string, data?: any): any {
         data: [
           {
             id: 'veh-01',
+            vehicleId: 'veh-01',
             registrationNumber: 'DL-01-GA-4892',
+            collectorName: 'Ramesh Kumar',
             driverName: 'Ramesh Kumar',
             status: 'ON_ROUTE',
+            speedKmH: 22,
             currentSpeedKmH: 22,
             batteryFuelPercent: 78,
-            currentWard: 'Ward 42',
+            currentWard: 'Ward 42 (Mayur Vihar)',
             latitude: 28.6083,
             longitude: 77.2985,
             lastPingTime: new Date().toISOString(),
           },
           {
             id: 'veh-02',
+            vehicleId: 'veh-02',
             registrationNumber: 'DL-01-GA-3419',
+            collectorName: 'Manoj Yadav',
             driverName: 'Manoj Yadav',
             status: 'ON_ROUTE',
+            speedKmH: 18,
             currentSpeedKmH: 18,
             batteryFuelPercent: 64,
-            currentWard: 'Ward 42',
+            currentWard: 'Ward 43 (Patparganj)',
             latitude: 28.6142,
             longitude: 77.3041,
             lastPingTime: new Date().toISOString(),
@@ -422,6 +495,62 @@ export function getMockResponse(method: string, url: string, data?: any): any {
           { id: '4', name: 'Sunita Mehra', email: 'society@ecosetu.in', role: 'SOCIETY_ADMIN' },
           { id: '5', name: 'Rajesh Gupta', email: 'recycler@ecosetu.in', role: 'RECYCLER' },
           { id: '6', name: 'Vikram Singh', email: 'mcd@ecosetu.in', role: 'MCD_OFFICER' },
+        ],
+      },
+    };
+  }
+
+  // Admin Logs
+  if (cleanUrl.includes('/admin/logs')) {
+    return {
+      status: 200,
+      data: {
+        success: true,
+        data: [
+          {
+            id: 'log-01',
+            action: 'USER_ROLE_ASSIGNED',
+            entity: 'User',
+            entityId: 'usr-collector',
+            ipAddress: '103.21.244.0',
+            details: { targetRole: 'COLLECTOR', assignedBy: 'SUPER_ADMIN' },
+            createdAt: new Date().toISOString(),
+          },
+          {
+            id: 'log-02',
+            action: 'RECYCLER_CPCB_VERIFIED',
+            entity: 'RecyclerFacility',
+            entityId: 'rec-01',
+            ipAddress: '103.21.244.0',
+            details: { licenseCode: 'CPCB/WMT/2024/0912', status: 'VERIFIED' },
+            createdAt: new Date(Date.now() - 7200000).toISOString(),
+          },
+          {
+            id: 'log-03',
+            action: 'GREEN_CREDIT_LEDGER_ANCHORED',
+            entity: 'CreditLedger',
+            entityId: 'BLK-0891',
+            ipAddress: '127.0.0.1',
+            details: { blockHash: '0x8f4d...391a', totalCreditsMinted: 1420 },
+            createdAt: new Date(Date.now() - 14400000).toISOString(),
+          },
+        ],
+      },
+    };
+  }
+
+  // Society Households
+  if (cleanUrl.includes('/households/society')) {
+    return {
+      status: 200,
+      data: {
+        success: true,
+        data: [
+          { flatNumber: 'A-101', wingBlock: 'Block A', residentName: 'Pooja Verma', householdIdCode: 'HH-DL-WZ1-0042', complianceScore: 98.4, status: 'VERIFIED', balance: 145 },
+          { flatNumber: 'A-204', wingBlock: 'Block A', residentName: 'Rohan Sharma', householdIdCode: 'HH-DL-WZ1-0051', complianceScore: 94.2, status: 'VERIFIED', balance: 110 },
+          { flatNumber: 'C-501', wingBlock: 'Block C', residentName: 'Sunita Mehra', householdIdCode: 'HH-DL-WZ1-0078', complianceScore: 99.1, status: 'VERIFIED', balance: 240 },
+          { flatNumber: 'D-302', wingBlock: 'Block D', residentName: 'Kabir Batra', householdIdCode: 'HH-DL-WZ1-0112', complianceScore: 88.0, status: 'NEEDS_SPOT_CHECK', balance: 65 },
+          { flatNumber: 'B-105', wingBlock: 'Block B', residentName: 'Pooja Gupta', householdIdCode: 'HH-DL-WZ1-0033', complianceScore: 96.5, status: 'VERIFIED', balance: 180 },
         ],
       },
     };

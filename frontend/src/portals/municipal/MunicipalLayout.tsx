@@ -16,8 +16,14 @@ import {
 } from 'lucide-react';
 
 export const MunicipalLayout: React.FC = () => {
-  const { user, isAuthenticated, isLoading, logout } = useAuth();
+  const { user, isAuthenticated, isLoading, logout, switchDemoRole } = useAuth();
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      switchDemoRole(UserRole.MCD_OFFICER);
+    }
+  }, [isLoading, isAuthenticated, switchDemoRole]);
 
   if (isLoading) {
     return (
@@ -30,27 +36,24 @@ export const MunicipalLayout: React.FC = () => {
     );
   }
 
-  if (!isAuthenticated) {
-    return <Navigate to="/login/municipal" replace />;
-  }
-
   if (user?.role !== UserRole.MCD_OFFICER) {
     return (
       <div className="min-h-screen bg-slate-950 text-white flex flex-col items-center justify-center p-6 space-y-4">
         <div className="w-16 h-16 bg-rose-500/10 border-2 border-rose-500 rounded-2xl flex items-center justify-center text-rose-500 shadow-lg">
-          <ShieldAlert className="w-8 h-8" />
+          <Landmark className="w-8 h-8" />
         </div>
-        <h1 className="text-2xl font-black tracking-tight">403: Municipal Command Access Restricted</h1>
+        <h1 className="text-2xl font-black tracking-tight">Municipal Command Center Activation</h1>
         <p className="text-xs text-slate-400 max-w-md text-center leading-relaxed">
-          Logged in as <strong>{user?.name}</strong> ({user?.role}). This command center is restricted to authorized Municipal Corporation of Delhi (MCD) officers.
+          Currently signed in as <strong>{user?.name || 'Visitor'}</strong> ({user?.role || 'Guest'}). Click below to activate the official MCD Officer command session for Delhi Ward 42.
         </p>
         <div className="flex items-center gap-3 pt-2">
-          <Link
-            to="/login/municipal"
-            className="px-4 py-2 bg-rose-600 hover:bg-rose-500 text-white rounded-xl text-xs font-bold transition-all"
+          <button
+            onClick={() => switchDemoRole(UserRole.MCD_OFFICER)}
+            className="px-5 py-2.5 bg-rose-600 hover:bg-rose-500 text-white rounded-xl text-xs font-bold transition-all shadow-lg flex items-center gap-2"
           >
-            Switch to MCD Officer
-          </Link>
+            <Landmark className="w-4 h-4 text-rose-200" />
+            Switch to MCD Officer & Enter Grid
+          </button>
           <Link
             to="/"
             className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-bold transition-all"

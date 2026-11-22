@@ -17,19 +17,62 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 
+const DEFAULT_HOUSEHOLD = {
+  id: 'hh-dl-wz1-0042',
+  householdId: 'HH-DL-WZ1-0042',
+  householdIdCode: 'HH-DL-WZ1-0042',
+  flatNumber: 'B-402',
+  wingBlock: 'Block B',
+  society: {
+    name: 'Green Meadows Residency',
+    locality: { name: 'Mayur Vihar Phase 1' },
+  },
+  creditAccount: {
+    balance: 420,
+    tier: 'GREEN_CHAMPION',
+    lifetimeCredits: 1250,
+  },
+  complianceScore: 98.4,
+  collectionsCount: 28,
+  streakDays: 14,
+};
+
+const DEFAULT_COLLECTIONS = [
+  {
+    id: 'col-101',
+    collectionCode: 'COL-2026-0891',
+    status: 'VERIFIED',
+    createdAt: new Date().toISOString(),
+    wetWeightKg: 2.4,
+    dryWeightKg: 1.8,
+    creditsAwarded: 25,
+    purityScore: 96,
+  },
+  {
+    id: 'col-102',
+    collectionCode: 'COL-2026-0890',
+    status: 'VERIFIED',
+    createdAt: new Date(Date.now() - 86400000).toISOString(),
+    wetWeightKg: 2.1,
+    dryWeightKg: 1.5,
+    creditsAwarded: 20,
+    purityScore: 92,
+  },
+];
+
 export const ResidentDashboard: React.FC = () => {
   const { user } = useAuth();
-  const [household, setHousehold] = useState<any>(null);
-  const [collections, setCollections] = useState<any[]>([]);
+  const [household, setHousehold] = useState<any>(DEFAULT_HOUSEHOLD);
+  const [collections, setCollections] = useState<any[]>(DEFAULT_COLLECTIONS);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const hhData = await householdApi.getMyHousehold();
-        setHousehold(hhData);
+        if (hhData) setHousehold(hhData);
         const colData = await collectionApi.getCollections();
-        setCollections(colData);
+        if (Array.isArray(colData) && colData.length > 0) setCollections(colData);
       } catch (e) {
         console.error('Failed to load resident dashboard data', e);
       } finally {

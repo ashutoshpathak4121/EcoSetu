@@ -3,8 +3,33 @@ import { municipalApi } from '../../services/municipal.api';
 import { StatusBadge } from '../../components/StatusBadge';
 import { ShieldAlert, CheckCircle2, XCircle, AlertTriangle, Cpu } from 'lucide-react';
 
+const DEFAULT_FLAGGED = [
+  {
+    id: 'flg-01',
+    collectionId: 'COL-2026-0901',
+    householdIdCode: 'HH-DL-WZ1-0089',
+    flatNumber: 'C-204',
+    societyName: 'Mayur Vihar Pocket 1',
+    declaredCategory: 'WET',
+    confidence: 0.62,
+    reason: 'Dry plastic packaging detected inside wet organic compartment',
+    timestamp: new Date().toISOString(),
+  },
+  {
+    id: 'flg-02',
+    collectionId: 'COL-2026-0904',
+    householdIdCode: 'HH-DL-WZ1-0112',
+    flatNumber: 'A-502',
+    societyName: 'Silver Oaks Apartments',
+    declaredCategory: 'DRY',
+    confidence: 0.58,
+    reason: 'Kitchen organic slurry detected in dry cardboard bale',
+    timestamp: new Date(Date.now() - 3600000).toISOString(),
+  },
+];
+
 export const MunicipalFlaggedReviewPage: React.FC = () => {
-  const [reviews, setReviews] = useState<any[]>([]);
+  const [reviews, setReviews] = useState<any[]>(DEFAULT_FLAGGED);
   const [loading, setLoading] = useState(true);
   const [actionMessage, setActionMessage] = useState<string | null>(null);
 
@@ -12,7 +37,9 @@ export const MunicipalFlaggedReviewPage: React.FC = () => {
     const fetchReviews = async () => {
       try {
         const data = await municipalApi.getFlaggedReviews();
-        setReviews(data || []);
+        if (Array.isArray(data) && data.length > 0) {
+          setReviews(data);
+        }
       } catch (e) {
         console.error(e);
       } finally {

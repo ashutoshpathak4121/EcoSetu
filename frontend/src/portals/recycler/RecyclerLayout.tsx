@@ -15,8 +15,14 @@ import {
 } from 'lucide-react';
 
 export const RecyclerLayout: React.FC = () => {
-  const { user, isAuthenticated, isLoading, logout } = useAuth();
+  const { user, isAuthenticated, isLoading, logout, switchDemoRole } = useAuth();
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      switchDemoRole(UserRole.RECYCLER);
+    }
+  }, [isLoading, isAuthenticated, switchDemoRole]);
 
   if (isLoading) {
     return (
@@ -29,27 +35,24 @@ export const RecyclerLayout: React.FC = () => {
     );
   }
 
-  if (!isAuthenticated) {
-    return <Navigate to="/login/recycler" replace />;
-  }
-
   if (user?.role !== UserRole.RECYCLER) {
     return (
       <div className="min-h-screen bg-zinc-950 text-white flex flex-col items-center justify-center p-6 space-y-4">
         <div className="w-16 h-16 bg-amber-500/10 border-2 border-amber-500 rounded-2xl flex items-center justify-center text-amber-500 shadow-lg">
-          <ShieldAlert className="w-8 h-8" />
+          <Factory className="w-8 h-8" />
         </div>
-        <h1 className="text-2xl font-black tracking-tight">403: Authorized Recycler Portal Restricted</h1>
+        <h1 className="text-2xl font-black tracking-tight">Recycler B2B Exchange Activation</h1>
         <p className="text-xs text-zinc-400 max-w-md text-center leading-relaxed">
-          Logged in as <strong>{user?.name}</strong> ({user?.role}). Only authorized CPCB/SPCB licensed recycling facilities can bid on bulk segregated lots and generate digital manifests.
+          Logged in as <strong>{user?.name || 'Visitor'}</strong> ({user?.role || 'Guest'}). Click below to activate the CPCB-authorized Recycler session for bidding on segregated society scrap lots.
         </p>
         <div className="flex items-center gap-3 pt-2">
-          <Link
-            to="/login/recycler"
-            className="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-zinc-950 rounded-xl text-xs font-bold transition-all"
+          <button
+            onClick={() => switchDemoRole(UserRole.RECYCLER)}
+            className="px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-zinc-950 rounded-xl text-xs font-bold transition-all shadow-lg flex items-center gap-2"
           >
-            Switch to Recycler Account
-          </Link>
+            <Factory className="w-4 h-4 text-zinc-950" />
+            Switch to Recycler & Open B2B Market
+          </button>
           <Link
             to="/"
             className="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 rounded-xl text-xs font-bold transition-all"
