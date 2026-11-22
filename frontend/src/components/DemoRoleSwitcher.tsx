@@ -20,9 +20,10 @@ export const DemoRoleSwitcher: React.FC = () => {
   const handleSwitch = async (role: UserRole, targetPath: string) => {
     try {
       await switchDemoRole(role);
-      navigate(targetPath);
     } catch (e) {
       console.error('Role switch failed', e);
+    } finally {
+      navigate(targetPath);
     }
   };
 

@@ -23,7 +23,28 @@ api.interceptors.request.use(
 
 // Response interceptor: handle resilient mock fallback for static deployments (Vercel)
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    // If Vercel SPA rewrite returned HTML index page instead of JSON API response
+    if (
+      typeof response.data === 'string' &&
+      (response.data.includes('<!DOCTYPE html') ||
+        response.data.includes('<html') ||
+        response.data.includes('<head'))
+    ) {
+      const method = (response.config.method || 'get').toUpperCase();
+      const url = response.config.url || '';
+      let requestData = response.config.data;
+      if (typeof requestData === 'string') {
+        try {
+          requestData = JSON.parse(requestData);
+        } catch {}
+      }
+
+      console.warn(`[EcoSetu Vercel HTML intercept] Providing resilient mock response for ${method} ${url}`);
+      return getMockResponse(method, url, requestData);
+    }
+    return response;
+  },
   (error: AxiosError) => {
     // If running on a static host (Vercel) and backend is offline / 404 / connection refused
     const isOffline =
