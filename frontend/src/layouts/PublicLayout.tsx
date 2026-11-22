@@ -57,7 +57,7 @@ export const PublicLayout: React.FC = () => {
             <div>
               <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-3">Techathon 2026</h4>
               <p className="text-xs text-gray-400 leading-relaxed mb-2">
-                Architected and developed by <strong>Team MazeRunners</strong> for Techathon 2026.
+                Architected and developed by <strong>Ashutosh Pathak</strong> for Techathon 2026.
               </p>
               <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-forest-800 text-emerald-300 text-xs border border-forest-700">
                 <Shield className="w-3.5 h-3.5" />
@@ -69,7 +69,7 @@ export const PublicLayout: React.FC = () => {
           <div className="pt-6 border-t border-forest-800/80 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-400">
             <div>&copy; {new Date().getFullYear()} EcoSetu. Built for sustainable Indian cities.</div>
             <div className="mt-2 sm:mt-0 flex items-center gap-1">
-              Engineered with <Heart className="w-3.5 h-3.5 text-rose-500 fill-current" /> by Team MazeRunners
+              Engineered with <Heart className="w-3.5 h-3.5 text-rose-500 fill-current" /> by Ashutosh Pathak
             </div>
           </div>
         </div>

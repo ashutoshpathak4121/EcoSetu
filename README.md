@@ -1,11 +1,11 @@
 # 🌿 EcoSetu (स्वच्छसेतु) – Bridge to Cleanliness
 ### *Under the WasteChakra Circular Economy Framework*
-**Developed by Team MazeRunners for Techathon 2026**
+**Architected & Developed by Ashutosh Pathak for Techathon 2026**
 
-[![Tech Stack](https://img.shields.io/badge/Stack-React%2018%20%7C%20Node.js%20%7C%20PostgreSQL%20%7C%20FastAPI-2d6a4f?style=for-the-badge)](https://github.com/MazeRunners/ecosetu)
+[![Tech Stack](https://img.shields.io/badge/Stack-React%2018%20%7C%20Node.js%20%7C%20PostgreSQL%20%7C%20FastAPI-2d6a4f?style=for-the-badge)](https://github.com/ashutoshpathak4121/EcoSetu)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
-[![Build Status](https://img.shields.io/badge/Build-Passing-emerald?style=for-the-badge)](https://github.com/MazeRunners/ecosetu)
-[![AI Engine](https://img.shields.io/badge/AI%20Microservice-ecosetu--waste--v2.1-blue?style=for-the-badge)](https://github.com/MazeRunners/ecosetu)
+[![Build Status](https://img.shields.io/badge/Build-Passing-emerald?style=for-the-badge)](https://github.com/ashutoshpathak4121/EcoSetu)
+[![AI Engine](https://img.shields.io/badge/AI%20Microservice-ecosetu--waste--v2.1-blue?style=for-the-badge)](https://github.com/ashutoshpathak4121/EcoSetu)
 
 ---
 
@@ -140,7 +140,7 @@ The frontend includes an **Evaluation Bar** sticky at the top, allowing judges t
 ### Option A: Automated Multi-Container Docker Compose
 ```bash
 # Clone the repository
-git clone https://github.com/MazeRunners/ecosetu.git
+git clone https://github.com/ashutoshpathak4121/EcoSetu.git
 cd ecosetu
 
 # Run the complete ecosystem
@@ -203,6 +203,7 @@ cd frontend && npm run build
 
 ---
 
-## 8. Team MazeRunners (Techathon 2026)
+## 8. Author & Creator (Techathon 2026)
+**Ashutosh Pathak**
 *Engineering scalable civic technology for clean, circular, and transparent Indian cities.*
 

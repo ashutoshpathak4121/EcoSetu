@@ -36,7 +36,7 @@ export const HomePage: React.FC = () => {
             <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-100/80 border border-emerald-200 text-forest-800 text-xs font-bold tracking-wide">
                 <Sparkles className="w-4 h-4 text-emerald-600" />
-                Team MazeRunners • Techathon 2026 Initiative
+                Ashutosh Pathak • Techathon 2026 Initiative
               </div>
 
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 tracking-tight leading-[1.15]">

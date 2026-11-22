@@ -15,7 +15,7 @@ export const AboutPage: React.FC = () => {
           Bridge to Cleanliness – WasteChakra Concept
         </h1>
         <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
-          Developed by <strong>Team MazeRunners</strong> for <strong>Techathon 2026</strong>, EcoSetu tackles the root bottleneck of urban Indian sanitation: improper segregation at source.
+          Developed by <strong>Ashutosh Pathak</strong> for <strong>Techathon 2026</strong>, EcoSetu tackles the root bottleneck of urban Indian sanitation: improper segregation at source.
         </p>
       </div>
 
@@ -52,7 +52,7 @@ export const AboutPage: React.FC = () => {
       </div>
 
       <div className="border-t border-gray-200 pt-8 text-center space-y-4">
-        <h3 className="text-xl font-bold text-gray-900">Team MazeRunners • Techathon 2026</h3>
+        <h3 className="text-xl font-bold text-gray-900">Ashutosh Pathak • Techathon 2026</h3>
         <p className="text-xs text-gray-500 max-w-lg mx-auto">
           Built with an enterprise software architecture: React 18, Node.js Express TypeScript, Prisma ORM, PostgreSQL, Python FastAPI Computer Vision microservice, and Docker containerization.
         </p>

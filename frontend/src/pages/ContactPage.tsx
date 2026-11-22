@@ -49,9 +49,9 @@ export const ContactPage: React.FC = () => {
           </div>
 
           <div className="bg-forest-900 text-white p-6 rounded-2xl border border-forest-800 shadow-sm text-xs space-y-2">
-            <h4 className="font-bold text-emerald-300 text-sm">Techathon 2026 Core Team</h4>
+            <h4 className="font-bold text-emerald-300 text-sm">Techathon 2026 Creator</h4>
             <p className="text-gray-300">
-              Team MazeRunners • Built with modern civic technology protocols for rapid deployment in urban wards.
+              Ashutosh Pathak • Built with modern civic technology protocols for rapid deployment in urban wards.
             </p>
           </div>
         </div>
