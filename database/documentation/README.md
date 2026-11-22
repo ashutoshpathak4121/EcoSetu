@@ -1,6 +1,6 @@
 # Database Architecture & Seeding Strategy
 
-This directory contains database documentation, migration strategies, and seed definitions for SwachhSetu.
+This directory contains database documentation, migration strategies, and seed definitions for EcoSetu.
 
 ## Production Database
 - **Engine**: PostgreSQL 16

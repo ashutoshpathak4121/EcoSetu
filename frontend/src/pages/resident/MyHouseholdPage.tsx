@@ -49,7 +49,7 @@ export const MyHouseholdPage: React.FC = () => {
             <span className="text-[10px] uppercase font-black tracking-widest text-emerald-700 block">
               Municipal Corporation of Delhi • SBM 2.0
             </span>
-            <h3 className="text-lg font-black text-forest-900 tracking-tight">SwachhSetu Household Token</h3>
+            <h3 className="text-lg font-black text-forest-900 tracking-tight">EcoSetu Household Token</h3>
           </div>
 
           <div className="p-3 bg-gray-50 rounded-2xl border border-gray-200 inline-block shadow-inner">

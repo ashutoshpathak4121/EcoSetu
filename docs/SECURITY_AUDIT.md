@@ -1,4 +1,4 @@
-# SwachhSetu – Comprehensive Security Audit & Threat Mitigation Report
+# EcoSetu – Comprehensive Security Audit & Threat Mitigation Report
 
 **Standard Applied:** OWASP Top 10 (2021) & OWASP API Security Top 10 (2023)  
 **Classification:** Confidential Technical Audit  
@@ -8,7 +8,7 @@
 
 ## 1. Threat Modeling & Attack Surface Analysis
 
-SwachhSetu processes civic identity data, residential location coordinates, financial credit ledger balances, and industrial B2B waste transactions. The critical threat vectors analyzed include:
+EcoSetu processes civic identity data, residential location coordinates, financial credit ledger balances, and industrial B2B waste transactions. The critical threat vectors analyzed include:
 1. **Privilege Escalation**: Unauthorized assumption of Super Admin or MCD Officer roles.
 2. **Insecure Direct Object References (IDOR)**: Accessing unassigned household records, tampering with collection evidence, or viewing private resident coordinates.
 3. **Double-Spending / Race Conditions**: Concurrently redeeming rewards or spoofing collection records to mint illicit green credits.

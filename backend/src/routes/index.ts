@@ -24,7 +24,7 @@ router.use('/admin', adminRoutes);
 router.get('/health', (req, res) => {
   res.status(200).json({
     status: 'HEALTHY',
-    service: 'SwachhSetu Express REST Gateway',
+    service: 'EcoSetu Express REST Gateway',
     version: '1.0.0',
     timestamp: new Date().toISOString(),
   });

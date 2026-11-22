@@ -14,7 +14,7 @@ export interface MockUser {
 export const mockUsers: MockUser[] = [
   {
     id: 'user-resident-01',
-    email: 'resident@swachhsetu.in',
+    email: 'resident@ecosetu.in',
     name: 'Aarav Sharma',
     phoneNumber: '+919876543210',
     role: Role.RESIDENT,
@@ -23,7 +23,7 @@ export const mockUsers: MockUser[] = [
   },
   {
     id: 'user-collector-01',
-    email: 'collector@swachhsetu.in',
+    email: 'collector@ecosetu.in',
     name: 'Rajesh Kumar (MCD Staff)',
     phoneNumber: '+919811223344',
     role: Role.COLLECTOR,
@@ -32,7 +32,7 @@ export const mockUsers: MockUser[] = [
   },
   {
     id: 'user-society-01',
-    email: 'society@swachhsetu.in',
+    email: 'society@ecosetu.in',
     name: 'Sunita Mehra (President RWA)',
     phoneNumber: '+919822334455',
     role: Role.SOCIETY_ADMIN,
@@ -41,7 +41,7 @@ export const mockUsers: MockUser[] = [
   },
   {
     id: 'user-recycler-01',
-    email: 'recycler@swachhsetu.in',
+    email: 'recycler@ecosetu.in',
     name: 'Vikram Singhania (GreenEarth Recyclers)',
     phoneNumber: '+919833445566',
     role: Role.RECYCLER,
@@ -50,7 +50,7 @@ export const mockUsers: MockUser[] = [
   },
   {
     id: 'user-mcd-01',
-    email: 'mcd@swachhsetu.in',
+    email: 'mcd@ecosetu.in',
     name: 'Dr. Ramesh Chandra (Sanitation Superintendent)',
     phoneNumber: '+919844556677',
     role: Role.MCD_OFFICER,
@@ -59,7 +59,7 @@ export const mockUsers: MockUser[] = [
   },
   {
     id: 'user-admin-01',
-    email: 'admin@swachhsetu.in',
+    email: 'admin@ecosetu.in',
     name: 'DevOps & System Admin (Team MazeRunners)',
     phoneNumber: '+919899001122',
     role: Role.SUPER_ADMIN,
@@ -205,7 +205,7 @@ export const mockRewards = [
   {
     id: 'rew-02',
     title: 'Biodegradable Divided Bin Liners (Roll of 30)',
-    description: 'Cornstarch-based compostable bags custom-sized for SwachhSetu dual compartments.',
+    description: 'Cornstarch-based compostable bags custom-sized for EcoSetu dual compartments.',
     category: 'LINERS',
     creditCost: 40,
     partnerName: 'WasteChakra Eco Essentials',
@@ -261,7 +261,7 @@ export const mockCollections: any[] = [
       confidence: 0.94,
       contaminationIndex: 0.03,
       verificationStatus: VerificationStatus.APPROVED,
-      modelVersion: 'swachhsetu-waste-v2.1',
+      modelVersion: 'ecosetu-waste-v2.1',
       detectedItems: ['cardboard_packaging', 'crushed_pet_bottles', 'aluminum_cans'],
     },
   },
@@ -305,7 +305,7 @@ export const mockCollections: any[] = [
       confidence: 0.68,
       contaminationIndex: 0.18,
       verificationStatus: VerificationStatus.REQUIRES_REVIEW,
-      modelVersion: 'swachhsetu-waste-v2.1',
+      modelVersion: 'ecosetu-waste-v2.1',
       detectedItems: ['vegetable_peels', 'plastic_milk_pouch_wrapper'],
       reviewerNote: 'Flagged for supervisor spot check: plastic contamination in organic waste.',
     },

@@ -9,7 +9,7 @@ export const HowItWorksPage: React.FC = () => {
       icon: Layers,
       color: 'bg-emerald-100 text-emerald-800',
       description:
-        'Instead of forcing households to buy multiple bulky dustbins, SwachhSetu introduces a divided bag with separate green and blue sections fitting standard home bins, supplemented by red sanitary and yellow hazardous add-ons.',
+        'Instead of forcing households to buy multiple bulky dustbins, EcoSetu introduces a divided bag with separate green and blue sections fitting standard home bins, supplemented by red sanitary and yellow hazardous add-ons.',
     },
     {
       step: '02',
@@ -60,7 +60,7 @@ export const HowItWorksPage: React.FC = () => {
           The Circular Life-Cycle
         </span>
         <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight">
-          How SwachhSetu Works
+          How EcoSetu Works
         </h1>
         <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
           From the household kitchen counter to the recycling plant: Traceable, verified, and rewarded.

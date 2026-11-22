@@ -35,7 +35,7 @@ export const LeafletMap: React.FC<LeafletMapProps> = ({
       const map = L.map(mapContainerRef.current).setView(center, zoom);
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors | SwachhSetu Municipal GIS',
+        attribution: '&copy; OpenStreetMap contributors | EcoSetu Municipal GIS',
         maxZoom: 19,
       }).addTo(map);
 

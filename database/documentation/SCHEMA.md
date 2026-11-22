@@ -1,4 +1,4 @@
-# SwachhSetu – Relational Database Schema Specification
+# EcoSetu – Relational Database Schema Specification
 **Engine:** PostgreSQL 16  
 **ORM:** Prisma ORM  
 **Namespace:** `public`  

@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import { Landmark, Lock, Mail, ArrowRight, AlertCircle, Sparkles, ShieldCheck } from 'lucide-react';
 
 export const MunicipalLoginPage: React.FC = () => {
-  const [email, setEmail] = useState('mcd@swachhsetu.in');
+  const [email, setEmail] = useState('mcd@ecosetu.in');
   const [password, setPassword] = useState('Password@123');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -43,7 +43,7 @@ export const MunicipalLoginPage: React.FC = () => {
             <Sparkles className="w-3.5 h-3.5" />
             MCD Officer Credentials:
           </span>
-          <span className="font-mono text-[11px] text-slate-300">mcd@swachhsetu.in</span>
+          <span className="font-mono text-[11px] text-slate-300">mcd@ecosetu.in</span>
         </div>
 
         {error && (
@@ -63,7 +63,7 @@ export const MunicipalLoginPage: React.FC = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="mcd@swachhsetu.in"
+                placeholder="mcd@ecosetu.in"
                 className="w-full pl-10 pr-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white focus:ring-2 focus:ring-rose-500 focus:outline-none"
               />
             </div>
@@ -105,7 +105,7 @@ export const MunicipalLoginPage: React.FC = () => {
         <div className="text-center text-xs text-slate-500">
           Return to{' '}
           <Link to="/" className="text-rose-400 font-bold hover:underline">
-            SwachhSetu Home
+            EcoSetu Home
           </Link>
         </div>
       </div>

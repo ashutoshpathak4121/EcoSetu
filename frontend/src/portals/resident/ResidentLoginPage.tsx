@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import { Recycle, Lock, Mail, ArrowRight, AlertCircle, Sparkles, Home } from 'lucide-react';
 
 export const ResidentLoginPage: React.FC = () => {
-  const [email, setEmail] = useState('resident@swachhsetu.in');
+  const [email, setEmail] = useState('resident@ecosetu.in');
   const [password, setPassword] = useState('Password@123');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -43,7 +43,7 @@ export const ResidentLoginPage: React.FC = () => {
             <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
             Resident Demo Account:
           </span>
-          <span className="font-mono text-[11px]">resident@swachhsetu.in</span>
+          <span className="font-mono text-[11px]">resident@ecosetu.in</span>
         </div>
 
         {error && (

@@ -22,7 +22,7 @@ def test_health_check():
     assert response.status_code == 200
     data = response.json()
     assert data["status"] == "HEALTHY"
-    assert "SwachhSetu" in data["service"]
+    assert "EcoSetu" in data["service"]
 
 def test_verify_wet_waste_image_json():
     # Green/organic dominant image
@@ -36,7 +36,7 @@ def test_verify_wet_waste_image_json():
     assert data["success"] is True
     assert data["classification"]["predictedCategory"] == "wet"
     assert data["classification"]["confidence"] >= 0.50
-    assert "swachhsetu-waste" in data["modelVersion"]
+    assert "ecosetu-waste" in data["modelVersion"]
 
 def test_verify_dry_waste_image_json():
     # High blue/synthetic dominant image

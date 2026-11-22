@@ -40,7 +40,7 @@ export class CollectionService {
             localityId: household.localityId,
             status: CollectionStatus.ASSIGNED,
             addressSnapshot: `${household.flatNumber}, ${household.wingBlock || ''}, ${household.society.name}`,
-            notes: data.notes || 'Household scheduled pickup via SwachhSetu.',
+            notes: data.notes || 'Household scheduled pickup via EcoSetu.',
           },
         });
         return collection;
@@ -62,7 +62,7 @@ export class CollectionService {
       sanitaryWeightKg: 0.0,
       specialCareWeightKg: 0.0,
       addressSnapshot: 'Flat B-402, Gulmohar Enclave, Mayur Vihar Phase 1',
-      notes: data.notes || 'Household scheduled pickup via SwachhSetu.',
+      notes: data.notes || 'Household scheduled pickup via EcoSetu.',
       collectedAt: null,
       aiVerification: undefined,
     };

@@ -6,13 +6,13 @@ export const AboutPage: React.FC = () => {
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
       <div className="text-center space-y-3">
         <span className="text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
-          About SwachhSetu
+          About EcoSetu
         </span>
         <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight">
           Bridge to Cleanliness – WasteChakra Concept
         </h1>
         <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
-          Developed by <strong>Team MazeRunners</strong> for <strong>Techathon 2026</strong>, SwachhSetu tackles the root bottleneck of urban Indian sanitation: improper segregation at source.
+          Developed by <strong>Team MazeRunners</strong> for <strong>Techathon 2026</strong>, EcoSetu tackles the root bottleneck of urban Indian sanitation: improper segregation at source.
         </p>
       </div>
 
@@ -29,7 +29,7 @@ export const AboutPage: React.FC = () => {
         <div className="bg-emerald-50 p-6 rounded-xl border border-emerald-200 space-y-3 text-xs text-forest-900">
           <h3 className="font-bold text-base flex items-center gap-1.5 text-forest-800">
             <ShieldCheck className="w-5 h-5 text-emerald-600" />
-            The SwachhSetu Solution
+            The EcoSetu Solution
           </h3>
           <ul className="space-y-2">
             <li className="flex items-start gap-2">

@@ -62,7 +62,7 @@ app.use('/api/v1', apiRouter);
 // Root health & welcome
 app.get('/', (req, res) => {
   res.status(200).json({
-    message: 'SwachhSetu - Waste Management Ecosystem API Gateway',
+    message: 'EcoSetu - Waste Management Ecosystem API Gateway',
     documentation: '/api-docs',
     version: '1.0.0',
     health: '/api/v1/health',

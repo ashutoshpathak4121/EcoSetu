@@ -53,7 +53,7 @@ export const RegisterPage: React.FC = () => {
           <div className="w-12 h-12 bg-forest-800 text-white rounded-2xl flex items-center justify-center mx-auto shadow-md">
             <Recycle className="w-7 h-7 text-emerald-300" />
           </div>
-          <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">Join the SwachhSetu Eco-Grid</h2>
+          <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">Join the EcoSetu Eco-Grid</h2>
           <p className="text-xs text-gray-500">Connect to your local 4-stream municipal segregation network</p>
         </div>
 
@@ -242,7 +242,7 @@ export const RegisterPage: React.FC = () => {
         <div className="text-center text-xs text-gray-500">
           Already registered?{' '}
           <Link to="/login" className="font-bold text-emerald-700 hover:underline">
-            Sign In to SwachhSetu
+            Sign In to EcoSetu
           </Link>
         </div>
       </div>

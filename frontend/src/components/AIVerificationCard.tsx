@@ -56,9 +56,9 @@ export const AIVerificationCard: React.FC<AIVerificationCardProps> = ({ result }
           </div>
           <div>
             <h4 className="font-bold text-gray-900 text-sm flex items-center gap-1.5">
-              SwachhSetu AI Computer Vision Engine
+              EcoSetu AI Computer Vision Engine
               <span className="text-[10px] font-mono px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded">
-                {result.modelVersion || 'swachhsetu-waste-v2.1'}
+                {result.modelVersion || 'ecosetu-waste-v2.1'}
               </span>
             </h4>
             <span className="text-xs text-gray-500">Autonomous 4-Stream Multi-label Classifier</span>

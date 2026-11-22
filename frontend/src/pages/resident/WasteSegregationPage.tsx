@@ -185,7 +185,7 @@ export const WasteSegregationPage: React.FC = () => {
             ) : (
               <>
                 <Sparkles className="w-4 h-4 text-emerald-300" />
-                Analyze with SwachhSetu AI v2.1
+                Analyze with EcoSetu AI v2.1
               </>
             )}
           </button>

@@ -1,8 +1,8 @@
 {
-  "name": "swachhsetu-monorepo",
+  "name": "ecosetu-monorepo",
   "version": "1.0.0",
   "private": true,
-  "description": "SwachhSetu - Waste Management Ecosystem | WasteChakra by Team MazeRunners (Techathon 2026)",
+  "description": "EcoSetu - Waste Management Ecosystem | WasteChakra by Team MazeRunners (Techathon 2026)",
   "workspaces": [
     "frontend",
     "backend",

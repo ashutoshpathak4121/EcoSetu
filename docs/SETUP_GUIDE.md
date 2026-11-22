@@ -1,6 +1,6 @@
-# SwachhSetu – Local Setup & Development Guide
+# EcoSetu – Local Setup & Development Guide
 
-Follow this guide to get SwachhSetu up and running on your local machine.
+Follow this guide to get EcoSetu up and running on your local machine.
 
 ## Prerequisites
 - **Node.js**: v18.0.0 or higher (v20+ recommended)
@@ -15,8 +15,8 @@ The fastest way to spin up the entire ecosystem (PostgreSQL, Node.js Backend, Fa
 
 ```bash
 # Clone the repository
-git clone https://github.com/MazeRunners/swachhsetu.git
-cd swachhsetu
+git clone https://github.com/MazeRunners/ecosetu.git
+cd ecosetu
 
 # Run the automated docker compose stack
 docker compose up --build
@@ -91,12 +91,12 @@ The database seed script generates pre-configured accounts for all roles:
 
 | Role | Email | Password | Details |
 |---|---|---|---|
-| **Resident** | `resident@swachhsetu.in` | `Password@123` | Flat B-402, Gulmohar Enclave (HH-DL-WZ1-0042) |
-| **Collector** | `collector@swachhsetu.in` | `Password@123` | Staff ID: COL-EMP-108, Assigned Ward 203 |
-| **Society Admin** | `society@swachhsetu.in` | `Password@123` | RWA President, Gulmohar Enclave |
-| **Recycler** | `recycler@swachhsetu.in` | `Password@123` | GreenEarth Recyclers Pvt Ltd (Authorized CPCB) |
-| **MCD Officer** | `mcd@swachhsetu.in` | `Password@123` | Sanitation Superintendent, East Delhi MCD |
-| **Super Admin** | `admin@swachhsetu.in` | `Password@123` | Platform Administrator |
+| **Resident** | `resident@ecosetu.in` | `Password@123` | Flat B-402, Gulmohar Enclave (HH-DL-WZ1-0042) |
+| **Collector** | `collector@ecosetu.in` | `Password@123` | Staff ID: COL-EMP-108, Assigned Ward 203 |
+| **Society Admin** | `society@ecosetu.in` | `Password@123` | RWA President, Gulmohar Enclave |
+| **Recycler** | `recycler@ecosetu.in` | `Password@123` | GreenEarth Recyclers Pvt Ltd (Authorized CPCB) |
+| **MCD Officer** | `mcd@ecosetu.in` | `Password@123` | Sanitation Superintendent, East Delhi MCD |
+| **Super Admin** | `admin@ecosetu.in` | `Password@123` | Platform Administrator |
 
 *Note: You can also use the **Quick Demo Switcher** bar at the top of the frontend to switch instantly between any of these roles with 1 click.*
 

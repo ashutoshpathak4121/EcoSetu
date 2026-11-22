@@ -23,7 +23,7 @@ export const PublicLayout: React.FC = () => {
                 <div className="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center">
                   <Recycle className="w-5 h-5" />
                 </div>
-                <span className="font-extrabold text-lg text-white">SwachhSetu</span>
+                <span className="font-extrabold text-lg text-white">EcoSetu</span>
               </div>
               <p className="text-xs text-gray-400 leading-relaxed">
                 Bridge to Cleanliness — Transforming urban Indian waste management through 4-stream source segregation, computer vision verification, and circular economy rewards.
@@ -64,7 +64,7 @@ export const PublicLayout: React.FC = () => {
           </div>
 
           <div className="pt-6 border-t border-forest-800/80 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-400">
-            <div>&copy; {new Date().getFullYear()} SwachhSetu. Built for sustainable Indian cities.</div>
+            <div>&copy; {new Date().getFullYear()} EcoSetu. Built for sustainable Indian cities.</div>
             <div className="mt-2 sm:mt-0 flex items-center gap-1">
               Engineered with <Heart className="w-3.5 h-3.5 text-rose-500 fill-current" /> by Team MazeRunners
             </div>

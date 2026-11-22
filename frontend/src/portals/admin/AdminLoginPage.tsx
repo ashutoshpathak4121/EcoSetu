@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import { Shield, Lock, Mail, ArrowRight, AlertCircle, KeyRound, Sparkles } from 'lucide-react';
 
 export const AdminLoginPage: React.FC = () => {
-  const [email, setEmail] = useState('admin@swachhsetu.in');
+  const [email, setEmail] = useState('admin@ecosetu.in');
   const [password, setPassword] = useState('Password@123');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -43,7 +43,7 @@ export const AdminLoginPage: React.FC = () => {
             <Sparkles className="w-3.5 h-3.5" />
             Evaluation Credentials:
           </span>
-          <span className="font-mono text-[11px] text-gray-300">admin@swachhsetu.in</span>
+          <span className="font-mono text-[11px] text-gray-300">admin@ecosetu.in</span>
         </div>
 
         {error && (
@@ -63,7 +63,7 @@ export const AdminLoginPage: React.FC = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@swachhsetu.in"
+                placeholder="admin@ecosetu.in"
                 className="w-full pl-10 pr-3.5 py-2.5 bg-gray-800 border border-gray-700 rounded-xl text-xs text-white focus:ring-2 focus:ring-emerald-500 focus:outline-none"
               />
             </div>

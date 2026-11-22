@@ -1,4 +1,4 @@
-# SwachhSetu – UI/UX Research & Design System Specification
+# EcoSetu – UI/UX Research & Design System Specification
 
 ## 1. Industry Research & Real-World Product Analysis
 
@@ -6,23 +6,23 @@ To prevent generic, template-driven "AI website" aesthetics, we conducted a stru
 
 ### 1.1 Swachhata-MoHUA (Govt. of India / Ministry of Housing & Urban Affairs)
 - **Strengths**: Clear municipal accountability, ward-level complaint escalation, geo-tagged ticket proof with before/after photographs, unambiguous status indicators.
-- **Adopted in SwachhSetu**: Government-grade command center for municipal officers with Ward 203 / East Delhi zone breakdowns, explicit photo evidence verification, and transparent complaint redressal.
+- **Adopted in EcoSetu**: Government-grade command center for municipal officers with Ward 203 / East Delhi zone breakdowns, explicit photo evidence verification, and transparent complaint redressal.
 
 ### 1.2 Recykal (India's Managed Waste Marketplace)
 - **Strengths**: B2B transparent pricing per kilogram (PET, HDPE, Cardboard, E-waste), purity grading (Grade A+, A, B), CPCB EPR (Extended Producer Responsibility) compliance manifests, electronic weighbridge slips.
-- **Adopted in SwachhSetu**: The Recycler Portal mirrors industrial waste procurement workflows with reserve bids, material lot purity inspections, digital manifests, and escrow hold statuses.
+- **Adopted in EcoSetu**: The Recycler Portal mirrors industrial waste procurement workflows with reserve bids, material lot purity inspections, digital manifests, and escrow hold statuses.
 
 ### 1.3 Recycle Coach (Household Waste Education App)
 - **Strengths**: Frictionless item search (e.g. typing "milk pouch" or "diaper" immediately tells the citizen which bin to use), visual dos and don'ts, schedule reminders.
-- **Adopted in SwachhSetu**: Resident item search tool with 4-stream color tags, physical divided bag diagrams, and doorstep collection status.
+- **Adopted in EcoSetu**: Resident item search tool with 4-stream color tags, physical divided bag diagrams, and doorstep collection status.
 
 ### 1.4 Fleetio / Samsara (Logistics & Fleet Telematics)
 - **Strengths**: High-contrast, dense vehicle tracking, speed telemetry, battery/fuel monitoring, breadcrumb route visualization on OpenStreetMap/Mapbox.
-- **Adopted in SwachhSetu**: Municipal and Collector GIS Leaflet views showing live truck telemetry, battery health, and beat progress.
+- **Adopted in EcoSetu**: Municipal and Collector GIS Leaflet views showing live truck telemetry, battery health, and beat progress.
 
 ---
 
-## 2. SwachhSetu Civic Design System
+## 2. EcoSetu Civic Design System
 
 ### 2.1 Color Palette
 - **Forest Green (`#1b4332`, `#2d6a4f`)**: Core brand, civic sustainability, primary actions.

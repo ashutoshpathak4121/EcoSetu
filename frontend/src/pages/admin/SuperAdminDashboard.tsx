@@ -30,7 +30,7 @@ export const SuperAdminDashboard: React.FC = () => {
           <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
           Super Administrator Console • Techathon 2026 Core
         </div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">SwachhSetu System Governance</h1>
+        <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">EcoSetu System Governance</h1>
         <p className="text-xs sm:text-sm text-gray-300">
           Role-Based Access Control, CPCB recycler licensing approvals, cryptographic audit ledgers, and API gateway telemetry.
         </p>

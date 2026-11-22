@@ -62,7 +62,7 @@ export class MunicipalService {
           sanitaryKg: sanitary,
           specialCareKg: special,
         },
-        source: 'SwachhSetu Municipal PostgreSQL Engine',
+        source: 'EcoSetu Municipal PostgreSQL Engine',
       };
     } catch (e) {
       // High-fidelity fallback metrics
@@ -81,7 +81,7 @@ export class MunicipalService {
           sanitaryKg: 710.0,
           specialCareKg: 280.0,
         },
-        source: 'SwachhSetu Municipal State Engine',
+        source: 'EcoSetu Municipal State Engine',
       };
     }
   }
@@ -154,7 +154,7 @@ export class MunicipalService {
           confidence: 0.68,
           contaminationIndex: 0.18,
           verificationStatus: 'REQUIRES_REVIEW',
-          modelVersion: 'swachhsetu-waste-v2.1',
+          modelVersion: 'ecosetu-waste-v2.1',
           detectedItems: ['vegetable_peels', 'plastic_milk_pouch_wrapper'],
           reviewerNote: 'Flagged for supervisor spot check: plastic contamination in organic waste.',
           collection: {

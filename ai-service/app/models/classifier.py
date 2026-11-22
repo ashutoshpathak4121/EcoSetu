@@ -6,13 +6,13 @@ from app.schemas.waste import WasteCategoryEnum, VisualFeatures
 
 class WasteImageClassifier:
     """
-    SwachhSetu Waste Stream Classifier.
+    EcoSetu Waste Stream Classifier.
     Employs an image analysis pipeline combining colorimetric distribution,
     spatial gradient density, and textural entropy with waste-stream heuristics.
-    Model Version: swachhsetu-waste-v2.1
+    Model Version: ecosetu-waste-v2.1
     """
 
-    def __init__(self, model_version: str = "swachhsetu-waste-v2.1"):
+    def __init__(self, model_version: str = "ecosetu-waste-v2.1"):
         self.model_version = model_version
 
     def extract_features(self, image: Image.Image) -> Tuple[VisualFeatures, np.ndarray]:

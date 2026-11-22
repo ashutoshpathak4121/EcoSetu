@@ -8,7 +8,7 @@ async function bootstrap() {
   const server = app.listen(config.port, () => {
     console.log(`
 🚀 ========================================================
-   SWACHHSETU REST API SERVICE
+   ECOSETU REST API SERVICE
    Environment:  ${config.nodeEnv}
    Port:         ${config.port}
    Base URL:     http://localhost:${config.port}/api/v1
@@ -18,7 +18,7 @@ async function bootstrap() {
   });
 
   const shutdown = async () => {
-    console.log('Stopping SwachhSetu API service gracefully...');
+    console.log('Stopping EcoSetu API service gracefully...');
     server.close(() => {
       console.log('HTTP service stopped.');
       process.exit(0);

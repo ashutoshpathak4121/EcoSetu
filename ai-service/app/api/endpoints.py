@@ -75,7 +75,7 @@ async def verify_waste_raw(request: Request, declared_category: Optional[str] = 
 async def health_check():
     return {
         "status": "HEALTHY",
-        "service": "SwachhSetu AI Verification Microservice",
+        "service": "EcoSetu AI Verification Microservice",
         "version": "2.1.0",
-        "model": "swachhsetu-waste-v2.1"
+        "model": "ecosetu-waste-v2.1"
     }

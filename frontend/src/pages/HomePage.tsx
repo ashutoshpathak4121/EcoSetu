@@ -46,7 +46,7 @@ export const HomePage: React.FC = () => {
               </h1>
 
               <p className="text-base sm:text-lg text-gray-600 max-w-2xl leading-relaxed">
-                SwachhSetu bridges households, collectors, RWAs, and authorized recyclers. Powered by our <strong>dual-compartment physical divided bag</strong>, <strong>FastAPI computer vision verification</strong>, and an <strong>immutable green credit ledger</strong>.
+                EcoSetu bridges households, collectors, RWAs, and authorized recyclers. Powered by our <strong>dual-compartment physical divided bag</strong>, <strong>FastAPI computer vision verification</strong>, and an <strong>immutable green credit ledger</strong>.
               </p>
 
               <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-3">

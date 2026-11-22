@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import { Building2, Lock, Mail, ArrowRight, AlertCircle, Sparkles } from 'lucide-react';
 
 export const SocietyLoginPage: React.FC = () => {
-  const [email, setEmail] = useState('society@swachhsetu.in');
+  const [email, setEmail] = useState('society@ecosetu.in');
   const [password, setPassword] = useState('Password@123');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -43,7 +43,7 @@ export const SocietyLoginPage: React.FC = () => {
             <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
             Society RWA Demo Account:
           </span>
-          <span className="font-mono text-[11px]">society@swachhsetu.in</span>
+          <span className="font-mono text-[11px]">society@ecosetu.in</span>
         </div>
 
         {error && (
@@ -63,7 +63,7 @@ export const SocietyLoginPage: React.FC = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="society@swachhsetu.in"
+                placeholder="society@ecosetu.in"
                 className="w-full pl-10 pr-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-indigo-600 focus:outline-none"
               />
             </div>
@@ -97,7 +97,7 @@ export const SocietyLoginPage: React.FC = () => {
         <div className="text-center text-xs text-gray-500">
           Return to{' '}
           <Link to="/" className="text-indigo-700 font-bold hover:underline">
-            SwachhSetu Home
+            EcoSetu Home
           </Link>
         </div>
       </div>

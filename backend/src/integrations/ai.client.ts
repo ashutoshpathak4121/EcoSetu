@@ -67,7 +67,7 @@ export class AIClient {
           detectedItems: ['segregated_waste_item', 'source_verified_cluster'],
         },
         verificationStatus: 'APPROVED',
-        modelVersion: 'swachhsetu-waste-v2.1-fallback',
+        modelVersion: 'ecosetu-waste-v2.1-fallback',
         message: 'Verified via local fallback heuristic engine (AI service offline).',
       };
     }

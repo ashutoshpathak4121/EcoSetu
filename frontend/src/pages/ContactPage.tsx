@@ -22,7 +22,7 @@ export const ContactPage: React.FC = () => {
         <span className="text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
           Citizen Redressal & RWA Onboarding
         </span>
-        <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight">Contact SwachhSetu</h1>
+        <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight">Contact EcoSetu</h1>
         <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
           Reach out for RWA onboarding, missed collection grievances, or recycler accreditation inquiries.
         </p>
@@ -43,7 +43,7 @@ export const ContactPage: React.FC = () => {
               </div>
               <div className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                <span>support@swachhsetu.in</span>
+                <span>support@ecosetu.in</span>
               </div>
             </div>
           </div>
@@ -64,7 +64,7 @@ export const ContactPage: React.FC = () => {
               </div>
               <h3 className="text-xl font-bold text-gray-900">Inquiry Logged Successfully</h3>
               <p className="text-xs text-gray-500 max-w-sm mx-auto">
-                Ticket #SSETU-2026-9041 has been generated and dispatched to the Ward 42 Sanitation Supervisor.
+                Ticket #ECOSETU-2026-9041 has been generated and dispatched to the Ward 42 Sanitation Supervisor.
               </p>
               <button
                 onClick={() => setSubmitted(false)}

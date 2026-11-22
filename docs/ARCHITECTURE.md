@@ -1,7 +1,7 @@
-# SwachhSetu (स्वच्छसेतु) – System Architecture Document
+# EcoSetu (स्वच्छसेतु) – System Architecture Document
 
 ## 1. Executive Summary & Vision
-SwachhSetu ("Bridge to Cleanliness") is an enterprise-grade civic-tech platform under the **WasteChakra** circular economy paradigm, designed for Indian Municipal Corporations (MCD, BBMP, BMC, etc.), RWAs (Resident Welfare Associations), waste collectors, and authorized recyclers.
+EcoSetu ("Bridge to Cleanliness") is an enterprise-grade civic-tech platform under the **WasteChakra** circular economy paradigm, designed for Indian Municipal Corporations (MCD, BBMP, BMC, etc.), RWAs (Resident Welfare Associations), waste collectors, and authorized recyclers.
 
 The system addresses the fundamental failure of waste management in urban India: **lack of segregation at source** and **lack of traceable custody**. It integrates a 4-stream physical sorting bag (Wet, Dry, Sanitary, and Special-Care) with digital verification, a double-entry green credit ledger, an automated B2B marketplace, and municipal command-and-control telemetry.
 
@@ -11,7 +11,7 @@ The system addresses the fundamental failure of waste management in urban India:
 
 ### 2.1 Decoupled Monorepo Structure
 ```
-swachhsetu/
+ecosetu/
 ├── frontend/        # React 18 + TypeScript + Vite + Tailwind CSS + Lucide + Leaflet + Recharts
 ├── backend/         # Node.js + Express + TypeScript + Prisma ORM + Zod + Swagger + JWT/RBAC
 ├── ai-service/      # Python 3.11+ + FastAPI + OpenCV + Computer Vision & Contamination Engine
@@ -49,7 +49,7 @@ swachhsetu/
 ---
 
 ## 3. The 4-Stream Waste Segregation Model
-SwachhSetu standardizes urban Indian waste collection into four color-coded streams:
+EcoSetu standardizes urban Indian waste collection into four color-coded streams:
 1. **Wet Waste (Green / Hara Dabba)**:
    - Kitchen scraps, vegetable & fruit peels, leftover cooked food, tea leaves, eggshells, garden clippings.
    - Destination: Society-level bio-methanation or decentralized composting pits.

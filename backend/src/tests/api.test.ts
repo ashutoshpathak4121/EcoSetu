@@ -1,19 +1,19 @@
 import request from 'supertest';
 import { app } from '../app';
 
-describe('SwachhSetu Backend API Suite', () => {
+describe('EcoSetu Backend API Suite', () => {
   let authToken = '';
 
   it('GET /api/v1/health should return 200 and healthy status', async () => {
     const res = await request(app).get('/api/v1/health');
     expect(res.status).toBe(200);
     expect(res.body.status).toBe('HEALTHY');
-    expect(res.body.service).toContain('SwachhSetu');
+    expect(res.body.service).toContain('EcoSetu');
   });
 
   it('POST /api/v1/auth/login should authenticate resident with valid credentials', async () => {
     const res = await request(app).post('/api/v1/auth/login').send({
-      email: 'resident@swachhsetu.in',
+      email: 'resident@ecosetu.in',
       password: 'Password@123',
     });
 
@@ -31,7 +31,7 @@ describe('SwachhSetu Backend API Suite', () => {
 
     expect(res.status).toBe(200);
     expect(res.body.success).toBe(true);
-    expect(res.body.data.email).toBe('resident@swachhsetu.in');
+    expect(res.body.data.email).toBe('resident@ecosetu.in');
   });
 
   it('GET /api/v1/households/me should return household info with credit account', async () => {

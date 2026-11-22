@@ -1,4 +1,4 @@
-// Shared TypeScript types for SwachhSetu Ecosystem
+// Shared TypeScript types for EcoSetu Ecosystem
 
 export enum UserRole {
   RESIDENT = 'RESIDENT',

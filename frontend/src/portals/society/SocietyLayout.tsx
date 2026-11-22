@@ -150,7 +150,7 @@ export const SocietyLayout: React.FC = () => {
       </main>
 
       <footer className="bg-white border-t border-gray-200 py-3 px-6 text-center text-xs text-gray-500">
-        Green Meadows RWA Portal • Powered by SwachhSetu WasteChakra Network
+        Green Meadows RWA Portal • Powered by EcoSetu WasteChakra Network
       </footer>
     </div>
   );

@@ -11,7 +11,7 @@ export const api = axios.create({
 // Request interceptor: attach token
 api.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    const token = localStorage.getItem('swachhsetu_token');
+    const token = localStorage.getItem('ecosetu_token');
     if (token && config.headers) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -27,8 +27,8 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       // If unauthorized and not already on login page, remove stale credentials
       if (!window.location.pathname.includes('/login')) {
-        localStorage.removeItem('swachhsetu_token');
-        localStorage.removeItem('swachhsetu_user');
+        localStorage.removeItem('ecosetu_token');
+        localStorage.removeItem('ecosetu_user');
       }
     }
     return Promise.reject(error);

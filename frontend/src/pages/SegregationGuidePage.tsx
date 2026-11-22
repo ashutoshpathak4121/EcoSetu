@@ -104,7 +104,7 @@ export const SegregationGuidePage: React.FC = () => {
           <h3 className="font-bold text-lg text-emerald-950">Why the Divided Bag is a Breakthrough</h3>
           <p className="leading-relaxed">
             In compact Indian flats and apartments, having 3 or 4 separate dustbins takes up excessive kitchen floor space.
-            SwachhSetu’s divided bag uses one regular circular or rectangular bin and splits it internally into Wet and Dry partitions.
+            EcoSetu’s divided bag uses one regular circular or rectangular bin and splits it internally into Wet and Dry partitions.
             Sanitary and hazardous pouches hang securely on the side. Simple, clean, and space-saving.
           </p>
         </div>

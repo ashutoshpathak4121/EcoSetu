@@ -1,7 +1,7 @@
 {
-  "name": "swachhsetu-backend",
+  "name": "ecosetu-backend",
   "version": "1.0.0",
-  "description": "Backend API Service for SwachhSetu - Waste Management Ecosystem",
+  "description": "Backend API Service for EcoSetu - Waste Management Ecosystem",
   "main": "dist/server.js",
   "scripts": {
     "build": "tsc",

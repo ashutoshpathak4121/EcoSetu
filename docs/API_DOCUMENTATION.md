@@ -1,4 +1,4 @@
-# SwachhSetu – API Specification & Contracts
+# EcoSetu – API Specification & Contracts
 
 Base URL: `/api/v1`  
 Interactive Swagger UI: `http://localhost:5000/api-docs`
@@ -69,7 +69,7 @@ Interactive Swagger UI: `http://localhost:5000/api-docs`
         "detectedItems": ["cardboard_box", "pet_bottle_crushed", "newspaper_bundle"]
       },
       "verificationStatus": "APPROVED",
-      "modelVersion": "swachhsetu-waste-v2.1"
+      "modelVersion": "ecosetu-waste-v2.1"
     }
     ```
 - `GET /api/v1/ai/results/:id`

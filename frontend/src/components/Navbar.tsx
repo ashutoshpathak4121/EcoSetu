@@ -47,7 +47,7 @@ export const Navbar: React.FC = () => {
             </div>
             <div>
               <span className="font-extrabold text-xl tracking-tight text-forest-900 block leading-tight">
-                SwachhSetu
+                EcoSetu
               </span>
               <span className="text-[10px] uppercase font-bold tracking-widest text-emerald-700 block">
                 WasteChakra Eco-Grid
@@ -108,7 +108,7 @@ export const Navbar: React.FC = () => {
                   to="/register"
                   className="px-4 py-2 rounded-xl bg-forest-800 hover:bg-forest-700 text-white text-sm font-semibold transition-colors shadow-sm"
                 >
-                  Join SwachhSetu
+                  Join EcoSetu
                 </Link>
               </div>
             )}

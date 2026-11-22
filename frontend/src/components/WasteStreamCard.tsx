@@ -18,7 +18,7 @@ export const WasteStreamCard: React.FC<WasteStreamCardProps> = ({ stream, detail
       description: 'Biodegradable kitchen scraps, vegetable/fruit peels, cooked leftovers, tea bags, eggshells.',
       dos: [
         'Drain excess gravy/liquids before disposing',
-        'Store in green side of SwachhSetu divided liner',
+        'Store in green side of EcoSetu divided liner',
         'Composted at decentralized society pits',
       ],
       donts: ['Never put plastic wrappers or milk pouches in wet section', 'Do not mix bones or thick hard shells with kitchen compost'],
@@ -47,7 +47,7 @@ export const WasteStreamCard: React.FC<WasteStreamCardProps> = ({ stream, detail
       dos: [
         'Wrap securely in newspaper or paper wrapper',
         'Mark with a prominent RED DOT or red sticker',
-        'Place into dedicated SwachhSetu sanitary add-on pouch',
+        'Place into dedicated EcoSetu sanitary add-on pouch',
       ],
       donts: ['Never throw sanitary items loosely into common dustbin', 'Never flush diapers or pads into toilets'],
     },

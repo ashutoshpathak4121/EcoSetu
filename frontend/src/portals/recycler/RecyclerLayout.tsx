@@ -151,7 +151,7 @@ export const RecyclerLayout: React.FC = () => {
       </main>
 
       <footer className="bg-zinc-900 border-t border-zinc-800 py-3 px-6 text-center text-xs text-zinc-500 font-mono">
-        SwachhSetu Circular Economy Exchange • Digital Chain of Custody Verified
+        EcoSetu Circular Economy Exchange • Digital Chain of Custody Verified
       </footer>
     </div>
   );

@@ -4,7 +4,7 @@ from app.api.endpoints import router
 from app.core.config import settings
 
 app = FastAPI(
-    title="SwachhSetu AI Waste Verification Service",
+    title="EcoSetu AI Waste Verification Service",
     description="Independent Computer Vision & Waste Stream Classification Microservice for Techathon 2026",
     version="2.1.0",
     docs_url="/docs",
@@ -29,7 +29,7 @@ app.include_router(router)
 @app.get("/")
 def root():
     return {
-        "message": "Welcome to SwachhSetu AI Verification Engine",
+        "message": "Welcome to EcoSetu AI Verification Engine",
         "docs": "/docs",
         "health": "/api/v1/health"
     }

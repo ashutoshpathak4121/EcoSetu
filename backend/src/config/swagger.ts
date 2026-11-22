@@ -4,13 +4,13 @@ import { Express } from 'express';
 const swaggerDocument = {
   openapi: '3.0.0',
   info: {
-    title: 'SwachhSetu REST API',
+    title: 'EcoSetu REST API',
     version: '1.0.0',
     description:
-      'Backend API service for SwachhSetu – Bridge to Cleanliness | WasteChakra Concept by Team MazeRunners (Techathon 2026)',
+      'Backend API service for EcoSetu – Bridge to Cleanliness | WasteChakra Concept by Team MazeRunners (Techathon 2026)',
     contact: {
       name: 'Team MazeRunners',
-      email: 'techathon2026@swachhsetu.in',
+      email: 'techathon2026@ecosetu.in',
     },
   },
   servers: [

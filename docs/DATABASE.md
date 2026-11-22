@@ -1,4 +1,4 @@
-# SwachhSetu – Database Architecture & Entity Relationship Design
+# EcoSetu – Database Architecture & Entity Relationship Design
 
 ## 1. Overview
 The database uses **PostgreSQL 16** managed through **Prisma ORM**. The schema is strictly normalized (3NF), enforces referential integrity through foreign key constraints, implements unique constraints on business identifiers, and features b-tree composite indexes on frequently filtered query paths.

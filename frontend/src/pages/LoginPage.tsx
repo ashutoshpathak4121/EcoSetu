@@ -18,7 +18,7 @@ import {
 import { UserRole } from '../../../shared/types';
 
 export const LoginPage: React.FC = () => {
-  const [email, setEmail] = useState('resident@swachhsetu.in');
+  const [email, setEmail] = useState('resident@ecosetu.in');
   const [password, setPassword] = useState('Password@123');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -68,7 +68,7 @@ export const LoginPage: React.FC = () => {
           <div className="w-12 h-12 bg-forest-800 text-white rounded-2xl flex items-center justify-center mx-auto shadow-md">
             <Recycle className="w-7 h-7 text-emerald-300" />
           </div>
-          <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">SwachhSetu Universal Sign In</h2>
+          <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">EcoSetu Universal Sign In</h2>
           <p className="text-xs text-gray-500">Sign in to your role account or choose your dedicated portal entrance below</p>
         </div>
 
@@ -104,42 +104,42 @@ export const LoginPage: React.FC = () => {
           <div className="grid grid-cols-3 gap-1.5 text-[11px]">
             <button
               type="button"
-              onClick={() => setPreset('resident@swachhsetu.in')}
+              onClick={() => setPreset('resident@ecosetu.in')}
               className="py-1 px-2 rounded-lg bg-white border border-emerald-300 font-semibold text-emerald-900 hover:bg-emerald-100 transition-colors"
             >
               Resident
             </button>
             <button
               type="button"
-              onClick={() => setPreset('collector@swachhsetu.in')}
+              onClick={() => setPreset('collector@ecosetu.in')}
               className="py-1 px-2 rounded-lg bg-white border border-emerald-300 font-semibold text-emerald-900 hover:bg-emerald-100 transition-colors"
             >
               Collector
             </button>
             <button
               type="button"
-              onClick={() => setPreset('society@swachhsetu.in')}
+              onClick={() => setPreset('society@ecosetu.in')}
               className="py-1 px-2 rounded-lg bg-white border border-emerald-300 font-semibold text-emerald-900 hover:bg-emerald-100 transition-colors"
             >
               Society RWA
             </button>
             <button
               type="button"
-              onClick={() => setPreset('recycler@swachhsetu.in')}
+              onClick={() => setPreset('recycler@ecosetu.in')}
               className="py-1 px-2 rounded-lg bg-white border border-emerald-300 font-semibold text-emerald-900 hover:bg-emerald-100 transition-colors"
             >
               Recycler
             </button>
             <button
               type="button"
-              onClick={() => setPreset('mcd@swachhsetu.in')}
+              onClick={() => setPreset('mcd@ecosetu.in')}
               className="py-1 px-2 rounded-lg bg-white border border-emerald-300 font-semibold text-emerald-900 hover:bg-emerald-100 transition-colors"
             >
               MCD Officer
             </button>
             <button
               type="button"
-              onClick={() => setPreset('admin@swachhsetu.in')}
+              onClick={() => setPreset('admin@ecosetu.in')}
               className="py-1 px-2 rounded-lg bg-white border border-emerald-300 font-semibold text-emerald-900 hover:bg-emerald-100 transition-colors"
             >
               Super Admin
@@ -164,7 +164,7 @@ export const LoginPage: React.FC = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="resident@swachhsetu.in"
+                placeholder="resident@ecosetu.in"
                 className="w-full pl-10 pr-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none"
               />
             </div>

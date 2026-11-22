@@ -71,7 +71,7 @@ export const AdminLayout: React.FC = () => {
           </div>
           <div>
             <div className="font-extrabold text-sm tracking-tight text-white flex items-center gap-2">
-              SwachhSetu Enterprise Admin
+              EcoSetu Enterprise Admin
               <span className="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded font-mono font-bold uppercase">
                 Root Access
               </span>

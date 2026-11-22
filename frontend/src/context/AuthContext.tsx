@@ -25,34 +25,34 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const DEMO_CREDENTIALS: Record<UserRole, { email: string; pass: string }> = {
-  [UserRole.RESIDENT]: { email: 'resident@swachhsetu.in', pass: 'Password@123' },
-  [UserRole.COLLECTOR]: { email: 'collector@swachhsetu.in', pass: 'Password@123' },
-  [UserRole.SOCIETY_ADMIN]: { email: 'society@swachhsetu.in', pass: 'Password@123' },
-  [UserRole.RECYCLER]: { email: 'recycler@swachhsetu.in', pass: 'Password@123' },
-  [UserRole.MCD_OFFICER]: { email: 'mcd@swachhsetu.in', pass: 'Password@123' },
-  [UserRole.SUPER_ADMIN]: { email: 'admin@swachhsetu.in', pass: 'Password@123' },
+  [UserRole.RESIDENT]: { email: 'resident@ecosetu.in', pass: 'Password@123' },
+  [UserRole.COLLECTOR]: { email: 'collector@ecosetu.in', pass: 'Password@123' },
+  [UserRole.SOCIETY_ADMIN]: { email: 'society@ecosetu.in', pass: 'Password@123' },
+  [UserRole.RECYCLER]: { email: 'recycler@ecosetu.in', pass: 'Password@123' },
+  [UserRole.MCD_OFFICER]: { email: 'mcd@ecosetu.in', pass: 'Password@123' },
+  [UserRole.SUPER_ADMIN]: { email: 'admin@ecosetu.in', pass: 'Password@123' },
 };
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(() => {
-    const saved = localStorage.getItem('swachhsetu_user');
+    const saved = localStorage.getItem('ecosetu_user');
     return saved ? JSON.parse(saved) : null;
   });
-  const [token, setToken] = useState<string | null>(() => localStorage.getItem('swachhsetu_token'));
+  const [token, setToken] = useState<string | null>(() => localStorage.getItem('ecosetu_token'));
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const initAuth = async () => {
-      const storedToken = localStorage.getItem('swachhsetu_token');
+      const storedToken = localStorage.getItem('ecosetu_token');
       if (storedToken) {
         try {
           const profile = await authApi.getMe();
           setUser(profile);
-          localStorage.setItem('swachhsetu_user', JSON.stringify(profile));
+          localStorage.setItem('ecosetu_user', JSON.stringify(profile));
         } catch (e) {
           console.warn('Session expired or invalid, clearing local auth.');
-          localStorage.removeItem('swachhsetu_token');
-          localStorage.removeItem('swachhsetu_user');
+          localStorage.removeItem('ecosetu_token');
+          localStorage.removeItem('ecosetu_user');
           setUser(null);
           setToken(null);
         }
@@ -70,8 +70,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const { user: authUser, token: authToken } = res.data;
       setUser(authUser);
       setToken(authToken);
-      localStorage.setItem('swachhsetu_token', authToken);
-      localStorage.setItem('swachhsetu_user', JSON.stringify(authUser));
+      localStorage.setItem('ecosetu_token', authToken);
+      localStorage.setItem('ecosetu_user', JSON.stringify(authUser));
     } finally {
       setIsLoading(false);
     }
@@ -84,8 +84,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const { user: authUser, token: authToken } = res.data;
       setUser(authUser);
       setToken(authToken);
-      localStorage.setItem('swachhsetu_token', authToken);
-      localStorage.setItem('swachhsetu_user', JSON.stringify(authUser));
+      localStorage.setItem('ecosetu_token', authToken);
+      localStorage.setItem('ecosetu_user', JSON.stringify(authUser));
     } finally {
       setIsLoading(false);
     }
@@ -94,8 +94,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const logout = () => {
     setUser(null);
     setToken(null);
-    localStorage.removeItem('swachhsetu_token');
-    localStorage.removeItem('swachhsetu_user');
+    localStorage.removeItem('ecosetu_token');
+    localStorage.removeItem('ecosetu_user');
   };
 
   const switchDemoRole = async (role: UserRole) => {

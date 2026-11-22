@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import { Factory, Lock, Mail, ArrowRight, AlertCircle, Sparkles, Award } from 'lucide-react';
 
 export const RecyclerLoginPage: React.FC = () => {
-  const [email, setEmail] = useState('recycler@swachhsetu.in');
+  const [email, setEmail] = useState('recycler@ecosetu.in');
   const [password, setPassword] = useState('Password@123');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -43,7 +43,7 @@ export const RecyclerLoginPage: React.FC = () => {
             <Sparkles className="w-3.5 h-3.5" />
             Recycler Enterprise Demo:
           </span>
-          <span className="font-mono text-[11px] text-zinc-300">recycler@swachhsetu.in</span>
+          <span className="font-mono text-[11px] text-zinc-300">recycler@ecosetu.in</span>
         </div>
 
         {error && (
@@ -63,7 +63,7 @@ export const RecyclerLoginPage: React.FC = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="recycler@swachhsetu.in"
+                placeholder="recycler@ecosetu.in"
                 className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-800 border border-zinc-700 rounded-xl text-xs text-white focus:ring-2 focus:ring-amber-500 focus:outline-none"
               />
             </div>
@@ -105,7 +105,7 @@ export const RecyclerLoginPage: React.FC = () => {
         <div className="text-center text-xs text-zinc-500">
           Return to{' '}
           <Link to="/" className="text-amber-400 font-bold hover:underline">
-            SwachhSetu Home
+            EcoSetu Home
           </Link>
         </div>
       </div>

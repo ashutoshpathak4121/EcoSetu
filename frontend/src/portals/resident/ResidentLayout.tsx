@@ -86,7 +86,7 @@ export const ResidentLayout: React.FC = () => {
           </div>
           <div>
             <div className="font-extrabold text-sm tracking-tight text-forest-900 flex items-center gap-2">
-              SwachhSetu Resident Portal
+              EcoSetu Resident Portal
               <span className="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-bold">
                 Household Hub
               </span>

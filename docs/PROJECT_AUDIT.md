@@ -1,8 +1,8 @@
-# SwachhSetu – Comprehensive Project Audit & Technical Assessment Report
+# EcoSetu – Comprehensive Project Audit & Technical Assessment Report
 
 **Audit Date:** November 22, 2026  
 **Auditor:** Senior Software Architect & Security Engineer  
-**System:** SwachhSetu – Bridge to Cleanliness (WasteChakra Concept)  
+**System:** EcoSetu – Bridge to Cleanliness (WasteChakra Concept)  
 **Target:** Monorepo (Frontend, Backend, AI Microservice, Database, Infrastructure)
 
 ---

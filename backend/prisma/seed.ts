@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs';
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log('🌱 Starting SwachhSetu database seeding...');
+  console.log('🌱 Starting EcoSetu database seeding...');
 
   // 1. Password hashing
   const salt = await bcrypt.genSalt(10);
@@ -125,7 +125,7 @@ async function main() {
   // 6.1 Resident User
   const residentUser = await prisma.user.create({
     data: {
-      email: 'resident@swachhsetu.in',
+      email: 'resident@ecosetu.in',
       passwordHash,
       name: 'Aarav Sharma',
       phoneNumber: '+919876543210',
@@ -137,7 +137,7 @@ async function main() {
   // 6.2 Waste Collector User
   const collectorUser = await prisma.user.create({
     data: {
-      email: 'collector@swachhsetu.in',
+      email: 'collector@ecosetu.in',
       passwordHash,
       name: 'Rajesh Kumar (MCD Staff)',
       phoneNumber: '+919811223344',
@@ -149,7 +149,7 @@ async function main() {
   // 6.3 Society Admin User
   const societyUser = await prisma.user.create({
     data: {
-      email: 'society@swachhsetu.in',
+      email: 'society@ecosetu.in',
       passwordHash,
       name: 'Sunita Mehra (President RWA)',
       phoneNumber: '+919822334455',
@@ -161,7 +161,7 @@ async function main() {
   // 6.4 Recycler User
   const recyclerUser = await prisma.user.create({
     data: {
-      email: 'recycler@swachhsetu.in',
+      email: 'recycler@ecosetu.in',
       passwordHash,
       name: 'Vikram Singhania (GreenEarth Recyclers)',
       phoneNumber: '+919833445566',
@@ -173,7 +173,7 @@ async function main() {
   // 6.5 MCD Municipal Officer
   const mcdUser = await prisma.user.create({
     data: {
-      email: 'mcd@swachhsetu.in',
+      email: 'mcd@ecosetu.in',
       passwordHash,
       name: 'Dr. Ramesh Chandra (Sanitation Superintendent)',
       phoneNumber: '+919844556677',
@@ -185,7 +185,7 @@ async function main() {
   // 6.6 Super Admin
   const adminUser = await prisma.user.create({
     data: {
-      email: 'admin@swachhsetu.in',
+      email: 'admin@ecosetu.in',
       passwordHash,
       name: 'DevOps & System Admin (Team MazeRunners)',
       phoneNumber: '+919899001122',
@@ -326,7 +326,7 @@ async function main() {
   const rewardLiners = await prisma.reward.create({
     data: {
       title: 'Biodegradable Divided Bin Liners (Roll of 30)',
-      description: 'Cornstarch-based compostable bags custom-sized for SwachhSetu dual compartments.',
+      description: 'Cornstarch-based compostable bags custom-sized for EcoSetu dual compartments.',
       category: 'LINERS',
       creditCost: 40,
       partnerName: 'WasteChakra Eco Essentials',
@@ -392,7 +392,7 @@ async function main() {
       confidence: 0.94,
       contaminationIndex: 0.03,
       verificationStatus: VerificationStatus.APPROVED,
-      modelVersion: 'swachhsetu-waste-v2.1',
+      modelVersion: 'ecosetu-waste-v2.1',
       detectedItems: ['cardboard_packaging', 'crushed_pet_bottles', 'aluminum_cans'],
       reviewedByUserId: collectorUser.id,
       reviewerNote: 'Visual AI confidence 94% confirmed. Zero organic residue in dry compartment.',
@@ -448,7 +448,7 @@ async function main() {
       confidence: 0.68,
       contaminationIndex: 0.18,
       verificationStatus: VerificationStatus.REQUIRES_REVIEW,
-      modelVersion: 'swachhsetu-waste-v2.1',
+      modelVersion: 'ecosetu-waste-v2.1',
       detectedItems: ['vegetable_peels', 'plastic_milk_pouch_wrapper'],
       reviewerNote: 'Flagged for supervisor spot check: plastic contamination in organic waste.',
     },
