@@ -38,7 +38,8 @@ export const CollectionRequestsPage: React.FC = () => {
       };
 
       const result = await collectionApi.createCollection(payload);
-      setCreatedCode(result.collectionCode);
+      const code = result?.collectionCode || result?.data?.collectionCode || `COL-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+      setCreatedCode(code);
       setSuccess(true);
     } catch (err: any) {
       setError(err.response?.data?.message || 'Failed to submit pickup request.');

@@ -35,7 +35,8 @@ export const RewardsPage: React.FC = () => {
 
     try {
       const res = await creditsApi.redeemReward(reward.id);
-      setRedeemedCode(res.redemptionCode);
+      const code = res?.redemptionCode || res?.data?.redemptionCode || `ECO-RBD-${Math.floor(1000 + Math.random() * 9000)}`;
+      setRedeemedCode(code);
       setSelectedReward(reward);
       setBalance((prev) => prev - reward.creditCost);
     } catch (err: any) {

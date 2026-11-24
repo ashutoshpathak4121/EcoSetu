@@ -124,8 +124,8 @@ export const AdminLayout: React.FC = () => {
         </div>
       </header>
 
-      {/* Mobile Horizontal Sub-Navigation (< md) */}
-      <nav className="md:hidden bg-gray-900/95 backdrop-blur-md border-b border-gray-800 px-3 py-2 sticky top-[57px] z-30 overflow-x-auto flex items-center space-x-2 scrollbar-none">
+      {/* Mobile Horizontal Sub-Navigation (< lg) */}
+      <nav className="lg:hidden bg-gray-900/95 backdrop-blur-md border-b border-gray-800 px-3 py-2 sticky top-[57px] z-30 overflow-x-auto flex items-center space-x-2 scrollbar-none">
         {navItems.map((item) => {
           const Icon = item.icon;
           return (
@@ -148,8 +148,8 @@ export const AdminLayout: React.FC = () => {
       </nav>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col md:flex-row max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 gap-6">
-        <aside className="hidden md:flex w-60 bg-gray-900/90 border border-gray-800 rounded-2xl p-4 flex-col flex-shrink-0 h-fit space-y-2">
+      <div className="flex-1 flex flex-col lg:flex-row max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 gap-6">
+        <aside className="hidden lg:flex w-60 bg-gray-900/90 border border-gray-800 rounded-2xl p-4 flex-col flex-shrink-0 h-fit space-y-2">
           <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest px-3 py-1">
             Governance Console
           </div>

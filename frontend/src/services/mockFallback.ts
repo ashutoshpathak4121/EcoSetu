@@ -265,26 +265,83 @@ export function getMockResponse(method: string, url: string, data?: any): any {
 
   // AI Verification
   if (cleanUrl.includes('/ai/verify')) {
+    const declared = (data?.declaredCategory || 'dry').toLowerCase();
+    const isWet = declared.includes('wet') || declared.includes('organic');
+    const isSanitary = declared.includes('sanitary');
+    const isSpecial = declared.includes('special') || declared.includes('hazard') || declared.includes('e-waste');
+    const category = isWet ? 'wet' : isSanitary ? 'sanitary' : isSpecial ? 'special-care' : 'dry';
+
+    const items = isWet
+      ? ['vegetable_peels', 'biodegradable_scraps', 'fruit_rinds']
+      : isSanitary
+      ? ['wrapped_sanitary_packet', 'red_dot_marked_pouch']
+      : isSpecial
+      ? ['lithium_cell', 'electronic_circuit_board']
+      : ['pet_bottle', 'cardboard_packaging', 'aluminium_can'];
+
+    const aiResult = {
+      predictedCategory: category,
+      confidence: 0.942,
+      contaminationIndex: 0.04,
+      verificationStatus: 'APPROVED',
+      status: 'APPROVED',
+      detectedItems: items,
+      modelVersion: 'ecosetu-waste-v2.1',
+      reviewerNote: 'High compliance. Dual-compartment segregation verified.',
+      manualReviewReasons: [],
+      purityScore: 96,
+    };
+
     return {
       status: 200,
       data: {
         success: true,
-        data: {
-          verifiedCategory: data?.declaredCategory || 'WET_ORGANIC',
+        ...aiResult,
+        classification: {
+          predictedCategory: category,
           confidence: 0.942,
-          status: 'APPROVED',
-          purityScore: 94,
-          contaminationDetected: false,
-          detectedItems: ['vegetable_peels', 'biodegradable_scraps'],
-          notes: 'High compliance. Dual-compartment segregation verified.',
-          modelVersion: 'ecosetu-waste-v2.1',
+          contaminationIndex: 0.04,
+          detectedItems: items,
         },
+        data: aiResult,
       },
     };
   }
 
-  // Collections List
+  // Collections (Create & List)
   if (cleanUrl.includes('/collections')) {
+    if (method.toUpperCase() === 'POST') {
+      const code = `COL-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+      const createdCol = {
+        id: `col-${Date.now()}`,
+        collectionCode: code,
+        status: 'PENDING',
+        scheduledDate: data?.scheduledDate || new Date().toISOString(),
+        notes: data?.notes || 'Divided bag ready at doorstep.',
+        createdAt: new Date().toISOString(),
+        wetWeightKg: 2.0,
+        dryWeightKg: 1.5,
+        sanitaryWeightKg: 0.0,
+        specialCareWeightKg: 0.0,
+        creditsAwarded: 20,
+        purityScore: 95,
+        household: {
+          householdIdCode: 'HH-DL-WZ1-0042',
+          flatNumber: 'B-402',
+          society: { name: 'Green Meadows Residency' },
+          user: { name: 'Aarav Sharma' },
+        },
+        collector: { name: 'Rajesh Kumar (MCD Staff)', phoneNumber: '+91 98112 23344' },
+      };
+      return {
+        status: 201,
+        data: {
+          success: true,
+          data: createdCol,
+        },
+      };
+    }
+
     return {
       status: 200,
       data: {
@@ -388,6 +445,51 @@ export function getMockResponse(method: string, url: string, data?: any): any {
             stock: 30,
           },
         ],
+      },
+    };
+  }
+
+  // Credits Redeem Voucher
+  if (cleanUrl.includes('/credits/redeem')) {
+    const code = `ECO-RBD-${Math.floor(1000 + Math.random() * 9000)}`;
+    return {
+      status: 200,
+      data: {
+        success: true,
+        redemptionCode: code,
+        data: {
+          redemptionCode: code,
+          message: 'Voucher redeemed successfully.',
+          timestamp: new Date().toISOString(),
+        },
+      },
+    };
+  }
+
+  // Collector Evidence Submission & Verification
+  if (cleanUrl.includes('/evidence')) {
+    const aiResult = {
+      predictedCategory: 'dry',
+      confidence: 0.96,
+      contaminationIndex: 0.02,
+      verificationStatus: 'APPROVED',
+      status: 'APPROVED',
+      detectedItems: ['segregated_divided_bag', 'clean_dry_stream', 'pet_bottles'],
+      modelVersion: 'ecosetu-waste-v2.1',
+      purityScore: 98,
+    };
+    return {
+      status: 200,
+      data: {
+        success: true,
+        message: 'Evidence submitted and verified by AI vision.',
+        data: {
+          id: `evi-${Date.now()}`,
+          verified: true,
+          creditsAwarded: 25,
+          aiResult,
+        },
+        aiResult,
       },
     };
   }

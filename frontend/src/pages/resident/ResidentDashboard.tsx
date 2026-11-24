@@ -101,7 +101,7 @@ export const ResidentDashboard: React.FC = () => {
 
         <div className="flex-shrink-0 bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/20 text-center space-y-2">
           <div className="text-[11px] uppercase tracking-wider text-emerald-300 font-bold">Household ID</div>
-          <div className="text-lg font-mono font-black tracking-wider text-white">
+          <div className="text-lg font-mono font-black tracking-wider text-white whitespace-nowrap">
             {household?.householdId || 'HH-DL-WZ1-0042'}
           </div>
           <Link
