@@ -1,4 +1,4 @@
-import { prisma } from '../config/prisma';
+import { prisma, isDbConnected } from '../config/prisma';
 import { ListingStatus, OrderStatus, PurityGrade, WasteStreamType } from '@prisma/client';
 import { mockMarketplaceListings } from './mockData';
 
@@ -17,21 +17,23 @@ export interface CreateListingDTO {
 
 export class MarketplaceService {
   async getListings(filters?: { category?: WasteStreamType; purityGrade?: PurityGrade; status?: ListingStatus }) {
-    try {
-      const listings = await prisma.wasteListing.findMany({
-        where: {
-          ...(filters?.category && { category: filters.category }),
-          ...(filters?.purityGrade && { purityGrade: filters.purityGrade }),
-          ...(filters?.status ? { status: filters.status } : { status: ListingStatus.ACTIVE }),
-        },
-        include: {
-          society: { select: { id: true, name: true, code: true, address: true } },
-          purchaseRequests: { include: { recycler: true } },
-        },
-        orderBy: { createdAt: 'desc' },
-      });
-      if (listings.length > 0) return listings;
-    } catch (e) {}
+    if (isDbConnected) {
+      try {
+        const listings = await prisma.wasteListing.findMany({
+          where: {
+            ...(filters?.category && { category: filters.category }),
+            ...(filters?.purityGrade && { purityGrade: filters.purityGrade }),
+            ...(filters?.status ? { status: filters.status } : { status: ListingStatus.ACTIVE }),
+          },
+          include: {
+            society: { select: { id: true, name: true, code: true, address: true } },
+            purchaseRequests: { include: { recycler: true } },
+          },
+          orderBy: { createdAt: 'desc' },
+        });
+        if (listings.length > 0) return listings;
+      } catch (e) {}
+    }
 
     return mockMarketplaceListings;
   }

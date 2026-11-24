@@ -1,4 +1,4 @@
-import { prisma } from '../config/prisma';
+import { prisma, isDbConnected } from '../config/prisma';
 import { CollectionStatus, VerificationStatus, WasteStreamType } from '@prisma/client';
 import { aiClient } from '../integrations/ai.client';
 import { creditService } from './credit.service';
@@ -71,24 +71,26 @@ export class CollectionService {
   }
 
   async getCollections(filter?: { householdId?: string; collectorId?: string; status?: CollectionStatus; localityId?: string }) {
-    try {
-      const collections = await prisma.collection.findMany({
-        where: {
-          ...(filter?.householdId && { householdId: filter.householdId }),
-          ...(filter?.collectorId && { collectorId: filter.collectorId }),
-          ...(filter?.status && { status: filter.status }),
-          ...(filter?.localityId && { localityId: filter.localityId }),
-        },
-        include: {
-          household: { include: { user: { select: { name: true, email: true } }, society: true } },
-          collector: { include: { user: { select: { name: true, phoneNumber: true } } } },
-          aiVerification: true,
-          mediaUploads: true,
-        },
-        orderBy: { createdAt: 'desc' },
-      });
-      if (collections.length > 0) return collections;
-    } catch (e) {}
+    if (isDbConnected) {
+      try {
+        const collections = await prisma.collection.findMany({
+          where: {
+            ...(filter?.householdId && { householdId: filter.householdId }),
+            ...(filter?.collectorId && { collectorId: filter.collectorId }),
+            ...(filter?.status && { status: filter.status }),
+            ...(filter?.localityId && { localityId: filter.localityId }),
+          },
+          include: {
+            household: { include: { user: { select: { name: true, email: true } }, society: true } },
+            collector: { include: { user: { select: { name: true, phoneNumber: true } } } },
+            aiVerification: true,
+            mediaUploads: true,
+          },
+          orderBy: { createdAt: 'desc' },
+        });
+        if (collections.length > 0) return collections;
+      } catch (e) {}
+    }
 
     return mockCollections;
   }

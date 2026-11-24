@@ -11,6 +11,11 @@ export const adminApi = {
     return res.data.data;
   },
 
+  updateUserStatus: async (userId: string, status: string) => {
+    const res = await api.patch(`/admin/users/${userId}/status`, { status });
+    return res.data.data;
+  },
+
   getLogs: async () => {
     const res = await api.get('/admin/logs');
     return res.data.data;

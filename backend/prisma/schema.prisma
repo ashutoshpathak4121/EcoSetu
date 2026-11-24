@@ -85,6 +85,10 @@ model User {
   role            Role              @default(RESIDENT)
   avatarUrl       String?
   isActive        Boolean           @default(true)
+  isVerified      Boolean           @default(true)
+  status          String            @default("ACTIVE")
+  resetPasswordToken   String?
+  resetPasswordExpires DateTime?
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
 

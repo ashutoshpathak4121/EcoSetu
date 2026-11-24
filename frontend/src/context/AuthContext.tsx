@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { UserRole } from '../../../shared/types';
-import { authApi } from '../services/auth.api';
+import { authApi, UpdateProfilePayload, ChangePasswordPayload, ResetPasswordPayload } from '../services/auth.api';
 
 export interface User {
   id: string;
@@ -9,6 +9,9 @@ export interface User {
   role: UserRole;
   phoneNumber?: string;
   avatarUrl?: string;
+  isVerified?: boolean;
+  status?: string;
+  createdAt?: string;
 }
 
 interface AuthContextType {
@@ -18,6 +21,10 @@ interface AuthContextType {
   isLoading: boolean;
   login: (email: string, pass: string) => Promise<void>;
   register: (payload: any) => Promise<void>;
+  updateProfile: (payload: UpdateProfilePayload) => Promise<User>;
+  changePassword: (payload: ChangePasswordPayload) => Promise<any>;
+  forgotPassword: (email: string) => Promise<any>;
+  resetPassword: (payload: ResetPasswordPayload) => Promise<any>;
   logout: () => void;
   switchDemoRole: (role: UserRole) => Promise<void>;
 }
@@ -47,14 +54,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (storedToken) {
         try {
           const profile = await authApi.getMe();
-          setUser(profile);
-          localStorage.setItem('ecosetu_user', JSON.stringify(profile));
+          if (profile) {
+            setUser(profile);
+            localStorage.setItem('ecosetu_user', JSON.stringify(profile));
+          }
         } catch (e) {
-          console.warn('Session expired or invalid, clearing local auth.');
-          localStorage.removeItem('ecosetu_token');
-          localStorage.removeItem('ecosetu_user');
-          setUser(null);
-          setToken(null);
+          console.warn('Session check fallback to cached session');
         }
       }
       setIsLoading(false);
@@ -79,8 +84,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       } else {
         throw new Error('No user data returned from login');
       }
-    } catch (err) {
-      console.warn('Backend login unavailable, creating demo session for', email);
+    } catch (err: any) {
+      // Check if mock user or seed user in demo fallback mode
+      console.warn('Backend login fallback for', email, err.message);
       const role = email.includes('collector')
         ? UserRole.COLLECTOR
         : email.includes('society')
@@ -95,11 +101,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       const roleNames: Record<UserRole, string> = {
         [UserRole.RESIDENT]: 'Aarav Sharma',
-        [UserRole.COLLECTOR]: 'Ramesh Kumar',
+        [UserRole.COLLECTOR]: 'Rajesh Kumar',
         [UserRole.SOCIETY_ADMIN]: 'Sunita Mehra',
-        [UserRole.RECYCLER]: 'Rajesh Gupta',
-        [UserRole.MCD_OFFICER]: 'Vikram Singh',
-        [UserRole.SUPER_ADMIN]: 'Ashutosh Pathak',
+        [UserRole.RECYCLER]: 'Vikram Singhania',
+        [UserRole.MCD_OFFICER]: 'Dr. Ramesh Chandra',
+        [UserRole.SUPER_ADMIN]: 'DevOps Admin',
       };
 
       const fallbackUser: User = {
@@ -108,6 +114,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         email,
         role,
         phoneNumber: '+91 98765 43210',
+        isVerified: true,
+        status: 'ACTIVE',
       };
       const fallbackToken = 'mock_jwt_ecosetu_demo_token';
 
@@ -134,7 +142,28 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const updateProfile = async (payload: UpdateProfilePayload): Promise<User> => {
+    const updated = await authApi.updateProfile(payload);
+    const mergedUser = { ...user, ...updated };
+    setUser(mergedUser);
+    localStorage.setItem('ecosetu_user', JSON.stringify(mergedUser));
+    return mergedUser;
+  };
+
+  const changePassword = async (payload: ChangePasswordPayload) => {
+    return await authApi.changePassword(payload);
+  };
+
+  const forgotPassword = async (email: string) => {
+    return await authApi.forgotPassword(email);
+  };
+
+  const resetPassword = async (payload: ResetPasswordPayload) => {
+    return await authApi.resetPassword(payload);
+  };
+
   const logout = () => {
+    authApi.logout().catch(() => {});
     setUser(null);
     setToken(null);
     localStorage.removeItem('ecosetu_token');
@@ -157,6 +186,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         isLoading,
         login,
         register,
+        updateProfile,
+        changePassword,
+        forgotPassword,
+        resetPassword,
         logout,
         switchDemoRole,
       }}
@@ -173,4 +206,3 @@ export const useAuth = () => {
   }
   return context;
 };
-

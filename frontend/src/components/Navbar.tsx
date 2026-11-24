@@ -81,9 +81,16 @@ export const Navbar: React.FC = () => {
                 </Link>
 
                 <div className="flex items-center space-x-2 pl-2 border-l border-gray-200">
-                  <div className="w-8 h-8 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-xs">
-                    {user.name?.charAt(0) || 'U'}
-                  </div>
+                  <Link
+                    to="/profile"
+                    className="flex items-center space-x-2 p-1 rounded-lg hover:bg-gray-100 transition-colors"
+                    title="View & Edit Profile"
+                  >
+                    <div className="w-8 h-8 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-xs">
+                      {user.name?.charAt(0) || 'U'}
+                    </div>
+                    <span className="text-xs font-bold text-gray-700 hidden lg:inline">{user.name?.split(' ')[0]}</span>
+                  </Link>
                   <button
                     onClick={() => {
                       logout();
@@ -151,6 +158,14 @@ export const Navbar: React.FC = () => {
                 >
                   <LayoutDashboard className="w-4 h-4" />
                   <span>Go to My Portal</span>
+                </Link>
+                <Link
+                  to="/profile"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-center space-x-2 w-full py-2.5 rounded-xl bg-emerald-50 text-forest-900 border border-emerald-200 font-semibold"
+                >
+                  <User className="w-4 h-4 text-emerald-700" />
+                  <span>Account & Profile Settings</span>
                 </Link>
                 <button
                   onClick={() => {

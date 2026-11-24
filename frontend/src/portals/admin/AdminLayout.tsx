@@ -3,7 +3,7 @@ import { Outlet, Navigate, NavLink, Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { UserRole } from '../../../../shared/types';
 import { DemoRoleSwitcher } from '../../components/DemoRoleSwitcher';
-import { Shield, ShieldAlert, Users, Settings, Activity, Database, LogOut, Terminal, Lock } from 'lucide-react';
+import { Shield, ShieldAlert, Users, Settings, Activity, Database, LogOut, Terminal, Lock, User } from 'lucide-react';
 
 export const AdminLayout: React.FC = () => {
   const { user, isAuthenticated, isLoading, logout, switchDemoRole } = useAuth();
@@ -99,8 +99,18 @@ export const AdminLayout: React.FC = () => {
           </div>
         </div>
 
-        <div className="flex items-center space-x-3">
-          <span className="text-xs text-gray-400 hidden sm:inline">{user.name}</span>
+        <div className="flex items-center space-x-2">
+          <Link to="/profile" className="text-right hidden sm:block hover:opacity-80 transition-opacity" title="Manage Profile">
+            <span className="text-xs text-gray-300 font-semibold">{user.name}</span>
+            <div className="text-[10px] text-emerald-400 font-mono">System SuperAdmin</div>
+          </Link>
+          <Link
+            to="/profile"
+            className="p-2 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-lg border border-gray-700 transition-colors"
+            title="Profile Settings"
+          >
+            <User className="w-4 h-4" />
+          </Link>
           <button
             onClick={() => {
               logout();

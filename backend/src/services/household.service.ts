@@ -1,25 +1,27 @@
-import { prisma } from '../config/prisma';
+import { prisma, isDbConnected } from '../config/prisma';
 import { mockHouseholds, mockSocieties, mockLocalities, mockCreditAccounts } from './mockData';
 
 export class HouseholdService {
   async getHouseholdByUserId(userId: string) {
-    try {
-      const household = await prisma.household.findFirst({
-        where: { userId },
-        include: {
-          society: true,
-          locality: true,
-          creditAccount: true,
-          collections: {
-            orderBy: { createdAt: 'desc' },
-            take: 5,
-            include: { aiVerification: true },
+    if (isDbConnected) {
+      try {
+        const household = await prisma.household.findFirst({
+          where: { userId },
+          include: {
+            society: true,
+            locality: true,
+            creditAccount: true,
+            collections: {
+              orderBy: { createdAt: 'desc' },
+              take: 5,
+              include: { aiVerification: true },
+            },
           },
-        },
-      });
-      if (household) return household;
-    } catch (e) {
-      // Fallback
+        });
+        if (household) return household;
+      } catch (e) {
+        // Fallback
+      }
     }
 
     const hh = mockHouseholds.find((h) => h.userId === userId) || mockHouseholds[0];
@@ -38,13 +40,15 @@ export class HouseholdService {
 
   async getHouseholdById(id: string, requestingUser?: any) {
     let household: any = null;
-    try {
-      household = await prisma.household.findUnique({
-        where: { id },
-        include: { society: true, locality: true, creditAccount: true },
-      });
-    } catch (e) {
-      // Fallback
+    if (isDbConnected) {
+      try {
+        household = await prisma.household.findUnique({
+          where: { id },
+          include: { society: true, locality: true, creditAccount: true },
+        });
+      } catch (e) {
+        // Fallback
+      }
     }
 
     if (!household) {

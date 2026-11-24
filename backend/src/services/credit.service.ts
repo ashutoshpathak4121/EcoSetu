@@ -1,21 +1,23 @@
-import { prisma } from '../config/prisma';
+import { prisma, isDbConnected } from '../config/prisma';
 import { CreditTransactionType } from '@prisma/client';
 import { mockCreditAccounts, mockCreditTransactions, mockRewards } from './mockData';
 
 export class CreditService {
   async getAccount(householdId: string) {
-    try {
-      const account = await prisma.creditAccount.findUnique({
-        where: { householdId },
-        include: {
-          transactions: {
-            orderBy: { createdAt: 'desc' },
-            take: 20,
+    if (isDbConnected) {
+      try {
+        const account = await prisma.creditAccount.findUnique({
+          where: { householdId },
+          include: {
+            transactions: {
+              orderBy: { createdAt: 'desc' },
+              take: 20,
+            },
           },
-        },
-      });
-      if (account) return account;
-    } catch (e) {}
+        });
+        if (account) return account;
+      } catch (e) {}
+    }
 
     const mockAcc = mockCreditAccounts.find((a) => a.householdId === householdId) || mockCreditAccounts[0];
     return {
@@ -95,10 +97,12 @@ export class CreditService {
   }
 
   async getRewards() {
-    try {
-      const rewards = await prisma.reward.findMany({ where: { active: true } });
-      if (rewards.length > 0) return rewards;
-    } catch (e) {}
+    if (isDbConnected) {
+      try {
+        const rewards = await prisma.reward.findMany({ where: { active: true } });
+        if (rewards.length > 0) return rewards;
+      } catch (e) {}
+    }
 
     return mockRewards;
   }

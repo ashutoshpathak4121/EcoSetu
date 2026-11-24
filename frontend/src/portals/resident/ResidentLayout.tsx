@@ -98,11 +98,18 @@ export const ResidentLayout: React.FC = () => {
           </div>
         </Link>
 
-        <div className="flex items-center space-x-3">
-          <div className="text-right hidden sm:block">
+        <div className="flex items-center space-x-2">
+          <Link to="/profile" className="text-right hidden sm:block hover:opacity-80 transition-opacity" title="Manage Profile">
             <div className="text-xs font-bold text-gray-900">{user.name}</div>
             <div className="text-[10px] text-emerald-700 font-bold">HH-DL-WZ1-0042 • Flat B-402</div>
-          </div>
+          </Link>
+          <Link
+            to="/profile"
+            className="p-2 text-gray-500 hover:text-emerald-700 rounded-lg border border-gray-200 hover:border-emerald-200 hover:bg-emerald-50 transition-colors"
+            title="Profile Settings"
+          >
+            <User className="w-4 h-4" />
+          </Link>
           <button
             onClick={() => {
               logout();

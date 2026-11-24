@@ -11,8 +11,8 @@ router.use(authorizeRoles(Role.SUPER_ADMIN));
 
 router.get('/users', adminController.getUsers);
 router.patch('/users/:id/role', adminController.updateUserRole);
+router.patch('/users/:id/status', adminController.updateUserStatus);
 router.get('/logs', adminController.getLogs);
 router.patch('/recyclers/:id/verify', adminController.verifyRecycler);
 
 export default router;
-

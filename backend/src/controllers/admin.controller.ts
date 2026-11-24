@@ -28,6 +28,20 @@ export class AdminController {
     }
   }
 
+  async updateUserStatus(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { status } = req.body;
+      const updated = await adminService.updateUserStatus(req.params.id, status);
+      res.status(200).json({
+        success: true,
+        message: `User account status updated to ${status}.`,
+        data: updated,
+      });
+    } catch (error: any) {
+      next(error);
+    }
+  }
+
   async getLogs(req: Request, res: Response, next: NextFunction) {
     try {
       const logs = await adminService.getAuditLogs();
@@ -56,4 +70,3 @@ export class AdminController {
 }
 
 export const adminController = new AdminController();
-

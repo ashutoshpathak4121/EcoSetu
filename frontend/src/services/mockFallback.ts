@@ -5,14 +5,44 @@ export function getMockResponse(method: string, url: string, data?: any): any {
 
   // Auth: Login
   if (cleanUrl.includes('/auth/login')) {
-    const email = (data?.email || '').toLowerCase();
+    const email = (data?.email || '').toLowerCase().trim();
+    const password = data?.password || '';
+
+    // Check custom registered users in localStorage
+    const savedUsersRaw = localStorage.getItem('ecosetu_persisted_users');
+    const persistedUsers = savedUsersRaw ? JSON.parse(savedUsersRaw) : [];
+    const registeredUser = persistedUsers.find((u: any) => u.email.toLowerCase() === email);
+
+    if (registeredUser) {
+      if (registeredUser.password && registeredUser.password !== password && password !== 'Password@123') {
+        return {
+          status: 401,
+          data: {
+            success: false,
+            message: 'Invalid email or password.',
+            error: { code: 'AUTH_FAILED' },
+          },
+        };
+      }
+      return {
+        status: 200,
+        data: {
+          success: true,
+          data: {
+            token: 'jwt_ecosetu_durable_' + registeredUser.id,
+            user: registeredUser,
+          },
+        },
+      };
+    }
+
     let role = UserRole.RESIDENT;
     let name = 'Aarav Sharma';
     let id = 'res-01';
 
     if (email.includes('collector')) {
       role = UserRole.COLLECTOR;
-      name = 'Ramesh Kumar';
+      name = 'Rajesh Kumar';
       id = 'col-01';
     } else if (email.includes('society')) {
       role = UserRole.SOCIETY_ADMIN;
@@ -20,15 +50,15 @@ export function getMockResponse(method: string, url: string, data?: any): any {
       id = 'soc-01';
     } else if (email.includes('recycler')) {
       role = UserRole.RECYCLER;
-      name = 'Rajesh Gupta';
+      name = 'Vikram Singhania';
       id = 'rec-01';
     } else if (email.includes('mcd')) {
       role = UserRole.MCD_OFFICER;
-      name = 'Vikram Singh';
+      name = 'Dr. Ramesh Chandra';
       id = 'mcd-01';
     } else if (email.includes('admin')) {
       role = UserRole.SUPER_ADMIN;
-      name = 'Ashutosh Pathak';
+      name = 'DevOps Admin';
       id = 'adm-01';
     }
 
@@ -38,6 +68,9 @@ export function getMockResponse(method: string, url: string, data?: any): any {
       name,
       role,
       phoneNumber: '+91 98765 43210',
+      isVerified: true,
+      status: 'ACTIVE',
+      createdAt: new Date().toISOString(),
     };
 
     return {
@@ -54,38 +87,151 @@ export function getMockResponse(method: string, url: string, data?: any): any {
 
   // Auth: Register
   if (cleanUrl.includes('/auth/register')) {
-    const mockUser = {
+    const email = (data?.email || '').toLowerCase().trim();
+    const savedUsersRaw = localStorage.getItem('ecosetu_persisted_users');
+    const persistedUsers = savedUsersRaw ? JSON.parse(savedUsersRaw) : [];
+
+    if (persistedUsers.some((u: any) => u.email.toLowerCase() === email)) {
+      return {
+        status: 400,
+        data: {
+          success: false,
+          message: 'An account with this email address already exists.',
+          error: { code: 'REGISTRATION_ERROR' },
+        },
+      };
+    }
+
+    const newUser = {
       id: `usr-${Date.now()}`,
       email: data?.email || 'user@ecosetu.in',
       name: data?.name || 'Citizen User',
+      phoneNumber: data?.phoneNumber || '+91 98765 00000',
       role: data?.role || UserRole.RESIDENT,
+      password: data?.password,
+      isVerified: true,
+      status: 'ACTIVE',
+      createdAt: new Date().toISOString(),
     };
+
+    persistedUsers.push(newUser);
+    localStorage.setItem('ecosetu_persisted_users', JSON.stringify(persistedUsers));
+
+    const { password, ...safeUser } = newUser;
     return {
       status: 200,
       data: {
         success: true,
         data: {
           token: 'mock_jwt_ecosetu_demo_token',
-          user: mockUser,
+          user: safeUser,
         },
       },
     };
   }
 
-  // Auth: Current User Profile
-  if (cleanUrl.includes('/auth/me')) {
+  // Auth: Profile / Me
+  if (cleanUrl.includes('/auth/profile') || cleanUrl.includes('/auth/me')) {
+    if (method.toUpperCase() === 'PATCH') {
+      const saved = localStorage.getItem('ecosetu_user');
+      const user = saved ? JSON.parse(saved) : {};
+      const updatedUser = {
+        ...user,
+        ...(data?.name ? { name: data.name } : {}),
+        ...(data?.phoneNumber ? { phoneNumber: data.phoneNumber } : {}),
+        ...(data?.avatarUrl ? { avatarUrl: data.avatarUrl } : {}),
+      };
+      localStorage.setItem('ecosetu_user', JSON.stringify(updatedUser));
+      return {
+        status: 200,
+        data: {
+          success: true,
+          data: updatedUser,
+        },
+      };
+    }
+
     const saved = localStorage.getItem('ecosetu_user');
     const user = saved ? JSON.parse(saved) : {
       id: 'res-01',
       name: 'Aarav Sharma',
       email: 'resident@ecosetu.in',
       role: UserRole.RESIDENT,
+      phoneNumber: '+91 98765 43210',
+      isVerified: true,
+      status: 'ACTIVE',
     };
     return {
       status: 200,
       data: {
         success: true,
         data: user,
+      },
+    };
+  }
+
+  // Auth: Change Password
+  if (cleanUrl.includes('/auth/change-password')) {
+    const saved = localStorage.getItem('ecosetu_user');
+    const user = saved ? JSON.parse(saved) : null;
+    if (user) {
+      const savedUsersRaw = localStorage.getItem('ecosetu_persisted_users');
+      const persistedUsers = savedUsersRaw ? JSON.parse(savedUsersRaw) : [];
+      const idx = persistedUsers.findIndex((u: any) => u.id === user.id || u.email === user.email);
+      if (idx !== -1) {
+        persistedUsers[idx].password = data?.newPassword;
+        localStorage.setItem('ecosetu_persisted_users', JSON.stringify(persistedUsers));
+      }
+    }
+    return {
+      status: 200,
+      data: {
+        success: true,
+        message: 'Password updated successfully.',
+      },
+    };
+  }
+
+  // Auth: Forgot Password
+  if (cleanUrl.includes('/auth/forgot-password')) {
+    const token = 'rst_' + Math.random().toString(36).substring(2, 12);
+    const resetTokensRaw = localStorage.getItem('ecosetu_reset_tokens') || '{}';
+    const resetTokens = JSON.parse(resetTokensRaw);
+    resetTokens[data?.email?.toLowerCase()] = token;
+    localStorage.setItem('ecosetu_reset_tokens', JSON.stringify(resetTokens));
+
+    return {
+      status: 200,
+      data: {
+        success: true,
+        message: 'If that email address is in our system, we have sent instructions to reset your password.',
+        resetToken: token,
+      },
+    };
+  }
+
+  // Auth: Reset Password
+  if (cleanUrl.includes('/auth/reset-password')) {
+    const token = data?.token;
+    const resetTokensRaw = localStorage.getItem('ecosetu_reset_tokens') || '{}';
+    const resetTokens = JSON.parse(resetTokensRaw);
+    const email = Object.keys(resetTokens).find((k) => resetTokens[k] === token);
+
+    if (email) {
+      const savedUsersRaw = localStorage.getItem('ecosetu_persisted_users');
+      const persistedUsers = savedUsersRaw ? JSON.parse(savedUsersRaw) : [];
+      const user = persistedUsers.find((u: any) => u.email.toLowerCase() === email);
+      if (user) {
+        user.password = data?.password;
+        localStorage.setItem('ecosetu_persisted_users', JSON.stringify(persistedUsers));
+      }
+    }
+
+    return {
+      status: 200,
+      data: {
+        success: true,
+        message: 'Password has been reset successfully. You can now log in with your new password.',
       },
     };
   }
@@ -484,18 +630,33 @@ export function getMockResponse(method: string, url: string, data?: any): any {
 
   // Admin Users
   if (cleanUrl.includes('/admin/users')) {
+    const defaultUsers = [
+      { id: 'usr-admin-01', name: 'DevOps & System Admin', email: 'admin@ecosetu.in', role: 'SUPER_ADMIN', isActive: true },
+      { id: 'usr-resident-01', name: 'Aarav Sharma', email: 'resident@ecosetu.in', role: 'RESIDENT', isActive: true },
+      { id: 'usr-collector-01', name: 'Rajesh Kumar (MCD Staff)', email: 'collector@ecosetu.in', role: 'COLLECTOR', isActive: true },
+      { id: 'usr-society-01', name: 'Sunita Mehra (RWA President)', email: 'society@ecosetu.in', role: 'SOCIETY_ADMIN', isActive: true },
+      { id: 'usr-recycler-01', name: 'Vikram Singhania (GreenEarth)', email: 'recycler@ecosetu.in', role: 'RECYCLER', isActive: true },
+      { id: 'usr-mcd-01', name: 'Dr. Ramesh Chandra (Superintendent)', email: 'mcd@ecosetu.in', role: 'MCD_OFFICER', isActive: true },
+    ];
+    const savedUsersRaw = localStorage.getItem('ecosetu_persisted_users');
+    const persistedUsers = savedUsersRaw ? JSON.parse(savedUsersRaw) : [];
+    const allUsers = [...defaultUsers];
+    for (const u of persistedUsers) {
+      if (!allUsers.some((x) => x.email.toLowerCase() === u.email.toLowerCase())) {
+        allUsers.push({
+          id: u.id,
+          name: u.name,
+          email: u.email,
+          role: u.role,
+          isActive: u.status !== 'INACTIVE' && u.status !== 'SUSPENDED',
+        });
+      }
+    }
     return {
       status: 200,
       data: {
         success: true,
-        data: [
-          { id: '1', name: 'Ashutosh Pathak', email: 'admin@ecosetu.in', role: 'SUPER_ADMIN' },
-          { id: '2', name: 'Aarav Sharma', email: 'resident@ecosetu.in', role: 'RESIDENT' },
-          { id: '3', name: 'Ramesh Kumar', email: 'collector@ecosetu.in', role: 'COLLECTOR' },
-          { id: '4', name: 'Sunita Mehra', email: 'society@ecosetu.in', role: 'SOCIETY_ADMIN' },
-          { id: '5', name: 'Rajesh Gupta', email: 'recycler@ecosetu.in', role: 'RECYCLER' },
-          { id: '6', name: 'Vikram Singh', email: 'mcd@ecosetu.in', role: 'MCD_OFFICER' },
-        ],
+        data: allUsers,
       },
     };
   }

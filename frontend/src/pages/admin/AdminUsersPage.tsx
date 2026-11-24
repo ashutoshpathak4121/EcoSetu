@@ -31,6 +31,18 @@ export const AdminUsersPage: React.FC = () => {
     }
   };
 
+  const handleStatusToggle = async (userId: string, currentActive: boolean) => {
+    const nextStatus = currentActive ? 'INACTIVE' : 'ACTIVE';
+    try {
+      await adminApi.updateUserStatus(userId, nextStatus);
+      setUsers(users.map((u) => (u.id === userId ? { ...u, isActive: !currentActive } : u)));
+      setMsg(`User status updated to ${nextStatus}.`);
+      setTimeout(() => setMsg(null), 3000);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   const filtered = users.filter(
     (u) =>
       u.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -80,7 +92,20 @@ export const AdminUsersPage: React.FC = () => {
               </div>
 
               <div className="flex items-center space-x-3">
-                <span className="text-gray-500 font-semibold text-[11px]">Assigned Role:</span>
+                <button
+                  type="button"
+                  onClick={() => handleStatusToggle(u.id, u.isActive !== false)}
+                  className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition-colors ${
+                    u.isActive !== false
+                      ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200'
+                      : 'bg-rose-100 text-rose-800 hover:bg-rose-200'
+                  }`}
+                  title="Click to toggle active/inactive account status"
+                >
+                  {u.isActive !== false ? '● ACTIVE' : '○ DEACTIVATED'}
+                </button>
+
+                <span className="text-gray-500 font-semibold text-[11px]">Role:</span>
                 <select
                   value={u.role}
                   onChange={(e) => handleRoleChange(u.id, e.target.value)}
